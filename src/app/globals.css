@@ -1,0 +1,685 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* ============================================
+     DESIGN SYSTEM DEFINITIVO v4.0 TOKENS
+     ============================================ */
+  
+  /* Colors */
+  --bg-primary: #000000;
+  --bg-secondary: #1b1b1b;
+  --bg-tertiary: #333333;
+  --bg-card: #1b1b1b;
+  --text-primary: #ffffff;
+  --text-secondary: #cccccc;
+  --text-muted: #999999;
+  --accent: #555555;
+  --accent-light: #666666;
+  --accent-dark: #444444;
+  --gold: #c9a962;
+  --gold-light: #d4b978;
+  --gold-dark: #a88c4a;
+  --error: #cc0000;
+  --success: #00cc66;
+  
+  /* Design System Tokens */
+  --radius: 4px;
+  --shadow: 0 10px 30px rgba(201,169,98,0.15);
+  --transition: all 300ms cubic-bezier(0.4,0,0.2,1);
+  
+  /* Responsive spacing scale */
+  --space-xs: clamp(0.5rem, 1vw, 0.75rem);
+  --space-sm: clamp(0.75rem, 1.5vw, 1rem);
+  --space-md: clamp(1rem, 2vw, 1.5rem);
+  --space-lg: clamp(1.5rem, 3vw, 2rem);
+  --space-xl: clamp(2rem, 4vw, 3rem);
+  --space-2xl: clamp(3rem, 6vw, 4rem);
+  --space-3xl: clamp(4rem, 8vw, 6rem);
+  
+  /* Responsive font sizes - Design System */
+  --text-xs: clamp(0.75rem, 1vw, 0.875rem);
+  --text-sm: clamp(0.875rem, 1.5vw, 1rem);
+  --text-base: clamp(1rem, 2vw, 1.125rem);
+  --text-lg: clamp(1.125rem, 1.8vw, 1.25rem);
+  --text-xl: clamp(1.25rem, 2vw, 1.5rem);
+  --text-2xl: clamp(1.5rem, 3vw, 2.25rem);
+  --text-3xl: clamp(1.875rem, 4vw, 3rem);
+  --text-4xl: clamp(2.25rem, 5vw, 4rem);
+  --text-5xl: clamp(2.75rem, 5vw, 3.75rem);
+  --text-6xl: clamp(3.25rem, 6vw, 4.5rem);
+  
+  /* Container widths */
+  --container-sm: 640px;
+  --container-md: 768px;
+  --container-lg: 1024px;
+  --container-xl: 1280px;
+  --container-2xl: 1536px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Prevent layout shift */
+  overflow-x: hidden;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Montserrat', sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+  /* Prevent CLS */
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-align: center;
+  padding: 0;
+}
+
+h1 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 700;
+}
+
+h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 600;
+}
+
+h3 {
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  font-weight: 500;
+}
+
+p, body {
+  font-size: clamp(1rem, 2vw, 1.125rem);
+  font-weight: 400;
+}
+
+.caption {
+  font-size: clamp(0.875rem, 1.5vw, 1rem);
+  font-weight: 300;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+/* ============================================
+   BUTTONS - Design System
+   ============================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 56px;
+  padding: 0 40px;
+  border-radius: var(--radius);
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: var(--font-heading);
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  border: none;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 50%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.btn:hover::before {
+  opacity: 1;
+}
+
+.btn:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 2px;
+}
+
+.btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn-primary {
+  background-color: var(--gold);
+  color: #0a0a0f;
+  box-shadow: 0 4px 20px rgba(201, 169, 98, 0.25);
+}
+
+.btn-primary:hover {
+  background-color: var(--gold-dark);
+  box-shadow: 0 8px 30px rgba(201, 169, 98, 0.4);
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  border: 2px solid var(--gold);
+  color: var(--gold);
+}
+
+.btn-secondary:hover {
+  background-color: var(--gold);
+  color: #0a0a0f;
+  box-shadow: 0 8px 30px rgba(201, 169, 98, 0.3);
+  transform: translateY(-2px);
+}
+
+.btn-ghost {
+  background-color: transparent;
+  color: var(--text-primary);
+  padding: 0;
+  height: auto;
+}
+
+.btn-ghost:hover {
+  text-decoration: underline;
+}
+
+/* ============================================
+   CARDS - Design System
+   ============================================ */
+.card {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: var(--transition);
+}
+
+.card:hover {
+  transform: scale(1.02);
+  box-shadow: var(--shadow);
+}
+
+.card-image {
+  aspect-ratio: 16/10;
+  overflow: hidden;
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: var(--transition);
+}
+
+.card:hover .card-image img {
+  transform: scale(1.05);
+}
+
+/* ============================================
+   FORMS - Design System
+   ============================================ */
+.form-input {
+  width: 100%;
+  height: 56px;
+  padding: 0 16px;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--accent);
+  border-radius: var(--radius);
+  color: var(--text-primary);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+  transition: var(--transition);
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+
+.form-input::placeholder {
+  color: var(--text-muted);
+}
+
+.form-input.error {
+  border-color: var(--error);
+}
+
+.form-textarea {
+  width: 100%;
+  min-height: 120px;
+  padding: 16px;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--accent);
+  border-radius: var(--radius);
+  color: var(--text-primary);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+  resize: vertical;
+  transition: var(--transition);
+}
+
+.form-textarea:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+
+.form-textarea::placeholder {
+  color: var(--text-muted);
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+a:hover {
+  font-weight: bold;
+}
+
+::selection {
+  background: var(--accent);
+  color: white;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+/* ============================================
+   RESPONSIVE CONTAINER SYSTEM
+   Mobile-first with fluid padding
+   ============================================ */
+.container {
+  width: 100%;
+  max-width: 1536px;
+  margin: 0 auto;
+  padding: 0 clamp(1rem, 4vw, 2.5rem);
+}
+
+/* Container queries for component-level responsiveness */
+@supports (container-type: inline-size) {
+  .container-query {
+    container-type: inline-size;
+  }
+}
+
+/* ============================================
+   SECTION PADDING - Responsive
+   ============================================ */
+.section-padding {
+  padding: var(--space-2xl) 0;
+}
+
+@media (min-width: 768px) {
+  .section-padding {
+    padding: var(--space-3xl) 0;
+  }
+}
+
+/* ============================================
+   TYPOGRAPHY - Responsive
+   ============================================ */
+.text-gradient {
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ============================================
+   GLASS CARD - Responsive
+   ============================================ */
+.glass-card {
+  background: rgba(21, 21, 31, 0.6);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* ============================================
+   GLASSMORPHISM - Liquid Glass Effect
+   ============================================ */
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(16px) saturate(150%);
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 
+    0 4px 24px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.glass-nav {
+  background: rgba(27, 27, 27, 0.8);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+}
+
+.glass-button {
+  background: rgba(201, 169, 98, 0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(201, 169, 98, 0.3);
+  box-shadow: 
+    0 4px 16px rgba(201, 169, 98, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.glass-button:hover {
+  background: rgba(201, 169, 98, 0.25);
+  border-color: rgba(201, 169, 98, 0.5);
+  box-shadow: 
+    0 8px 32px rgba(201, 169, 98, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.glass-input {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-input:focus {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--gold);
+  box-shadow: 
+    0 0 0 3px rgba(201, 169, 98, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ============================================
+   LEGACY STYLES - Responsive
+   ============================================ */
+.frame {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.header-shadow {
+  box-shadow: 0px 10px 50px #000000;
+}
+
+.nav-button {
+  display: inline-block;
+  margin: 0 clamp(0.25rem, 1vw, 0.625rem);
+  color: #fff;
+  text-decoration: none;
+  height: 40px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.nav-button:hover {
+  font-weight: bold;
+}
+
+/* ============================================
+   LOGO STRIP ANIMATION
+   ============================================ */
+@keyframes moveLogoStrips {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.wrapper {
+  overflow: hidden;
+  display: block;
+  position: relative;
+}
+
+.glass {
+  margin-top: -170px;
+  margin-bottom: -180px;
+  filter: contrast(110%) brightness(70%) blur(0px);
+}
+
+/* ============================================
+   DUAL LOGO STRIP - Responsive
+   ============================================ */
+.dual-logo-strip {
+  overflow: hidden;
+  position: relative;
+  width: 250%;
+  display: flex;
+  background-color: #1b1b1b;
+  margin-left: -75%;
+}
+
+.logo-strip {
+  background-color: #1b1b1b;
+  width: 100%;
+  height: clamp(60px, 10vw, 120px);
+  padding: clamp(10px, 2vw, 20px) 0;
+  background-repeat: repeat-x;
+  animation: moveLogoStrips 40s linear infinite;
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  object-position: center;
+}
+
+.strip-img {
+  padding: clamp(8px, 1.5vw, 25px);
+  width: 25%;
+  filter: brightness(0%) invert();
+  aspect-ratio: 0.75;
+  object-fit: contain;
+  height: clamp(40px, 6vw, 80px);
+}
+
+/* ============================================
+   HERO TEXT POSITIONING - Responsive
+   ============================================ */
+.text-on-h {
+  padding: 0;
+  margin: 0;
+  font-size: clamp(1.5rem, 5vw, 3.125rem);
+  font-weight: 900;
+  text-align: left;
+  position: absolute;
+  top: clamp(80px, 20vw, 220px);
+  left: clamp(16px, 5vw, 100px);
+  right: clamp(16px, 5vw, auto);
+  z-index: 1;
+  max-width: 90%;
+}
+
+.text-on-p {
+  padding: 0;
+  margin: 0;
+  font-size: clamp(0.875rem, 3vw, 1.875rem);
+  text-align: left;
+  position: absolute;
+  top: clamp(120px, 30vw, 280px);
+  left: clamp(16px, 5vw, 100px);
+  right: clamp(16px, 5vw, auto);
+  z-index: 1;
+  max-width: 90%;
+}
+
+/* ============================================
+   RESPONSIVE BREAKPOINTS
+   ============================================ */
+
+/* Small phones (320px) */
+@media (max-width: 479px) {
+  .container {
+    padding: 0 1rem;
+  }
+  
+  .section-padding {
+    padding: 2rem 0;
+  }
+}
+
+/* Large phones (480px) */
+@media (min-width: 480px) and (max-width: 639px) {
+  .container {
+    padding: 0 1.25rem;
+  }
+}
+
+/* Tablets (640px) */
+@media (min-width: 640px) and (max-width: 767px) {
+  .container {
+    padding: 0 1.5rem;
+  }
+}
+
+/* Small laptops (768px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .container {
+    padding: 0 2rem;
+  }
+}
+
+/* Laptops (1024px) */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .container {
+    padding: 0 2.5rem;
+  }
+}
+
+/* Desktops (1280px) */
+@media (min-width: 1280px) and (max-width: 1535px) {
+  .container {
+    padding: 0 3rem;
+  }
+}
+
+/* Large desktops (1536px+) */
+@media (min-width: 1536px) {
+  .container {
+    padding: 0 3rem;
+  }
+}
+
+/* ============================================
+   LANDSCAPE ORIENTATION HANDLING
+   ============================================ */
+@media (orientation: landscape) and (max-height: 500px) {
+  .text-on-h {
+    font-size: clamp(1.25rem, 4vw, 2rem);
+    top: clamp(40px, 10vw, 100px);
+  }
+  
+  .text-on-p {
+    font-size: clamp(0.75rem, 2vw, 1rem);
+    top: clamp(70px, 15vw, 140px);
+  }
+}
+
+/* ============================================
+   TOUCH DEVICE OPTIMIZATIONS
+   ============================================ */
+@media (hover: none) and (pointer: coarse) {
+  /* Increase tap targets */
+  .nav-button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Disable hover effects on touch */
+  .group:hover .group-hover\:scale-110 {
+    transform: none;
+  }
+}
+
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+@media print {
+  * {
+    background: white !important;
+    color: black !important;
+  }
+  
+  .nav-button,
+  .glass,
+  .dual-logo-strip {
+    display: none !important;
+  }
+}

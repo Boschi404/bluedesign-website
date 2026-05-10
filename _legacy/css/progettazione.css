@@ -1,0 +1,98 @@
+fieldset {
+    display: grid;
+    gap: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #3b3b3b;
+    padding: 10px;
+}
+
+label,
+input[type="text"],
+input[type="radio"],
+input[type="email"],
+input[type="tel"] {
+    width: 100%;
+    display: block;
+    text-align: center;
+}
+
+.radios{
+    grid-column-start: 0;
+    grid-column-end: span 2;
+    grid-row-start: 0;
+    grid-row-end: 2;
+}
+
+.nome {
+    grid-column-start: 0;
+    grid-column-end: 1;
+    grid-row-start: 3;
+    grid-row-end: 3;
+}
+.cognome{
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 3;
+    grid-row-end: 3;
+}
+.ragione_sociale{
+    grid-column-start: 0;
+    grid-column-end: 1;
+    grid-row-start: 4;
+    grid-row-end: 4;
+}
+
+.cod_univoco{
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 4;
+    grid-row-end: 4;
+}
+.indirizzo{
+    grid-column-start: 0;
+    grid-column-end: span 2;
+    grid-row-start: 5;
+    grid-row-end: 5;
+}
+
+.localita{
+    grid-column-start: 0;
+    grid-column-end: 1;
+    grid-row-start: 6;
+    grid-row-end: 6;
+}
+
+.cap{
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 6;
+    grid-row-end: 6;
+}
+
+.email{
+    grid-column-start: 0;
+    grid-column-end: 1;
+    grid-row-start: 7;
+    grid-row-end: 7;
+}
+
+.telefono{
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 7;
+    grid-row-end: 7;
+}
+
+.codice_fiscale{
+    grid-column-start: 0;
+    grid-column-end: 1;
+    grid-row-start: 8;
+    grid-row-end: 8;
+}
+
+.partita_iva{
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 8;
+    grid-row-end: 8;
+}
