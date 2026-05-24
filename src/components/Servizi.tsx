@@ -78,6 +78,9 @@ export default function Servizi() {
       <div className="absolute bottom-1/4 -right-32 w-64 h-64 bg-[#c9a962]/5 rounded-full blur-3xl" />
 
       <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
+        {/* Anchor for navbar 'Showroom' */}
+        <div id="showroom" className="pointer-events-none scroll-mt-24 sm:scroll-mt-28 md:scroll-mt-32" />
+
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}

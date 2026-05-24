@@ -8,11 +8,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
-   { href: "/chi-siamo", label: "Chi Siamo", isRoute: true },
-   { href: "/showroom", label: "Showroom", isRoute: true },
-   { href: "/progetti", label: "Progetti", isRoute: true },
-   { href: "/promozioni", label: "Promozioni", isRoute: true },
-   { href: "/contatti", label: "Contatti", isRoute: true },
+  { href: "#chi-siamo", label: "Chi Siamo", isRoute: false },
+  { href: "#showroom", label: "Showroom", isRoute: false },
+  { href: "#progetti", label: "Progetti", isRoute: false },
+  { href: "/promozioni", label: "Promozioni", isRoute: true },
+  { href: "#contatti", label: "Contatti", isRoute: false },
 ];
 
 const showroomLinks = [
@@ -46,23 +46,18 @@ export default function Navbar() {
        router.push(href);
        return;
      }
-     // If we're not on the home page, navigate to home first
-     if (pathname !== '/' && !href.startsWith('#')) {
-       router.push('/');
-       // Wait for navigation to complete before scrolling
-       setTimeout(() => {
-         const element = document.querySelector(href);
-         if (element) {
-           element.scrollIntoView({ behavior: "smooth" });
-         }
-       }, 100);
-       return;
-     }
-     
-     const element = document.querySelector(href);
-     if (element) {
-       element.scrollIntoView({ behavior: "smooth" });
-     }
+    // If we're not on the home page, navigate to home first, then scroll
+    if (pathname !== '/') {
+      router.push('/');
+      setTimeout(() => {
+        const element = document.querySelector(href);
+        if (element) element.scrollIntoView({ behavior: 'smooth' });
+      }, 120);
+      return;
+    }
+
+    const element = document.querySelector(href);
+    if (element) element.scrollIntoView({ behavior: 'smooth' });
    };
 
   return (
@@ -109,59 +104,21 @@ export default function Navbar() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.1 * index + 0.3 }}
                 >
-                  {link.label === "Showroom" ? (
-                    <div 
-                      className="relative inline-block"
-                      onMouseEnter={() => setIsDropdownOpen(true)}
-                      onMouseLeave={() => setIsDropdownOpen(false)}
-                    >
-                      <button className="relative px-3 xl:px-4 py-2 caption font-medium text-[#a0a0a0] hover:text-white transition-all duration-300 group">
-                        {link.label}
-                        <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-[2px] bg-gradient-to-r from-[#4a4a4a] to-[#6b6b6b] group-hover:w-full transition-all duration-300" />
-                      </button>
-                      {/* Modern dropdown */}
-                      <AnimatePresence>
-                        {isDropdownOpen && (
-                          <motion.div
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: 10 }}
-                            transition={{ duration: 0.2 }}
-                            className="absolute left-0 min-w-[180px] xl:min-w-[200px] bg-[#1b1b1b]/95 backdrop-blur-xl border border-white/[0.06] rounded-lg shadow-2xl z-10 overflow-hidden"
-                          >
-                            {showroomLinks.map((subLink, subIndex) => (
-                              <motion.button
-                                key={subLink.label}
-                                initial={{ opacity: 0, x: -10 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                transition={{ delay: 0.05 * subIndex }}
-                                onClick={() => scrollToSection(subLink.href, false)}
-                                className="block w-full text-left px-4 py-2.5 xl:py-3 text-xs xl:text-sm text-[#a0a0a0] hover:text-white hover:bg-[#2a2a2a] transition-all duration-200"
-                              >
-                                {subLink.label}
-                              </motion.button>
-                            ))}
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </div>
-                  ) : (
-                    <Link
-                      href={link.isRoute ? link.href : "#"}
-                      onClick={(e) => {
-                        if (!link.isRoute) {
-                          e.preventDefault();
-                          scrollToSection(link.href, link.isRoute);
-                        } else {
-                          setIsMobileMenuOpen(false);
-                        }
-                      }}
-                      className="relative px-3 xl:px-4 py-2 caption font-medium text-[#a0a0a0] hover:text-white transition-all duration-300 group"
-                    >
-                      {link.label}
-                      <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-[2px] bg-gradient-to-r from-[#4a4a4a] to-[#6b6b6b] group-hover:w-full transition-all duration-300" />
-                    </Link>
-                  )}
+                  <Link
+                    href={link.isRoute ? link.href : "#"}
+                    onClick={(e) => {
+                      if (!link.isRoute) {
+                        e.preventDefault();
+                        scrollToSection(link.href, link.isRoute);
+                      } else {
+                        setIsMobileMenuOpen(false);
+                      }
+                    }}
+                    className="relative px-3 xl:px-4 py-2 caption font-medium text-[#a0a0a0] hover:text-white transition-all duration-300 group"
+                  >
+                    {link.label}
+                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-[2px] bg-gradient-to-r from-[#4a4a4a] to-[#6b6b6b] group-hover:w-full transition-all duration-300" />
+                  </Link>
                 </motion.div>
               ))}
             </div>
