@@ -531,8 +531,7 @@ export default function ThreeDTest() {
               >
                 <h4 className="text-white font-semibold mb-2">Telefono</h4>
                 <p className="text-[#a0a0a0] text-sm">
-                  02 39326172<br />
-                  02 39326173
+                  02 39326172
                 </p>
               </div>
               <div

@@ -14,275 +14,346 @@ const promozioni = [
     originalPrice: 2845,
     discountedPrice: 850,
     discount: 70,
-    image: "/images/products/lampada-spirito-venezia.jpg",
+    images: ["/images/products/lampada-spirito-venezia.jpg"],
     stock: 1,
     views: 47,
     category: "Illuminazione",
   },
-  {
-    id: 2,
-    title: "Lampadario sospensione Hungry 100x150",
-    description: "Lampada sospensione Hungry 100x150 per un effetto scenografico e moderno.",
-    originalPrice: 1840,
-    discountedPrice: 730,
-    discount: 60,
-    image: "/images/products/lampada-hungry-1.jpg",
-    stock: 1,
-    views: 63,
-    category: "Illuminazione",
-  },
-  {
-    id: 3,
-    title: "Cassaforte Vittoria 1/2 800 nero con chiavi originali",
-    description: "Cassaforte Vittoria 1/2 800 in nero con chiavi originali e finiture di pregio.",
-    originalPrice: 2200,
-    discountedPrice: 1320,
-    discount: 40,
-    image: "/images/products/cassaforte-nera-1.jpeg",
-    stock: 1,
-    views: 89,
-    category: "Cucine",
-  },
-  {
-    id: 4,
-    title: "Cassaforte Vittoriana 1/2 800 rossa con chiavi interne",
-    description: "Cassaforte Vittoriana 1/2 800 rossa con chiavi interne e design classico.",
-    originalPrice: 2700,
-    discountedPrice: 1620,
-    discount: 40,
-    image: "/images/products/cassaforte-rossa-1.jpg",
-    stock: 2,
-    views: 34,
-    category: "Cucine",
-  },
-  {
-    id: 5,
-    title: "Tavolo bandelle essenza rovere primi del '900 75×35+36+36",
-    description: "Tavolo in rovere con bandelle estensibili, stile primi del '900.",
-    originalPrice: 745,
-    discountedPrice: 440,
-    discount: 40,
-    image: "/images/products/tavolo-bandelle-900-1.jpg",
-    stock: 1,
-    views: 112,
-    category: "Tavoli",
-  },
-  {
-    id: 6,
-    title: "Pouff bambini in pelle Nabuk scamosciata",
-    description: "Pouff per bambini in pelle Nabuk scamosciata morbida e resistente.",
-    originalPrice: 424,
-    discountedPrice: 210,
-    discount: 50,
-    image: "/images/products/sacco-nabuk.jpeg",
-    stock: 1,
-    views: 28,
-    category: "Living",
-  },
-  {
-    id: 7,
-    title: "Cucina Officine Fanesi Total Inox L 3008 con Gaggenau",
-    description: "Cucina Total Inox Officine Fanesi L 3008 con piano a induzione Gaggenau, lavastoviglie e cappa.",
-    originalPrice: 24850,
-    discountedPrice: 12400,
-    discount: 50,
-    image: "/images/products/cucina-officine-fanesi-1.jpeg",
-    stock: 1,
-    views: 45,
-    category: "Cucine",
-  },
-  {
-    id: 8,
-    title: "Divano Meta L in pelle",
-    description: "Divano Meta L in pelle, perfetto per salotti moderni e raffinati.",
-    originalPrice: 2450,
-    discountedPrice: 1470,
-    discount: 40,
-    image: "/images/products/divano-meta-1.jpeg",
-    stock: 1,
-    views: 56,
-    category: "Divani",
-  },
-  {
-    id: 9,
-    title: "Poltrona Charles Eames palissandro e pelle nera con pouf",
-    description: "Poltrona Charles Eames con struttura in palissandro e rivestimento in pelle nera, completa di pouf.",
-    originalPrice: 5480,
-    discountedPrice: 3280,
-    discount: 40,
-    image: "/images/products/poltrona-charles-eames-1.jpg",
-    stock: 1,
-    views: 78,
-    category: "Poltrone",
-  },
-  {
-    id: 10,
-    title: "Tavolo Fumo Plinio base metallo nero cristallo fumé 80×80",
-    description: "Tavolo Plinio con base in metallo nero e piano in cristallo fumé 80×80.",
-    originalPrice: 1260,
-    discountedPrice: 630,
-    discount: 50,
-    image: "/images/products/tavolo-cristallo-fume-1.jpg",
-    stock: 1,
-    views: 34,
-    category: "Tavoli",
-  },
-  {
-    id: 11,
-    title: "Pouff tondo pelle blu Saarinen",
-    description: "Pouff tondo in pelle blu con dettagli Saarinen e cordonatura bianca.",
-    originalPrice: 1180,
-    discountedPrice: 590,
-    discount: 50,
-    image: "/images/products/pouffe-saarinen-1.jpg",
-    stock: 1,
-    views: 67,
-    category: "Living",
-  },
-  {
-    id: 12,
-    title: "Poltroncina Midj doppio rivestimento noce",
-    description: "Poltroncina Midj con doppio rivestimento e struttura in essenza di noce.",
-    originalPrice: 588,
-    discountedPrice: 295,
-    discount: 50,
-    image: "/images/products/poltroncina-midj-sonny-1.jpg",
-    stock: 2,
-    views: 23,
-    category: "Poltrone",
-  },
-  {
-    id: 13,
-    title: "Libreria Extendo System in cristallo extra chiaro",
-    description: "Libreria Extendo System in cristallo extra chiaro laccato bianco con contenitori.",
-    originalPrice: 5850,
-    discountedPrice: 3200,
-    discount: 45,
-    image: "/images/products/libreria-extendo-system-1.jpg",
-    stock: 1,
-    views: 89,
-    category: "Living",
-  },
-  {
-    id: 14,
-    title: "Tavolino tondo Tulip Saarinen marmo bianco Carrara",
-    description: "Tavolino Tulip Saarinen con piano in marmo bianco Carrara e base in alluminio.",
-    originalPrice: 802,
-    discountedPrice: 480,
-    discount: 40,
-    image: "/images/products/tavolino-saarinen-tulip.jpg",
-    stock: 1,
-    views: 45,
-    category: "Tavoli",
-  },
-  {
-    id: 15,
-    title: "2 sedie in ecopelle Zamagna",
-    description: "Coppia di sedie in ecopelle Zamagna, eleganti e comode.",
-    originalPrice: 326,
-    discountedPrice: 160,
-    discount: 50,
-    image: "/images/products/sedia-zamagna-1.jpg",
-    stock: 1,
-    views: 12,
-    category: "Sedute",
-  },
-  {
-    id: 16,
-    title: "Pouff quadrato contenitore in velluto 50×47 H46",
-    description: "Pouff quadrato contenitore in velluto, 50×47 H46, perfetto per salotti e camere.",
-    originalPrice: 345,
-    discountedPrice: 170,
-    discount: 50,
-    image: "/images/products/pouffe-quadrato.jpeg",
-    stock: 1,
-    views: 34,
-    category: "Living",
-  },
-  {
-    id: 17,
-    title: "Comodino Calton laccato opaco con 2 cassetti",
-    description: "Comodino Calton laccato opaco con due cassetti e finiture morbide.",
-    originalPrice: 712,
-    discountedPrice: 390,
-    discount: 45,
-    image: "/images/products/comodino-calton-1.jpeg",
-    stock: 1,
-    views: 56,
-    category: "Comodini",
-  },
-  {
-    id: 18,
-    title: "Cucina Linea Pure",
-    description: "Cucina Linea Pure moderna e funzionale, con finiture eleganti.",
-    originalPrice: 52495,
-    discountedPrice: 20900,
-    discount: 60,
-    image: "/images/products/cucina-linea-pure-1.jpg",
-    stock: 1,
-    views: 156,
-    category: "Cucine",
-  },
-  {
-    id: 19,
-    title: "Cucina Touch",
-    description: "Cucina Touch moderna con design minimal e dettagli raffinati.",
-    originalPrice: 38450,
-    discountedPrice: 15300,
-    discount: 60,
-    image: "/images/products/cucina-touch-1.jpg",
-    stock: 1,
-    views: 134,
-    category: "Cucine",
-  },
-  {
-    id: 20,
-    title: "Cucina Lounge",
-    description: "Cucina Lounge elegante con finiture di alta gamma.",
-    originalPrice: 46127,
-    discountedPrice: 18500,
-    discount: 60,
-    image: "/images/products/cucina-lounge-1.jpg",
-    stock: 1,
-    views: 98,
-    category: "Cucine",
-  },
-  {
-    id: 21,
-    title: "Letto Felis Bowie con contenitore rialzato",
-    description: "Letto Felis Bowie con contenitore rialzato e materasso ortopedico.",
-    originalPrice: 4480,
-    discountedPrice: 2650,
-    discount: 40,
-    image: "/images/products/letto-felis-bowie-1.png",
-    stock: 1,
-    views: 78,
-    category: "Letti",
-  },
-  {
-    id: 22,
-    title: "Divano Felis Larson",
-    description: "Divano Felis Larson elegante e confortevole per living di carattere.",
-    originalPrice: 3768,
-    discountedPrice: 2260,
-    discount: 40,
-    image: "/images/products/divano.png",
-    stock: 1,
-    views: 89,
-    category: "Divani",
-  },
-  {
-    id: 23,
-    title: "Armadio Linea 120 3 vani laccato opaco con cassettiera",
-    description: "Armadio Linea 120 in laccato opaco con 3 vani, cassettiera e portacamicie.",
-    originalPrice: 4888,
-    discountedPrice: 2430,
-    discount: 50,
-    image: "/images/products/armadio-linea-120.png",
-    stock: 1,
-    views: 67,
-    category: "Armadi",
-  },
+    {
+      id: 2,
+      title: "Lampadario sospensione Hungry 100x150",
+      description: "Lampada sospensione Hungry 100x150 per un effetto scenografico e moderno.",
+      originalPrice: 1840,
+      discountedPrice: 730,
+      discount: 60,
+      images: [
+        "/images/products/lampada-hungry-1.jpg",
+        "/images/products/lampada-hungry-2.jpg"
+      ],
+      stock: 1,
+      views: 63,
+      category: "Illuminazione",
+    },
+    {
+      id: 3,
+      title: "Cassaforte Vittoriana 1/2 800 nero con chiavi originali",
+      description: "Cassaforte Vittoria 1/2 800 in nero con chiavi originali e finiture di pregio.",
+      originalPrice: 2200,
+      discountedPrice: 1320,
+      discount: 40,
+      images: [
+        "/images/products/cassaforte-nera-1.jpeg",
+        "/images/products/cassaforte-nera-2.jpeg"
+      ],
+      stock: 1,
+      views: 89,
+      category: "Cucine",
+    },
+    {
+      id: 4,
+      title: "Cassaforte Vittoriana 1/2 800 rossa con chiavi interne",
+      description: "Cassaforte Vittoriana 1/2 800 rossa con chiavi interne e design classico.",
+      originalPrice: 2700,
+      discountedPrice: 1620,
+      discount: 40,
+      images: [
+        "/images/products/cassaforte-rossa-1.jpg",
+        "/images/products/cassaforte-rossa-2.jpg"
+      ],
+      stock: 2,
+      views: 34,
+      category: "Cucine",
+    },
+    {
+      id: 5,
+      title: "Tavolo bandelle essenza rovere primi del '900 75×35+36+36",
+      description: "Tavolo in rovere con bandelle estensibili, stile primi del '900.",
+      originalPrice: 745,
+      discountedPrice: 440,
+      discount: 40,
+      images: [
+        "/images/products/tavolo-bandelle-900-1.jpg",
+        "/images/products/tavolo-bandelle-900-2.jpg",
+        "/images/products/tavolo-bandelle-900-3.jpg"
+      ],
+      stock: 1,
+      views: 112,
+      category: "Tavoli",
+    },
+    {
+      id: 6,
+      title: "Pouff bambini in pelle Nabuk scamosciata",
+      description: "Pouff per bambini in pelle Nabuk scamosciata morbida e resistente.",
+      originalPrice: 424,
+      discountedPrice: 210,
+      discount: 50,
+      images: ["/images/products/sacco-nabuk.jpeg"],
+      stock: 1,
+      views: 28,
+      category: "Living",
+    },
+    {
+      id: 7,
+      title: "Cucina Officine Fanesi Total Inox L 3008 con Gaggenau",
+      description: "Cucina Total Inox Officine Fanesi L 3008 con piano a induzione Gaggenau, lavastoviglie e cappa.",
+      originalPrice: 24850,
+      discountedPrice: 12400,
+      discount: 50,
+      images: [
+        "/images/products/cucina-officine-fanesi-1.jpeg",
+        "/images/products/cucina-officine-fanesi-2.jpeg",
+        "/images/products/cucina-officine-fanesi-3.jpeg"
+      ],
+      stock: 1,
+      views: 45,
+      category: "Cucine",
+    },
+    {
+      id: 8,
+      title: "Divano Meta in tessuto",
+      description: "Divano Meta L in pelle, perfetto per salotti moderni e raffinati.",
+      originalPrice: 2450,
+      discountedPrice: 1470,
+      discount: 40,
+      images: [
+        "/images/products/divano-meta-1.jpeg",
+        "/images/products/divano-meta-2.jpeg"
+      ],
+      stock: 1,
+      views: 56,
+      category: "Divani",
+    },
+    {
+      id: 9,
+      title: "Poltrona Charles Eames palissandro e pelle nera con pouf",
+      description: "Poltrona Charles Eames con struttura in palissandro e rivestimento in pelle nera, completa di pouf.",
+      originalPrice: 5480,
+      discountedPrice: 3280,
+      discount: 40,
+      images: [
+        "/images/products/poltrona-charles-eames-1.jpg",
+        "/images/products/poltrona-charles-eames-2.jpg"
+      ],
+      stock: 1,
+      views: 78,
+      category: "Poltrone",
+    },
+    {
+      id: 10,
+      title: "Tavolo Fumo Plinio base metallo nero cristallo fumé 80×80",
+      description: "Tavolo Plinio con base in metallo nero e piano in cristallo fumé 80×80.",
+      originalPrice: 1260,
+      discountedPrice: 630,
+      discount: 50,
+      images: ["/images/products/tavolo-cristallo-fume-1.jpg"],
+      stock: 1,
+      views: 34,
+      category: "Tavoli",
+    },
+    {
+      id: 11,
+      title: "Pouff tondo pelle blu Saarinen",
+      description: "Pouff tondo in pelle blu con dettagli Saarinen e cordonatura bianca.",
+      originalPrice: 1180,
+      discountedPrice: 590,
+      discount: 50,
+      images: ["/images/products/pouffe-saarinen-1.jpg"],
+      stock: 1,
+      views: 67,
+      category: "Living",
+    },
+    {
+      id: 12,
+      title: "Poltroncina Midj doppio rivestimento noce",
+      description: "Poltroncina Midj con doppio rivestimento e struttura in essenza di noce.",
+      originalPrice: 588,
+      discountedPrice: 295,
+      discount: 50,
+      images: [
+        "/images/products/poltroncina-midj-sonny-1.jpg",
+        "/images/products/poltroncina-midj-sonny-2.jpg"
+      ],
+      stock: 2,
+      views: 23,
+      category: "Poltrone",
+    },
+    {
+      id: 13,
+      title: "Libreria Extendo System in cristallo extra chiaro",
+      description: "Libreria Extendo System in cristallo extra chiaro laccato bianco con contenitori.",
+      originalPrice: 5850,
+      discountedPrice: 3200,
+      discount: 45,
+      images: [
+        "/images/products/libreria-extendo-system-1.jpg",
+        "/images/products/libreria-extendo-system-2.jpg"
+      ],
+      stock: 1,
+      views: 89,
+      category: "Living",
+    },
+    {
+      id: 14,
+      title: "Tavolino tondo Tulip Saarinen marmo bianco Carrara",
+      description: "Tavolino Tulip Saarinen con piano in marmo bianco Carrara e base in alluminio.",
+      originalPrice: 802,
+      discountedPrice: 480,
+      discount: 40,
+      images: [
+        "/images/products/tavolino-saarinen-tulip.jpg"
+      ],
+      stock: 1,
+      views: 45,
+      category: "Tavoli",
+    },
+    {
+      id: 15,
+      title: "2 sedie in ecopelle Zamagna",
+      description: "Coppia di sedie in ecopelle Zamagna, eleganti e comode.",
+      originalPrice: 326,
+      discountedPrice: 160,
+      discount: 50,
+      images: [
+        "/images/products/sedia-zamagna-1.jpg",
+        "/images/products/sedia-zamagna-2.jpg"
+      ],
+      stock: 1,
+      views: 12,
+      category: "Sedute",
+    },
+    {
+      id: 16,
+      title: "Pouff quadrato contenitore in velluto 50×47 H46",
+      description: "Pouff quadrato contenitore in velluto, 50×47 H46, perfetto per salotti e camere.",
+      originalPrice: 345,
+      discountedPrice: 170,
+      discount: 50,
+      images: [
+        "/images/products/pouffe-quadrato.jpeg",
+        "/images/products/pouffe-quadrato-2.jpeg"
+      ],
+      stock: 1,
+      views: 34,
+      category: "Living",
+    },
+    {
+      id: 17,
+      title: "Comodino Calton laccato opaco con 2 cassetti",
+      description: "Comodino Calton laccato opaco con due cassetti e finiture morbide.",
+      originalPrice: 712,
+      discountedPrice: 390,
+      discount: 45,
+      images: [
+        "/images/products/comodino-calton-1.jpeg",
+        "/images/products/comodino-calton-2.jpeg",
+        "/images/products/comodino-calton-3.jpeg"
+      ],
+      stock: 1,
+      views: 56,
+      category: "Comodini",
+    },
+    {
+      id: 18,
+      title: "Cucina Linea Pure",
+      description: "Cucina Linea Pure moderna e funzionale, con finiture eleganti.",
+      originalPrice: 52495,
+      discountedPrice: 20900,
+      discount: 60,
+      images: [
+        "/images/products/cucina-linea-pure-1.jpg",
+        "/images/products/cucina-linea-pure-2.jpg",
+        "/images/products/cucina-linea-pure-3.jpg",
+        "/images/products/cucina-linea-pure-4.jpg",
+        "/images/products/cucina-linea-pure-5.jpg",
+        "/images/products/cucina-linea-pure-6.jpg",
+        "/images/products/cucina-linea-pure-7.jpg",
+        "/images/products/cucina-linea-pure-8.jpg",
+        "/images/products/cucina-linea-pure-9.jpg",
+        "/images/products/cucina-linea-pure-10.jpg"
+      ],
+      stock: 1,
+      views: 156,
+      category: "Cucine",
+    },
+    {
+      id: 19,
+      title: "Cucina Touch",
+      description: "Cucina Touch moderna con design minimal e dettagli raffinati.",
+      originalPrice: 38450,
+      discountedPrice: 15300,
+      discount: 60,
+      images: [
+        "/images/products/cucina-touch-1.jpg",
+        "/images/products/cucina-touch-2.jpg",
+        "/images/products/cucina-touch-3.jpg",
+        "/images/products/cucina-touch-4.jpg",
+        "/images/products/cucina-touch-5.jpg",
+        "/images/products/cucina-touch-6.jpg",
+        "/images/products/cucina-touch-7.jpg"
+      ],
+      stock: 1,
+      views: 134,
+      category: "Cucine",
+    },
+    {
+      id: 20,
+      title: "Cucina Lounge",
+      description: "Cucina Lounge elegante con finiture di alta gamma.",
+      originalPrice: 46127,
+      discountedPrice: 18500,
+      discount: 60,
+      images: [
+        "/images/products/cucina-lounge-1.jpg",
+        "/images/products/cucina-lounge-2.jpg",
+        "/images/products/cucina-lounge-3.jpg",
+        "/images/products/cucina-lounge-4.jpg",
+        "/images/products/cucina-lounge-5.jpg",
+        "/images/products/cucina-lounge-6.jpg"
+      ],
+      stock: 1,
+      views: 98,
+      category: "Cucine",
+    },
+    {
+      id: 21,
+      title: "Letto Felis Bowie con contenitore rialzato",
+      description: "Letto Felis Bowie con contenitore rialzato e materasso ortopedico.",
+      originalPrice: 4480,
+      discountedPrice: 2650,
+      discount: 40,
+      images: [
+        "/images/products/letto-felis-bowie-1.png",
+        "/images/products/letto-felis-bowie-2.png",
+        "/images/products/letto-felis-bowie-3.png"
+      ],
+      stock: 1,
+      views: 78,
+      category: "Letti",
+    },
+    {
+      id: 22,
+      title: "Divano Felis Larson",
+      description: "Divano Felis Larson elegante e confortevole per living di carattere.",
+      originalPrice: 3768,
+      discountedPrice: 2260,
+      discount: 40,
+      images: ["/images/products/divano.png"],
+      stock: 1,
+      views: 89,
+      category: "Divani",
+    },
+    {
+      id: 23,
+      title: "Armadio Linea 120 3 vani laccato opaco con cassettiera",
+      description: "Armadio Linea 120 in laccato opaco con 3 vani, cassettiera e portacamicie.",
+      originalPrice: 4888,
+      discountedPrice: 2430,
+      discount: 50,
+      images: ["/images/products/armadio-linea-120.png"],
+      stock: 1,
+      views: 67,
+      category: "Armadi",
+    },
   {
     id: 24,
     title: "Pouff contenitore in velluto con apertura a ribalta",
@@ -290,71 +361,72 @@ const promozioni = [
     originalPrice: 898,
     discountedPrice: 270,
     discount: 70,
-    image: "/images/products/pouffe-rettangolare-velluto.jpg",
+    images: ["/images/products/pouffe-rettangolare-velluto.jpg"],
     stock: 1,
     views: 123,
     category: "Living",
   },
-  {
-    id: 25,
-    title: "Tavolo cucina noce provenienza Spagna con cassetto e allunga",
-    description: "Tavolo cucina in noce spagnolo con cassetto e allunga 132+30×64.",
-    originalPrice: 1430,
-    discountedPrice: 715,
-    discount: 50,
-    image: "/images/products/tavolo-spagna-1.jpg",
-    stock: 1,
-    views: 45,
-    category: "Tavoli",
-  },
-  {
-    id: 26,
-    title: "Bagno Arteba laccato opaco con specchio retroilluminato",
-    description: "Bagno Arteba laccato opaco con lavabo, miscelatore e specchio retroilluminato.",
-    originalPrice: 3985,
-    discountedPrice: 1990,
-    discount: 50,
-    image: "/images/products/bagno-arteba-2.jpg",
-    stock: 1,
-    views: 67,
-    category: "Bagni",
-  },
+    {
+      id: 25,
+      title: "Tavolo cucina noce provenienza Spagna con cassetto e allunga",
+      description: "Tavolo cucina in noce spagnolo con cassetto e allunga 132+30×64.",
+      originalPrice: 1430,
+      discountedPrice: 715,
+      discount: 50,
+      images: [
+        "/images/products/tavolo-spagna-1.jpg",
+        "/images/products/tavolo-spagna-2.jpg",
+        "/images/products/tavolo-spagna-3.jpg"
+      ],
+      stock: 1,
+      views: 45,
+      category: "Tavoli",
+    },
+    {
+      id: 26,
+      title: "Bagno Arteba laccato opaco con specchio retroilluminato",
+      description: "Bagno Arteba laccato opaco con lavabo, miscelatore e specchio retroilluminato.",
+      originalPrice: 3985,
+      discountedPrice: 1990,
+      discount: 50,
+      images: [
+        "/images/products/bagno-arteba-2.jpg",
+        "/images/products/bagno-arteba-3.jpg",
+        "/images/products/bagno-arteba-4.jpg"
+      ],
+      stock: 1,
+      views: 67,
+      category: "Bagni",
+    },
 ];
 
 export default function Promozioni() {
-  const [timeLeft, setTimeLeft] = useState({
-    days: 3,
-    hours: 12,
-    minutes: 45,
-    seconds: 30,
-  });
+type Promozione = (typeof promozioni)[number];
 
-  const [selectedCategory, setSelectedCategory] = useState("Tutti");
+type PromozioneWithImages = Promozione & { images: string[] };
+
+   const [selectedCategory, setSelectedCategory] = useState("Tutti");
+   const [selectedProduct, setSelectedProduct] = useState<PromozioneWithImages | null>(null);
+
+   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+
+  // Close overlay on Escape key
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && selectedProduct) {
+        setSelectedProduct(null);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [selectedProduct]);
 
   const categories = ["Tutti", "Cucine", "Divani", "Poltrone", "Tavoli", "Living", "Letti", "Armadi", "Bagni", "Comodini", "Sedute", "Illuminazione"];
 
   const filteredProducts = selectedCategory === "Tutti" 
     ? promozioni 
     : promozioni.filter(p => p.category === selectedCategory);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setTimeLeft((prev) => {
-        if (prev.seconds > 0) {
-          return { ...prev, seconds: prev.seconds - 1 };
-        } else if (prev.minutes > 0) {
-          return { ...prev, minutes: prev.minutes - 1, seconds: 59 };
-        } else if (prev.hours > 0) {
-          return { ...prev, hours: prev.hours - 1, minutes: 59, seconds: 59 };
-        } else if (prev.days > 0) {
-          return { ...prev, days: prev.days - 1, hours: 23, minutes: 59, seconds: 59 };
-        }
-        return prev;
-      });
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, []);
 
   return (
     <main className="min-h-screen bg-[#0a0a0f]">
@@ -365,7 +437,7 @@ export default function Promozioni() {
         {/* Background Image with Vignette */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="/images/products/bagno.jpg"
+            src="/images/products/bagno-arteba-2.jpg"
             alt="Arredamento di lusso"
             fill
             className="object-cover blur-sm scale-110"
@@ -376,32 +448,21 @@ export default function Promozioni() {
           <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0f]/80 via-transparent to-[#0a0a0f]/80" />
         </div>
 
-        <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 relative z-10 pt-24 sm:pt-28">
+        <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 relative z-10 pt-28 sm:pt-28">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             className="text-center"
           >
-            {/* Main Badge */}
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ delay: 0.2 }}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-[#c9a962]/20 border border-[#c9a962]/30 rounded-full mb-6"
-            >
-              <span className="w-2 h-2 bg-[#c9a962] rounded-full animate-pulse" />
-              <span className="text-[#c9a962] text-sm font-medium uppercase tracking-wider">
-                BLUEDESIGN srl - Progettazione • Renderizzazione • Vendita
-              </span>
-            </motion.div>
-
             {/* Main Headline */}
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 sm:mb-6">
               Sconti fino al <span className="text-[#c9a962] text-5xl sm:text-6xl md:text-7xl lg:text-8xl">70%</span>
             </h1>
+
+            {/* Subtitle */}
             <p className="text-[#a0a0a0] text-lg sm:text-xl max-w-2xl mx-auto mb-4">
-              <span className="text-white font-semibold">Cucine, armadi, letti, divani, poltrone, pouf</span> e tantissimi complementi!
+              <span className="text-white font-semibold">Cucine, armadi, letti, divani, poltrone, pouf</span> e tantissimi complementi in esposizione.
             </p>
             <p className="text-[#c9a962] text-base sm:text-lg font-medium mb-8">
               Professionalità da oltre 35 anni • Consulenza anche presso Vostro domicilio
@@ -421,34 +482,14 @@ export default function Promozioni() {
                 </svg>
                 <span className="text-white text-xs sm:text-sm">Showroom Milano</span>
               </div>
+              <div className="flex items-center gap-2 px-3 py-2 bg-[#1a1a1f]/80 backdrop-blur-sm rounded-lg border border-white/[0.06]">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22c55e" strokeWidth="2">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+                <span className="text-white text-xs sm:text-sm">Studio di Architettura Besana</span>
+              </div>
             </motion.div>
-
-            {/* Countdown Timer */}
-            <div className="flex justify-center gap-4 sm:gap-6 mb-8">
-              {[
-                { value: timeLeft.days, label: "Giorni" },
-                { value: timeLeft.hours, label: "Ore" },
-                { value: timeLeft.minutes, label: "Minuti" },
-                { value: timeLeft.seconds, label: "Secondi" },
-              ].map((item, index) => (
-                <motion.div
-                  key={item.label}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3 + index * 0.1 }}
-                  className="flex flex-col items-center"
-                >
-                  <div className="w-16 h-16 sm:w-20 sm:h-20 glass-card rounded-lg flex items-center justify-center mb-2">
-                    <span className="text-2xl sm:text-3xl font-bold text-[#c9a962]">
-                      {String(item.value).padStart(2, "0")}
-                    </span>
-                  </div>
-                  <span className="text-[#6b6b7b] text-xs sm:text-sm uppercase tracking-wider">
-                    {item.label}
-                  </span>
-                </motion.div>
-              ))}
-            </div>
 
             {/* Stock Warning */}
             <motion.div
@@ -520,6 +561,13 @@ export default function Promozioni() {
                 </svg>
                 Piazzale Lugano 6/10, Milano
               </span>
+              <span className="flex items-center gap-2">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+                Studio di Architettura Besana, Via Luigi Viarana 26, Besana in Brianza
+              </span>
               <span className="hidden sm:inline">•</span>
               <span className="flex items-center gap-2">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -528,8 +576,8 @@ export default function Promozioni() {
                   <line x1="8" y1="2" x2="8" y2="6" />
                   <line x1="3" y1="10" x2="21" y2="10" />
                 </svg>
-                Lun: 15:00-19:00
-                Mar-Sab: 9:00-13:00 • 15:00-19:00
+                Lun: 15:30-19:00
+                Mar-Sab: 9:00-13:00 • 15:30-19:00
               </span>
             </motion.div>
 
@@ -560,7 +608,7 @@ export default function Promozioni() {
               Prodotti in Promozione
             </h2>
             <p className="text-[#a0a0a0] text-base sm:text-lg max-w-2xl mx-auto">
-              Cucine, armadi, letti, divani, poltrone, pouf e tantissimi complementi d'arredo in esposizione.
+               Cucine, armadi, letti, divani, poltrone, pouf e tantissimi complementi d&apos;arredo in esposizione.
               Approfitta degli sconti esclusivi - Professionalità da oltre 35 anni!
             </p>
           </motion.div>
@@ -582,8 +630,8 @@ export default function Promozioni() {
             ))}
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            {filteredProducts.map((product, index) => (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+             {filteredProducts.map((product, _) => (
               <div
                 key={product.id}
                 className="group relative glass-card rounded-lg overflow-hidden flex flex-col"
@@ -595,18 +643,46 @@ export default function Promozioni() {
                   </div>
                 </div>
 
-                {/* Image */}
-                <div className="relative h-48 sm:h-56 overflow-hidden">
-                  <Image
-                    src={product.image}
-                    alt={product.title}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-transparent to-transparent" />
-                </div>
+                 {/* Image */}
+                  <div 
+                    className="relative h-[368px] sm:h-[415px] overflow-hidden cursor-pointer"
+                    onClick={() => {
+                      setSelectedProduct(product as PromozioneWithImages);
+                      setCurrentImageIndex(0);
+                    }}
+                  >
+                    {product.images.length > 1 ? (
+                      <div className="relative h-full w-full">
+                        <Image
+                          src={product.images?.[0] || ""}
+                          alt={product.title}
+                          fill
+                          className="object-cover"
+                          loading="lazy"
+                        />
+                        {/* Mini carousel indicators */}
+                        <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex gap-1">
+                          {(product.images || []).map((_, index) => (
+                            <div
+                              key={index}
+                              className={`w-2 h-2 bg-white/50 rounded-full transition-all duration-300 ${
+                                index === 0 ? 'bg-white' : 'bg-white/50'
+                              }`}
+                            />
+                          ))}
+                        </div>
+                      </div>
+                    ) : (
+                      <Image
+                        src={product.images?.[0] || ""}
+                        alt={product.title}
+                        fill
+                        className="object-cover"
+                        loading="lazy"
+                      />
+                    )}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-transparent to-transparent" />
+                  </div>
 
                 {/* Content */}
                 <div className="p-4 sm:p-6 flex flex-col flex-grow">
@@ -635,11 +711,6 @@ export default function Promozioni() {
                         Risparmi €{(product.originalPrice - product.discountedPrice)}
                       </span>
                     </div>
-                  </div>
-
-                  {/* Social Proof */}
-                  <div className="flex items-center gap-2 mb-4 text-[#6b6b7b] text-xs">
-                    <span>👁️ {product.views} visualizzazioni oggi</span>
                   </div>
 
                   {/* Stock Warning */}
@@ -684,20 +755,15 @@ export default function Promozioni() {
             viewport={{ once: true }}
             className="text-center"
           >
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4">
-              Non Perdere Questa Occasione
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-8">
+               Non perdere l&apos;occasione — Esaurimento scorte garantito
             </h2>
-            <p className="text-[#a0a0a0] text-base sm:text-lg max-w-2xl mx-auto mb-8">
-              Le promozioni sono valide solo fino a esaurimento scorte. 
-              Consulenza anche presso Vostro domicilio.
-            </p>
-
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
                 href="tel:+390239326172"
                 className="btn btn-primary text-lg px-8 py-4"
               >
-                Chiama: 02 39326172
+                Chiama Ora: 02 39326172
               </Link>
               <Link
                 href="/contatti"
@@ -706,14 +772,96 @@ export default function Promozioni() {
                 Prenota Visita
               </Link>
             </div>
-
-            <p className="mt-4 text-[#c9a962] font-medium animate-pulse">
-              Clicca sullo sconto!
-            </p>
-
           </motion.div>
         </div>
       </section>
+
+             {/* Image Overlay */}
+       {selectedProduct && (
+          <div
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm"
+            onClick={(e) => {
+              if (e.target === e.currentTarget) {
+                setSelectedProduct(null);
+              }
+            }}
+          >
+           <div className="relative max-w-5xl mx-4 h-[85vh]">
+             {/* Close Button */}
+             <button
+               onClick={() => setSelectedProduct(null)}
+               className="absolute top-2 right-2 z-10 p-2 bg-white/20 backdrop-blur rounded-full hover:bg-white/30 transition-all"
+               aria-label="Chiudi"
+             >
+               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                 <path d="M18 6l-12 12M6 6l12 12" />
+               </svg>
+             </button>
+
+             {/* Image Carousel */}
+             <div className="relative h-full w-full">
+                 <Image
+                   src={selectedProduct.images?.[currentImageIndex] || ""}
+                   alt={selectedProduct.title}
+                   width={800}
+                   height={600}
+                   className="object-cover rounded-lg"
+                   loading="lazy"
+                 />
+
+               {/* Navigation Arrows */}
+               {(selectedProduct.images || []).length > 1 && (
+                 <>
+                   <button
+                     onClick={() =>
+                       setCurrentImageIndex(
+                         (prev) =>
+                           (prev - 1 + (selectedProduct.images || []).length) % (selectedProduct.images || []).length
+                       )
+                     }
+                     className="absolute left-2 top-1/2 -translate-y-1/2 z-10 p-3 bg-white/20 backdrop-blur rounded-full hover:bg-white/30 transition-all"
+                   >
+                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                       <path d="M15 18l-6-6 6-6" />
+                     </svg>
+                   </button>
+                   <button
+                     onClick={() =>
+                       setCurrentImageIndex(
+                         (prev) => (prev + 1) % (selectedProduct.images || []).length
+                       )
+                     }
+                     className="absolute right-2 top-1/2 -translate-y-1/2 z-10 p-3 bg-white/20 backdrop-blur rounded-full hover:bg-white/30 transition-all"
+                   >
+                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                       <path d="M9 6l6 6-6 6" />
+                     </svg>
+                   </button>
+                 </>
+               )}
+
+               {/* Image Counter */}
+               {(selectedProduct.images || []).length > 1 && (
+                 <div className="absolute bottom-2 left-1/2 -translate-x-1/2 text-white text-sm bg-black/30 px-3 py-1 rounded">
+                   {currentImageIndex + 1} / {(selectedProduct.images || []).length}
+                 </div>
+               )}
+
+               {/* Product Info */}
+               <div className="absolute bottom-4 left-4 right-4 bg-black/50 backdrop-blur p-4 rounded-lg">
+                 <h3 className="text-lg font-semibold text-white mb-2">{selectedProduct.title}</h3>
+                 <p className="text-[#a0a0a0] text-sm mb-4 line-clamp-3">{selectedProduct.description}</p>
+                 <div className="flex items-baseline gap-2">
+                   <span className="text-2xl font-bold text-[#c9a962]">€{selectedProduct.discountedPrice}</span>
+                   <span className="text-[#6b6b7b] text-xs line-through">€{selectedProduct.originalPrice}</span>
+                   <span className="ml-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">-{selectedProduct.discount}%</span>
+                 </div>
+               </div>
+              </div>
+            </div>
+          </div>
+        )}
+
 
       {/* Footer */}
       <footer className="py-8 bg-[#1b1b1b]">

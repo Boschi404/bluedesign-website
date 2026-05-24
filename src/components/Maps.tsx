@@ -121,7 +121,7 @@ export default function Maps() {
                 </div>
               </div>
               <p className="text-[#a0a0a0] text-sm ml-16">
-                Via Luigi Viarana 26, 20841 Besana Brianza MB
+                Via Luigi Viarana 26, 20842 Besana Brianza MB
               </p>
             </div>
             <div className="relative w-full h-64 sm:h-72 md:h-80">

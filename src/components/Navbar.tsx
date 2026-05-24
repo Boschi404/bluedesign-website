@@ -2,33 +2,34 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
-  { href: "#chi-siamo", label: "Chi Siamo", isRoute: false },
-  { href: "#servizi", label: "Showroom", isRoute: false },
-  { href: "#progetti", label: "Progetti", isRoute: false },
-  { href: "/promozioni", label: "Promozioni", isRoute: true },
-  { href: "#contatti", label: "Contatti", isRoute: false },
+   { href: "/chi-siamo", label: "Chi Siamo", isRoute: true },
+   { href: "/showroom", label: "Showroom", isRoute: true },
+   { href: "/progetti", label: "Progetti", isRoute: true },
+   { href: "/promozioni", label: "Promozioni", isRoute: true },
+   { href: "/contatti", label: "Contatti", isRoute: true },
 ];
 
 const showroomLinks = [
-  { href: "#servizi", label: "Bagni" },
-  { href: "#servizi", label: "Zona Notte" },
-  { href: "#servizi", label: "Living" },
-  { href: "#servizi", label: "Illuminazione" },
-  { href: "#servizi", label: "Cucine" },
-  { href: "#servizi", label: "Camerette" },
+   { href: "/bagni-lusso-spa-milano", label: "Bagni" },
+   { href: "/zona-notte-camere-let-milano", label: "Zona Notte" },
+   { href: "/progettazione-living-zona-giorno-milano", label: "Living" },
+   { href: "/illuminazione-interni-milano", label: "Illuminazione" },
+   { href: "/cucine-moderne-minimal-milano", label: "Cucine" },
+   { href: "/camerette-bambini-ragazzi-milano", label: "Camerette" },
 ];
 
 export default function Navbar() {
-  const router = useRouter();
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+   const router = useRouter();
+   const pathname = usePathname();
+   const [isScrolled, setIsScrolled] = useState(false);
+   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -39,17 +40,30 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollToSection = (href: string, isRoute: boolean) => {
-    setIsMobileMenuOpen(false);
-    if (isRoute) {
-      router.push(href);
-      return;
-    }
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
+   const scrollToSection = (href: string, isRoute: boolean) => {
+     setIsMobileMenuOpen(false);
+     if (isRoute) {
+       router.push(href);
+       return;
+     }
+     // If we're not on the home page, navigate to home first
+     if (pathname !== '/' && !href.startsWith('#')) {
+       router.push('/');
+       // Wait for navigation to complete before scrolling
+       setTimeout(() => {
+         const element = document.querySelector(href);
+         if (element) {
+           element.scrollIntoView({ behavior: "smooth" });
+         }
+       }, 100);
+       return;
+     }
+     
+     const element = document.querySelector(href);
+     if (element) {
+       element.scrollIntoView({ behavior: "smooth" });
+     }
+   };
 
   return (
     <>
@@ -65,7 +79,7 @@ export default function Navbar() {
         )}
       >
         <div className="container mx-auto px-3 sm:px-4 md:px-6">
-          <div className="flex items-center justify-between h-16 sm:h-20 md:h-24">
+          <div className="flex items-center justify-between h-[80px] sm:h-20 md:h-24">
             {/* Logo - Responsive sizing */}
             <Link href="/" className="relative z-50">
               <motion.div
@@ -73,16 +87,16 @@ export default function Navbar() {
                 whileTap={{ scale: 0.95 }}
                 className="flex items-center gap-2 sm:gap-3"
               >
-                <div className="relative w-24 sm:w-32 md:w-40 lg:w-48 xl:w-56">
-                  <Image
-                    src="/images/logo/BlueDesign-Logo.png"
-                    alt="BlueDesign"
-                    width={240}
-                    height={120}
-                    className="object-contain invert"
-                    priority
-                  />
-                </div>
+                 <div id="navbar-logo" className="relative w-[220px] sm:w-32 md:w-40 lg:w-48 xl:w-56 h-full flex items-center">
+                   <Image
+                     src="/images/logo/BlueDesign-Logo.png"
+                     alt="BlueDesign"
+                     width={360}
+                     height={180}
+                     className="object-contain invert h-[96px] sm:h-16 md:h-20 w-auto max-h-full"
+                     priority
+                   />
+                 </div>
               </motion.div>
             </Link>
 
@@ -208,6 +222,19 @@ export default function Navbar() {
             className="fixed inset-0 z-40 bg-[#1b1b1b]/98 backdrop-blur-xl"
           >
             <div className="flex flex-col items-center justify-center h-full gap-6 sm:gap-8 pt-16 sm:pt-20">
+              {/* Home — solo nel menu hamburger */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0 }}
+              >
+                <Link
+                  href="/"
+                  className="h2 text-white hover:text-[#6b6b6b] transition-colors"
+                >
+                  Home
+                </Link>
+              </motion.div>
               {navLinks.map((link, index) => (
                 link.isRoute ? (
                   <motion.div

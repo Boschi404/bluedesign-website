@@ -147,14 +147,14 @@ export default function Contatti() {
           >
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 items-stretch">
               {/* Showroom Milano */}
-              <div className="space-y-4">
+              <div className="flex flex-col space-y-4">
                 <h3 className="text-white font-medium text-lg flex items-center gap-2">
                   <span className="w-1 h-5 bg-[#c9a962] rounded-full"></span>
                   Showroom Milano
                 </h3>
                 
                 {/* Card unificata con icone */}
-                <div className="p-6 bg-[#0a0a0f]/50 backdrop-blur-sm border border-white/[0.06] rounded-2xl hover:border-[#c9a962]/30 transition-all duration-300 h-full">
+                <div className="p-6 bg-[#0a0a0f]/50 backdrop-blur-sm border border-white/[0.06] rounded-2xl hover:border-[#c9a962]/30 transition-all duration-300 flex-1">
                   <div className="space-y-5">
                     {/* Indirizzo */}
                     <div className="flex items-start gap-4">
@@ -182,7 +182,7 @@ export default function Contatti() {
                       <div>
                         <p className="text-[#6b6b7b] text-xs mb-1">Telefono Showroom</p>
                         <div className="flex flex-col gap-1">
-                          <a href="tel:+390239326173" className="text-white text-sm hover:text-[#c9a962] transition-colors">02 39326173</a>
+                          <a href="tel:+390239326172" className="text-white text-sm hover:text-[#c9a962] transition-colors">02 39326172</a>
                         </div>
                       </div>
                     </div>
@@ -196,12 +196,12 @@ export default function Contatti() {
                         </svg>
                       </div>
                       <div className="space-y-1">
-                        <p className="text-[#a0a0a0] text-sm"><span className="text-white">Lun:</span> 15:00 - 19:30</p>
-                        <p className="text-[#a0a0a0] text-sm"><span className="text-white">Mar:</span> 10:00 - 13:00 / 15:00 - 19:30</p>
-                        <p className="text-[#a0a0a0] text-sm"><span className="text-white">Mer:</span> 10:00 - 13:00 / 15:00 - 19:30</p>
-                        <p className="text-[#a0a0a0] text-sm"><span className="text-white">Gio:</span> 10:00 - 13:00 / 15:00 - 19:30</p>
-                        <p className="text-[#a0a0a0] text-sm"><span className="text-white">Ven:</span> 10:00 - 13:00 / 15:00 - 19:30</p>
-                        <p className="text-[#a0a0a0] text-sm"><span className="text-white">Sab:</span> 10:00 - 13:00 / 15:00 - 19:30</p>
+                        <p className="text-[#a0a0a0] text-sm"><span className="text-white">Lun:</span> 15:30 - 19:30</p>
+                        <p className="text-[#a0a0a0] text-sm"><span className="text-white">Mar:</span> 10:00 - 13:00 / 15:30 - 19:30</p>
+                        <p className="text-[#a0a0a0] text-sm"><span className="text-white">Mer:</span> 10:00 - 13:00 / 15:30 - 19:30</p>
+                        <p className="text-[#a0a0a0] text-sm"><span className="text-white">Gio:</span> 10:00 - 13:00 / 15:30 - 19:30</p>
+                        <p className="text-[#a0a0a0] text-sm"><span className="text-white">Ven:</span> 10:00 - 13:00 / 15:30 - 19:30</p>
+                        <p className="text-[#a0a0a0] text-sm"><span className="text-white">Sab:</span> 10:00 - 13:00 / 15:30 - 19:30</p>
                         <p className="text-[#a0a0a0] text-sm"><span className="text-white">Dom:</span> <span className="text-[#6b6b7b]">Chiuso</span></p>
                       </div>
                     </div>
@@ -210,13 +210,13 @@ export default function Contatti() {
               </div>
 
               {/* Studio Architettura */}
-              <div className="space-y-4">
+              <div className="flex flex-col space-y-4">
                 <h3 className="text-white font-medium text-lg flex items-center gap-2">
                   <span className="w-1 h-5 bg-[#c9a962] rounded-full"></span>
                   Studio di Architettura Besana
                 </h3>
                 
-                <div className="p-6 bg-[#0a0a0f]/50 backdrop-blur-sm border border-white/[0.06] rounded-2xl hover:border-[#c9a962]/30 transition-all duration-300 h-full">
+                <div className="p-6 bg-[#0a0a0f]/50 backdrop-blur-sm border border-white/[0.06] rounded-2xl hover:border-[#c9a962]/30 transition-all duration-300 flex-1">
                   <div className="space-y-5">
                     {/* Indirizzo */}
                     <div className="flex items-start gap-4">
@@ -229,7 +229,7 @@ export default function Contatti() {
                       <div>
                         <p className="text-[#a0a0a0] text-sm leading-relaxed">
                           Via Luigi Viarana 26<br />
-                          <span className="text-[#6b6b7b]">20841 Besana Brianza MB</span>
+                          <span className="text-[#6b6b7b]">20842 Besana Brianza MB</span>
                         </p>
                       </div>
                     </div>

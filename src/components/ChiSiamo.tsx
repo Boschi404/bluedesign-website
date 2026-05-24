@@ -50,13 +50,13 @@ export default function ChiSiamo() {
             className="relative order-2 lg:order-1"
           >
             <div className="relative aspect-[4/5] rounded-2xl overflow-hidden">
-              <Image
-                src="/images/products/bagno.jpg"
-                alt="BlueDesign studio showroom"
-                fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-              />
+<Image
+                  src="/images/other/nostra-storia.png"
+                  alt="BlueDesign studio showroom"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-transparent to-transparent" />
             </div>
             

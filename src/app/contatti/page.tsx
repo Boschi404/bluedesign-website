@@ -29,8 +29,8 @@ export default function Contatti() {
                                 <div className="info-item">
                                     <i className="bi bi-telephone"></i>
                                     <div>
-                                        <h3>Telefono / Fax</h3>
-                                        <p>02 39326173</p>
+                                        <h3>Telefono</h3>
+                                        <p>Tel: <a href="tel:+390239326172">02 39326172</a></p>
                                     </div>
                                 </div>
                                 <div className="info-item">
@@ -44,7 +44,7 @@ export default function Contatti() {
                                     <i className="bi bi-house"></i>
                                     <div>
                                         <h3>Bluedesign - Studio d'Architettura</h3>
-                                        <p>Via Luigi Viarana 26<br />20842 Besana Brianza (MB)</p>
+                                        <p>Via Luigi Viarana 26<br />20842 Besana Brianza (MB)<br />Tel: <a href="tel:+3903621481773">0362 1481773</a></p>
                                     </div>
                                 </div>
                                 <div className="info-item">
@@ -103,6 +103,8 @@ export default function Contatti() {
         .contact-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 60px; align-items: stretch; }
         
         .contact-info-card { background: #1b1b1b; padding: 50px; border-radius: 8px; color: #fff; }
+        .contact-info-card a { color: #fff; text-decoration: none; transition: color 0.3s; }
+        .contact-info-card a:hover { color: #c9a962; }
         .info-item { display: flex; gap: 25px; margin-bottom: 35px; }
         .info-item i { font-size: 1.5rem; color: #fff; background: rgba(255,255,255,0.05); width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; border-radius: 50%; }
         .info-item h3 { font-size: 0.9rem; text-transform: uppercase; color: #aaa; letter-spacing: 0.1em; margin-bottom: 5px; }

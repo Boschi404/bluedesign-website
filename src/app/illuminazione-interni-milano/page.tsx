@@ -25,13 +25,13 @@ export default function Page() {
       
       <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <Image 
-            src="/images/products/bagno.jpg" 
-            alt="Illuminazione interni Milano" 
-            fill 
-            className="object-cover"
-            priority
-          />
+<Image 
+             src="/images/projects/foto-4.png" 
+             alt="Illuminazione interni Milano" 
+             fill 
+             className="object-cover"
+             priority
+           />
           <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0f]/80 via-[#0a0a0f]/60 to-[#0a0a0f]" />
           <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0f]/60 via-transparent to-[#0a0a0f]/60" />
         </div>
