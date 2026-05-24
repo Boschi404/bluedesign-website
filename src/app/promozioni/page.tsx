@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { motion } from "framer-motion";
 import Image from "next/image";
@@ -512,7 +512,7 @@ type PromozioneWithImages = Promozione & { images: string[] };
               className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6"
             >
               <Link
-                href="tel:+390239326172"
+                href="tel:+390239326173"
                 className="inline-flex items-center gap-3 btn btn-primary text-lg sm:text-xl px-8 sm:px-12 py-4 sm:py-5"
               >
                 <svg
@@ -525,7 +525,7 @@ type PromozioneWithImages = Promozione & { images: string[] };
                 >
                   <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
                 </svg>
-                Chiama Ora: 02 39326172
+                Chiama Ora: 02 39326173
               </Link>
               <Link
                 href="#prodotti"
@@ -724,7 +724,7 @@ type PromozioneWithImages = Promozione & { images: string[] };
                   {/* CTA - Always at bottom */}
                   <div className="mt-auto">
                     <Link
-                      href="tel:+390239326172"
+                      href="tel:+390239326173"
                       className="w-full btn btn-primary text-center block text-lg font-bold"
                     >
                       <span className="flex items-center justify-center gap-2">
@@ -735,7 +735,7 @@ type PromozioneWithImages = Promozione & { images: string[] };
                       </span>
                     </Link>
                     <p className="text-center text-[#6b6b7b] text-xs mt-2">
-                      Oppure chiamaci: 02 39326172
+                      Oppure chiamaci: 02 39326173
                     </p>
                   </div>
                 </div>
@@ -760,10 +760,10 @@ type PromozioneWithImages = Promozione & { images: string[] };
             </h2>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
-                href="tel:+390239326172"
+                href="tel:+390239326173"
                 className="btn btn-primary text-lg px-8 py-4"
               >
-                Chiama Ora: 02 39326172
+                Chiama Ora: 02 39326173
               </Link>
               <Link
                 href="/contatti"
@@ -799,13 +799,13 @@ type PromozioneWithImages = Promozione & { images: string[] };
              </button>
 
              {/* Image Carousel */}
-             <div className="relative h-full w-full">
+             <div className="relative h-full w-full flex items-center justify-center">
                  <Image
                    src={selectedProduct.images?.[currentImageIndex] || ""}
                    alt={selectedProduct.title}
                    width={800}
                    height={600}
-                   className="object-cover rounded-lg"
+                   className="object-contain rounded-lg max-h-full max-w-full"
                    loading="lazy"
                  />
 
@@ -857,6 +857,28 @@ type PromozioneWithImages = Promozione & { images: string[] };
                    <span className="ml-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">-{selectedProduct.discount}%</span>
                  </div>
                </div>
+               {/* Product JSON-LD */}
+               <script
+                 type="application/ld+json"
+                 dangerouslySetInnerHTML={{
+                   __html: JSON.stringify({
+                     "@context": "https://schema.org",
+                     "@type": "Product",
+                     name: selectedProduct.title,
+                     image: (selectedProduct.images || []).map((p) => (process.env.NEXT_PUBLIC_SITE_URL || "https://www.bluedesign.biz") + p),
+                     description: selectedProduct.description,
+                     sku: String(selectedProduct.id),
+                     brand: { "@type": "Brand", name: "BlueDesign" },
+                     offers: {
+                       "@type": "Offer",
+                       url: (process.env.NEXT_PUBLIC_SITE_URL || "https://www.bluedesign.biz") + "/promozioni#product-" + selectedProduct.id,
+                       priceCurrency: "EUR",
+                       price: selectedProduct.discountedPrice,
+                       availability: selectedProduct.stock && selectedProduct.stock > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
+                     },
+                   }),
+                 }}
+               />
               </div>
             </div>
           </div>
@@ -877,3 +899,4 @@ type PromozioneWithImages = Promozione & { images: string[] };
     </main>
   );
 }
+

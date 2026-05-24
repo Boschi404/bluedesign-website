@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { motion } from "framer-motion";
 import Link from "next/link";
@@ -107,14 +107,14 @@ export default function Footer() {
                 </svg>
                 <p className="leading-relaxed">
                   Piazzale Lugano 6/10<br />
-                  <span className="text-[#6b6b7b]">20158 Milano (MI)</span>
+                  <span className="text-white/70">20158 Milano (MI)</span>
                 </p>
               </div>
               <div className="flex items-start gap-3">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-[#c9a962] mt-0.5 flex-shrink-0">
                   <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
                 </svg>
-                <a href="tel:+390239326172" className="hover:text-[#c9a962] transition-colors">02 39326172</a>
+                <a href="tel:+390239326173" className="hover:text-[#c9a962] transition-colors">02 39326173</a>
               </div>
               <div className="flex items-start gap-3">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-[#c9a962] mt-0.5 flex-shrink-0">
@@ -140,7 +140,7 @@ export default function Footer() {
                 </svg>
                 <p className="leading-relaxed">
                   Via Luigi Viarana 26<br />
-                  <span className="text-[#6b6b7b]">20842 Besana Brianza (MB)</span>
+                  <span className="text-white/70">20842 Besana Brianza (MB)</span>
                 </p>
               </div>
               <div className="flex items-start gap-3">
@@ -162,21 +162,23 @@ export default function Footer() {
 
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-white/[0.06]">
-          <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-            <div className="text-[#6b6b7b] text-sm text-center sm:text-left">
+          <div className="flex flex-col justify-center items-center gap-4 sm:flex-row sm:justify-between sm:items-center">
+            <div className="text-white/70 text-sm text-center sm:text-left">
               <p>© {currentYear} BlueDesign Srl. Tutti i diritti riservati.</p>
+            </div>
+            <div className="text-white/70 text-sm text-center">
               <p>
                 Realizzato da <a href="https://leonardoboschi.com" target="_blank" rel="noopener noreferrer" className="hover:text-[#c9a962] transition-colors duration-300">Leonardo Boschi</a>
               </p>
             </div>
             <div className="flex flex-wrap justify-center sm:justify-end gap-6 text-sm">
-              <Link href="/privacy-policy" className="text-[#6b6b7b] hover:text-white transition-colors">
+              <Link href="/privacy-policy" className="text-white/70 hover:text-white transition-colors">
                 Privacy Policy
               </Link>
-              <Link href="/terms-conditions" className="text-[#6b6b7b] hover:text-white transition-colors">
+              <Link href="/terms-conditions" className="text-white/70 hover:text-white transition-colors">
                 Termini e Condizioni
               </Link>
-              <Link href="/cookie-policy" className="text-[#6b6b7b] hover:text-white transition-colors">
+              <Link href="/cookie-policy" className="text-white/70 hover:text-white transition-colors">
                 Cookie Policy
               </Link>
             </div>
@@ -186,3 +188,4 @@ export default function Footer() {
     </footer>
   );
 }
+

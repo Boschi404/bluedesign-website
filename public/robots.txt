@@ -2,46 +2,27 @@
 # https://www.bluedesign.biz
 
 User-agent: *
-Allow: /
+Disallow: /private/
+Disallow: /admin/
+Disallow: /.next/
+Disallow: /node_modules/
+Disallow: /api/
+
+# Recommended crawl delay (seconds) for polite crawling
+Crawl-delay: 1
 
 # Sitemap location
 Sitemap: https://www.bluedesign.biz/sitemap.xml
 
-# Crawl-delay for polite crawling
-Crawl-delay: 1
+# Preferred host
+Host: https://www.bluedesign.biz
 
-# Allow all search engines
+# Allow common public anchors and pages
+Allow: /
+
+# Specific bots allowances
 User-agent: Googlebot
 Allow: /
 
 User-agent: Bingbot
 Allow: /
-
-User-agent: Slurp
-Allow: /
-
-User-agent: DuckDuckBot
-Allow: /
-
-User-agent: Baiduspider
-Allow: /
-
-User-agent: YandexBot
-Allow: /
-
-# Block access to admin or private areas (if any)
-Disallow: /admin/
-Disallow: /private/
-Disallow: /api/
-
-# Allow access to all public content
-Allow: /
-Allow: /#chi-siamo
-Allow: /#servizi
-Allow: /#progetti
-Allow: /#testimonials
-Allow: /#contatti
-Allow: /#maps
-
-# Host directive
-Host: https://www.bluedesign.biz

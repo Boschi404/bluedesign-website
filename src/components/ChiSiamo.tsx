@@ -128,7 +128,7 @@ export default function ChiSiamo() {
                   viewport={{ once: true }}
                   className="mx-auto w-full max-w-md sm:max-w-none p-6 sm:p-5 bg-gradient-to-tr from-[#020407] to-[#07080a] backdrop-blur-sm border border-white/[0.12] rounded-2xl hover:shadow-[0_12px_30px_rgba(2,6,23,0.7)] hover:border-[#c9a962]/30 transition-all duration-300 flex flex-col items-center text-center gap-2"
                 >
-                  <h4 className="text-[#c9a962] text-lg sm:text-base md:text-lg font-semibold mb-1 tracking-tight">{item.title}</h4>
+                  <h3 className="text-[#c9a962] text-lg sm:text-base md:text-lg font-semibold mb-1 tracking-tight">{item.title}</h3>
                   <p className="text-[#e6e6e6] text-sm sm:text-sm leading-tight">{item.desc}</p>
                 </motion.div>
               ))}

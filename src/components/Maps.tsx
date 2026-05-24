@@ -71,7 +71,7 @@ export default function Maps() {
                   </svg>
                 </div>
                 <div>
-                  <h4 className="text-white text-lg font-medium">Showroom Milano</h4>
+                  <h3 className="text-white text-lg font-medium">Showroom Milano</h3>
                 </div>
               </div>
               <p className="text-[#a0a0a0] text-sm ml-16">
@@ -117,7 +117,7 @@ export default function Maps() {
                   </svg>
                 </div>
                 <div>
-                  <h4 className="text-white text-lg font-medium">Studio di Architettura</h4>
+                  <h3 className="text-white text-lg font-medium">Studio di Architettura</h3>
                 </div>
               </div>
               <p className="text-[#a0a0a0] text-sm ml-16">

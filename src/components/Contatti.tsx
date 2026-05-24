@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { motion } from "framer-motion";
 
@@ -182,7 +182,7 @@ export default function Contatti() {
                       <div>
                         <p className="text-[#6b6b7b] text-xs mb-1">Telefono Showroom</p>
                         <div className="flex flex-col gap-1">
-                          <a href="tel:+390239326172" className="text-white text-sm hover:text-[#c9a962] transition-colors">02 39326172</a>
+                          <a href="tel:+390239326173" className="text-white text-sm hover:text-[#c9a962] transition-colors">02 39326173</a>
                         </div>
                       </div>
                     </div>
@@ -297,3 +297,4 @@ export default function Contatti() {
     </section>
   );
 }
+

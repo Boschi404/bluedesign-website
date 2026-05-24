@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -30,7 +30,7 @@ export default function Contatti() {
                                     <i className="bi bi-telephone"></i>
                                     <div>
                                         <h3>Telefono</h3>
-                                        <p>Tel: <a href="tel:+390239326172">02 39326172</a></p>
+                                        <p>Tel: <a href="tel:+390239326173">02 39326173</a></p>
                                     </div>
                                 </div>
                                 <div className="info-item">
@@ -122,3 +122,4 @@ export default function Contatti() {
         </div>
     );
 }
+

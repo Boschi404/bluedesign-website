@@ -115,7 +115,7 @@ export default function Testimonials() {
                   {testimonial.author.charAt(0)}
                 </div>
                 <div>
-                  <h4 className="text-white font-medium">{testimonial.author}</h4>
+                  <h3 className="text-white font-medium">{testimonial.author}</h3>
                   <p className="text-[#6b6b7b] text-sm">
                     {testimonial.role}, {testimonial.location}
                   </p>

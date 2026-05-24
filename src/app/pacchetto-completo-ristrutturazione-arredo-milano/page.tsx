@@ -1,4 +1,4 @@
-import Image from "next/image";
+﻿import Image from "next/image";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import { MapPinIcon, ClockIcon, BanknotesIcon, PhoneIcon, ArrowRightIcon, CheckCircleIcon, StarIcon, HomeIcon, SparklesIcon } from "@heroicons/react/24/outline";
@@ -13,7 +13,7 @@ const jsonLd = {
   '@type': 'Service',
   name: 'Pacchetto Completo Ristrutturazione + Arredo',
   description: 'Ristrutturazione completa + arredo a Milano.',
-  provider: { '@type': 'HomeIconAndConstructionBusiness', name: 'BlueDesign S.r.l.', telephone: '+390239326172' },
+  provider: { '@type': 'HomeIconAndConstructionBusiness', name: 'BlueDesign S.r.l.', telephone: '+390239326173' },
   areaServed: ['Milano'],
   serviceType: 'ConstructionService',
 };
@@ -77,7 +77,7 @@ export default function Page() {
             
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link 
-                href="tel:+390239326172" 
+                href="tel:+390239326173" 
                 className="btn btn-primary inline-flex text-base px-10 py-4"
                 style={{ boxShadow: "0 20px 40px rgba(201,169,98,0.25)" }}
               >
@@ -181,8 +181,8 @@ export default function Page() {
           <p className="text-white/40 mb-10 max-w-xl mx-auto">Un solo interlocutore per tutto</p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link href="tel:+390239326172" className="btn btn-primary text-lg px-10 py-5">
-               02 39 32 61 72
+            <Link href="tel:+390239326173" className="btn btn-primary text-lg px-10 py-5">
+               02 39 32 61 73
             </Link>
             <Link href="/contatti" className="btn btn-secondary text-lg px-10 py-5">
               Prenota sopralluogo gratuito
