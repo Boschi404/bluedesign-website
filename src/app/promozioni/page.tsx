@@ -2,6 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
@@ -432,6 +433,7 @@ type PromozioneWithImages = Promozione & { images: string[] };
   return (
     <main className="min-h-screen bg-[#0a0a0f]">
       <Navbar />
+      <SpeedInsights />
       
       {/* Hero Section - Enhanced with More Content */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
