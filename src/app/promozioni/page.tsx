@@ -651,7 +651,7 @@ type PromozioneWithImages = Promozione & { images: string[] };
                       setCurrentImageIndex(0);
                     }}
                   >
-                    {product.images.length > 1 ? (
+                    {product.images?.length > 1 ? (
                       <div className="relative h-full w-full">
                         <Image
                           src={product.images?.[0] || ""}
