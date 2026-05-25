@@ -50,13 +50,13 @@ export default function ChiSiamo() {
             className="relative order-2 lg:order-1"
           >
             <div className="relative aspect-[4/5] rounded-2xl overflow-hidden">
-              <Image
-                src="/images/products/bagno-arteba-2.jpg"
-                alt="BlueDesign studio showroom"
-                fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-              />
+<Image
+                  src="/images/other/nostra-storia.png"
+                  alt="BlueDesign studio showroom"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-transparent to-transparent" />
             </div>
             
@@ -126,10 +126,10 @@ export default function ChiSiamo() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4 + index * 0.1 }}
                   viewport={{ once: true }}
-                  className="p-5 bg-[#0a0a0f]/50 backdrop-blur-sm border border-white/[0.06] rounded-xl hover:border-[#c9a962]/20 transition-colors duration-300"
+                  className="mx-auto w-full max-w-md sm:max-w-none p-6 sm:p-5 bg-gradient-to-tr from-[#020407] to-[#07080a] backdrop-blur-sm border border-white/[0.12] rounded-2xl hover:shadow-[0_12px_30px_rgba(2,6,23,0.7)] hover:border-[#c9a962]/30 transition-all duration-300 flex flex-col items-center text-center gap-2"
                 >
-                  <h4 className="text-white font-medium mb-1">{item.title}</h4>
-                  <p className="text-[#6b6b7b] text-sm">{item.desc}</p>
+                  <h3 className="text-[#c9a962] text-lg sm:text-base md:text-lg font-semibold mb-1 tracking-tight">{item.title}</h3>
+                  <p className="text-[#e6e6e6] text-sm sm:text-sm leading-tight">{item.desc}</p>
                 </motion.div>
               ))}
             </div>

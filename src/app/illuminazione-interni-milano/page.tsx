@@ -1,4 +1,4 @@
-import Image from "next/image";
+﻿import Image from "next/image";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import { MapPinIcon, ClockIcon, BanknotesIcon, PhoneIcon, ArrowRightIcon, CheckCircleIcon, StarIcon, HomeIcon, SparklesIcon } from "@heroicons/react/24/outline";
@@ -12,7 +12,7 @@ const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Service',
   name: 'Illuminazione Interni',
-  provider: { '@type': 'HomeIconAndConstructionBusiness', name: 'BlueDesign S.r.l.', telephone: '+390239326172' },
+  provider: { '@type': 'HomeIconAndConstructionBusiness', name: 'BlueDesign S.r.l.', telephone: '+390239326173' },
   areaServed: ['Milano'],
   serviceType: 'Interior Design Service',
 };
@@ -25,13 +25,13 @@ export default function Page() {
       
       <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
-          <Image 
-            src="/images/products/bagno.jpg" 
-            alt="Illuminazione interni Milano" 
-            fill 
-            className="object-cover"
-            priority
-          />
+<Image 
+             src="/images/projects/foto-4.png" 
+             alt="Illuminazione interni Milano" 
+             fill 
+             className="object-cover"
+             priority
+           />
           <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0f]/80 via-[#0a0a0f]/60 to-[#0a0a0f]" />
           <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0f]/60 via-transparent to-[#0a0a0f]/60" />
         </div>
@@ -77,7 +77,7 @@ export default function Page() {
             
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link 
-                href="tel:+390239326172" 
+                href="tel:+390239326173" 
                 className="btn btn-primary inline-flex text-base px-10 py-4"
                 style={{ boxShadow: "0 20px 40px rgba(201,169,98,0.25)" }}
               >
@@ -174,7 +174,7 @@ export default function Page() {
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
-            <Link href="tel:+390239326172" className="btn btn-primary text-lg px-10 py-5">Chiamaci ora</Link>
+            <Link href="tel:+390239326173" className="btn btn-primary text-lg px-10 py-5">Chiamaci ora</Link>
             <Link href="/contatti" className="btn btn-secondary text-lg px-10 py-5">Prenota sopralluogo gratuito</Link>
           </div>
           
@@ -183,7 +183,7 @@ export default function Page() {
             <div className="flex items-center gap-2"><CheckCircleIcon className="w-4 h-4 text-green-500" /><span>Preventivo senza impegno</span></div>
           </div>
           
-          <p className="text-white/30 text-sm mt-8">Piazzale Lugano 6/10, Milano | 02 39 32 61 72</p>
+          <p className="text-white/30 text-sm mt-8">Piazzale Lugano 6/10, Milano | 02 39 32 61 73</p>
         </div>
       </section>
 

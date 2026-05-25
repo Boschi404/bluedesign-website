@@ -1,8 +1,73 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import Turnstile from "./Turnstile";
 
 export default function Contatti() {
+  const [formData, setFormData] = useState({
+    name: "",
+    surname: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
+  const [website, setWebsite] = useState(""); // Honeypot field
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { id, value } = e.target;
+    setFormData((prev) => ({ ...prev, [id]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
+    if (siteKey && !turnstileToken) {
+      setStatus("error");
+      setErrorMessage("Completa la verifica di sicurezza per favore.");
+      return;
+    }
+
+    setStatus("loading");
+    setErrorMessage("");
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...formData,
+          website, // Honeypot
+          token: turnstileToken,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        setStatus("success");
+        setFormData({ name: "", surname: "", email: "", phone: "", message: "" });
+        setTurnstileToken("");
+      } else {
+        setStatus("error");
+        setErrorMessage(result.error || "Qualcosa è andato storto. Riprova più tardi.");
+      }
+    } catch (err) {
+      console.error("Form submit error:", err);
+      setStatus("error");
+      setErrorMessage("Errore di connessione. Controlla la tua rete e riprova.");
+    }
+  };
+
+  const handleReset = () => {
+    setStatus("idle");
+    setErrorMessage("");
+  };
+
   return (
     <section
       id="contatti"
@@ -62,80 +127,192 @@ export default function Contatti() {
               Inviaci un Messaggio
             </h3>
             
-            <form className="space-y-5">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label htmlFor="name" className="block text-xs font-medium text-[#6b6b7b] uppercase tracking-wider mb-2">
-                    Nome
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    required
-                    className="w-full px-4 py-3 bg-[#0a0a0f]/50 border border-white/[0.08] rounded-xl text-white placeholder-[#4a4a5a] focus:outline-none focus:border-[#c9a962] focus:bg-[#0a0a0f]/80 transition-all"
-                    placeholder="Il tuo nome"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="surname" className="block text-xs font-medium text-[#6b6b7b] uppercase tracking-wider mb-2">
-                    Cognome
-                  </label>
-                  <input
-                    type="text"
-                    id="surname"
-                    className="w-full px-4 py-3 bg-[#0a0a0f]/50 border border-white/[0.08] rounded-xl text-white placeholder-[#4a4a5a] focus:outline-none focus:border-[#c9a962] focus:bg-[#0a0a0f]/80 transition-all"
-                    placeholder="Il tuo cognome"
-                  />
-                </div>
-              </div>
+            <AnimatePresence mode="wait">
+              {status === "success" ? (
+                <motion.div
+                  key="success"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  className="text-center py-10 flex flex-col items-center justify-center space-y-6"
+                >
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ type: "spring", stiffness: 200, damping: 15, delay: 0.2 }}
+                    className="w-16 h-16 bg-[#c9a962]/10 border border-[#c9a962]/30 rounded-full flex items-center justify-center text-[#c9a962] shadow-lg shadow-[#c9a962]/10"
+                  >
+                    <svg
+                      width="28"
+                      height="28"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                  </motion.div>
+                  <div className="space-y-2">
+                    <h4 className="text-white text-xl font-medium">Messaggio Inviato!</h4>
+                    <p className="text-[#a0a0a0] text-sm leading-relaxed max-w-sm mx-auto">
+                      Grazie per averci contattato. Abbiamo ricevuto la tua richiesta e ti risponderemo al più presto.
+                    </p>
+                  </div>
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={handleReset}
+                    type="button"
+                    className="px-6 py-2.5 bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] text-white text-sm rounded-xl transition-all"
+                  >
+                    Invia un altro messaggio
+                  </motion.button>
+                </motion.div>
+              ) : (
+                <motion.form
+                  key="form"
+                  onSubmit={handleSubmit}
+                  className="space-y-5"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                >
+                  {status === "error" && (
+                    <div className="p-4 bg-red-950/20 border border-red-500/20 rounded-xl text-red-400 text-sm flex items-center gap-3">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="flex-shrink-0">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="8" x2="12" y2="12"></line>
+                        <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                      </svg>
+                      <span>{errorMessage}</span>
+                    </div>
+                  )}
 
-              <div>
-                <label htmlFor="email" className="block text-xs font-medium text-[#6b6b7b] uppercase tracking-wider mb-2">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  required
-                  className="w-full px-4 py-3 bg-[#0a0a0f]/50 border border-white/[0.08] rounded-xl text-white placeholder-[#4a4a5a] focus:outline-none focus:border-[#c9a962] focus:bg-[#0a0a0f]/80 transition-all"
-                  placeholder="la-tua-email@esempio.it"
-                />
-              </div>
+                  {/* Honeypot hidden field */}
+                  <div className="hidden" aria-hidden="true">
+                    <input
+                      type="text"
+                      name="website"
+                      value={website}
+                      onChange={(e) => setWebsite(e.target.value)}
+                      tabIndex={-1}
+                      autoComplete="off"
+                    />
+                  </div>
 
-              <div>
-                <label htmlFor="phone" className="block text-xs font-medium text-[#6b6b7b] uppercase tracking-wider mb-2">
-                  Telefono
-                </label>
-                <input
-                  type="tel"
-                  id="phone"
-                  className="w-full px-4 py-3 bg-[#0a0a0f]/50 border border-white/[0.08] rounded-xl text-white placeholder-[#4a4a5a] focus:outline-none focus:border-[#c9a962] focus:bg-[#0a0a0f]/80 transition-all"
-                  placeholder="+39 000 000 0000"
-                />
-              </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label htmlFor="name" className="block text-xs font-medium text-[#6b6b7b] uppercase tracking-wider mb-2">
+                        Nome
+                      </label>
+                      <input
+                        type="text"
+                        id="name"
+                        required
+                        value={formData.name}
+                        onChange={handleInputChange}
+                        disabled={status === "loading"}
+                        className="w-full px-4 py-3 bg-[#0a0a0f]/50 border border-white/[0.08] rounded-xl text-white placeholder-[#4a4a5a] focus:outline-none focus:border-[#c9a962] focus:bg-[#0a0a0f]/80 transition-all disabled:opacity-50"
+                        placeholder="Il tuo nome"
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="surname" className="block text-xs font-medium text-[#6b6b7b] uppercase tracking-wider mb-2">
+                        Cognome
+                      </label>
+                      <input
+                        type="text"
+                        id="surname"
+                        value={formData.surname}
+                        onChange={handleInputChange}
+                        disabled={status === "loading"}
+                        className="w-full px-4 py-3 bg-[#0a0a0f]/50 border border-white/[0.08] rounded-xl text-white placeholder-[#4a4a5a] focus:outline-none focus:border-[#c9a962] focus:bg-[#0a0a0f]/80 transition-all disabled:opacity-50"
+                        placeholder="Il tuo cognome"
+                      />
+                    </div>
+                  </div>
 
-              <div>
-                <label htmlFor="message" className="block text-xs font-medium text-[#6b6b7b] uppercase tracking-wider mb-2">
-                  Messaggio
-                </label>
-                <textarea
-                  id="message"
-                  required
-                  rows={4}
-                  className="w-full px-4 py-3 bg-[#0a0a0f]/50 border border-white/[0.08] rounded-xl text-white placeholder-[#4a4a5a] focus:outline-none focus:border-[#c9a962] focus:bg-[#0a0a0f]/80 transition-all resize-none"
-                  placeholder="Raccontaci del tuo progetto..."
-                />
-              </div>
+                  <div>
+                    <label htmlFor="email" className="block text-xs font-medium text-[#6b6b7b] uppercase tracking-wider mb-2">
+                      Email
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      required
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      disabled={status === "loading"}
+                      className="w-full px-4 py-3 bg-[#0a0a0f]/50 border border-white/[0.08] rounded-xl text-white placeholder-[#4a4a5a] focus:outline-none focus:border-[#c9a962] focus:bg-[#0a0a0f]/80 transition-all disabled:opacity-50"
+                      placeholder="la-tua-email@esempio.it"
+                    />
+                  </div>
 
-              <motion.button
-                whileHover={{ scale: 1.02, boxShadow: "0 20px 40px rgba(201,169,98,0.25)" }}
-                whileTap={{ scale: 0.98 }}
-                type="submit"
-                className="w-full py-4 bg-gradient-to-r from-[#c9a962] to-[#a88a4a] text-[#0a0a0f] font-semibold rounded-xl text-base shadow-lg shadow-[#c9a962]/10"
-              >
-                Invia Messaggio
-              </motion.button>
-            </form>
+                  <div>
+                    <label htmlFor="phone" className="block text-xs font-medium text-[#6b6b7b] uppercase tracking-wider mb-2">
+                      Telefono
+                    </label>
+                    <input
+                      type="tel"
+                      id="phone"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      disabled={status === "loading"}
+                      className="w-full px-4 py-3 bg-[#0a0a0f]/50 border border-white/[0.08] rounded-xl text-white placeholder-[#4a4a5a] focus:outline-none focus:border-[#c9a962] focus:bg-[#0a0a0f]/80 transition-all disabled:opacity-50"
+                      placeholder="+39 000 000 0000"
+                    />
+                  </div>
+
+                  <div>
+                    <label htmlFor="message" className="block text-xs font-medium text-[#6b6b7b] uppercase tracking-wider mb-2">
+                      Messaggio
+                    </label>
+                    <textarea
+                      id="message"
+                      required
+                      rows={4}
+                      value={formData.message}
+                      onChange={handleInputChange}
+                      disabled={status === "loading"}
+                      className="w-full px-4 py-3 bg-[#0a0a0f]/50 border border-white/[0.08] rounded-xl text-white placeholder-[#4a4a5a] focus:outline-none focus:border-[#c9a962] focus:bg-[#0a0a0f]/80 transition-all resize-none disabled:opacity-50"
+                      placeholder="Raccontaci del tuo progetto..."
+                    />
+                  </div>
+
+                  {/* Cloudflare Turnstile integration */}
+                  {status !== "loading" && (
+                    <Turnstile
+                      onVerify={(token) => setTurnstileToken(token)}
+                      onExpire={() => setTurnstileToken("")}
+                      onError={() => setTurnstileToken("")}
+                    />
+                  )}
+
+                  <motion.button
+                    whileHover={{ scale: status === "loading" ? 1 : 1.02, boxShadow: status === "loading" ? "none" : "0 20px 40px rgba(201,169,98,0.25)" }}
+                    whileTap={{ scale: status === "loading" ? 1 : 0.98 }}
+                    type="submit"
+                    disabled={status === "loading"}
+                    className="w-full py-4 bg-gradient-to-r from-[#c9a962] to-[#a88a4a] text-[#0a0a0f] font-semibold rounded-xl text-base shadow-lg shadow-[#c9a962]/10 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                  >
+                    {status === "loading" ? (
+                      <>
+                        <svg className="animate-spin h-5 w-5 text-[#0a0a0f]" fill="none" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                        </svg>
+                        Invio in corso...
+                      </>
+                    ) : (
+                      "Invia Messaggio"
+                    )}
+                  </motion.button>
+                </motion.form>
+              )}
+            </AnimatePresence>
           </motion.div>
 
           {/* Contact Info */}
@@ -147,14 +324,14 @@ export default function Contatti() {
           >
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 items-stretch">
               {/* Showroom Milano */}
-              <div className="space-y-4">
+              <div className="flex flex-col space-y-4">
                 <h3 className="text-white font-medium text-lg flex items-center gap-2">
                   <span className="w-1 h-5 bg-[#c9a962] rounded-full"></span>
                   Showroom Milano
                 </h3>
                 
                 {/* Card unificata con icone */}
-                <div className="p-6 bg-[#0a0a0f]/50 backdrop-blur-sm border border-white/[0.06] rounded-2xl hover:border-[#c9a962]/30 transition-all duration-300 h-full">
+                <div className="p-6 bg-[#0a0a0f]/50 backdrop-blur-sm border border-white/[0.06] rounded-2xl hover:border-[#c9a962]/30 transition-all duration-300 flex-1">
                   <div className="space-y-5">
                     {/* Indirizzo */}
                     <div className="flex items-start gap-4">
@@ -210,13 +387,13 @@ export default function Contatti() {
               </div>
 
               {/* Studio Architettura */}
-              <div className="space-y-4">
+              <div className="flex flex-col space-y-4">
                 <h3 className="text-white font-medium text-lg flex items-center gap-2">
                   <span className="w-1 h-5 bg-[#c9a962] rounded-full"></span>
                   Studio di Architettura Besana
                 </h3>
                 
-                <div className="p-6 bg-[#0a0a0f]/50 backdrop-blur-sm border border-white/[0.06] rounded-2xl hover:border-[#c9a962]/30 transition-all duration-300 h-full">
+                <div className="p-6 bg-[#0a0a0f]/50 backdrop-blur-sm border border-white/[0.06] rounded-2xl hover:border-[#c9a962]/30 transition-all duration-300 flex-1">
                   <div className="space-y-5">
                     {/* Indirizzo */}
                     <div className="flex items-start gap-4">
@@ -229,7 +406,7 @@ export default function Contatti() {
                       <div>
                         <p className="text-[#a0a0a0] text-sm leading-relaxed">
                           Via Luigi Viarana 26<br />
-                          <span className="text-[#6b6b7b]">20841 Besana Brianza MB</span>
+                          <span className="text-[#6b6b7b]">20842 Besana Brianza MB</span>
                         </p>
                       </div>
                     </div>
@@ -297,3 +474,4 @@ export default function Contatti() {
     </section>
   );
 }
+

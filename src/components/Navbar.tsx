@@ -2,33 +2,34 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
   { href: "#chi-siamo", label: "Chi Siamo", isRoute: false },
-  { href: "#servizi", label: "Showroom", isRoute: false },
+  { href: "#showroom", label: "Showroom", isRoute: false },
   { href: "#progetti", label: "Progetti", isRoute: false },
   { href: "/promozioni", label: "Promozioni", isRoute: true },
   { href: "#contatti", label: "Contatti", isRoute: false },
 ];
 
 const showroomLinks = [
-  { href: "#servizi", label: "Bagni" },
-  { href: "#servizi", label: "Zona Notte" },
-  { href: "#servizi", label: "Living" },
-  { href: "#servizi", label: "Illuminazione" },
-  { href: "#servizi", label: "Cucine" },
-  { href: "#servizi", label: "Camerette" },
+   { href: "/bagni-lusso-spa-milano", label: "Bagni" },
+   { href: "/zona-notte-camere-let-milano", label: "Zona Notte" },
+   { href: "/progettazione-living-zona-giorno-milano", label: "Living" },
+   { href: "/illuminazione-interni-milano", label: "Illuminazione" },
+   { href: "/cucine-moderne-minimal-milano", label: "Cucine" },
+   { href: "/camerette-bambini-ragazzi-milano", label: "Camerette" },
 ];
 
 export default function Navbar() {
-  const router = useRouter();
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+   const router = useRouter();
+   const pathname = usePathname();
+   const [isScrolled, setIsScrolled] = useState(false);
+   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -39,17 +40,25 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollToSection = (href: string, isRoute: boolean) => {
-    setIsMobileMenuOpen(false);
-    if (isRoute) {
-      router.push(href);
+   const scrollToSection = (href: string, isRoute: boolean) => {
+     setIsMobileMenuOpen(false);
+     if (isRoute) {
+       router.push(href);
+       return;
+     }
+    // If we're not on the home page, navigate to home first, then scroll
+    if (pathname !== '/') {
+      router.push('/');
+      setTimeout(() => {
+        const element = document.querySelector(href);
+        if (element) element.scrollIntoView({ behavior: 'smooth' });
+      }, 120);
       return;
     }
+
     const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
+    if (element) element.scrollIntoView({ behavior: 'smooth' });
+   };
 
   return (
     <>
@@ -65,7 +74,7 @@ export default function Navbar() {
         )}
       >
         <div className="container mx-auto px-3 sm:px-4 md:px-6">
-          <div className="flex items-center justify-between h-16 sm:h-20 md:h-24">
+          <div className="flex items-center justify-between h-[80px] sm:h-20 md:h-24">
             {/* Logo - Responsive sizing */}
             <Link href="/" className="relative z-50">
               <motion.div
@@ -73,16 +82,16 @@ export default function Navbar() {
                 whileTap={{ scale: 0.95 }}
                 className="flex items-center gap-2 sm:gap-3"
               >
-                <div id="navbar-logo" className="relative w-24 sm:w-32 md:w-40 lg:w-48 xl:w-56">
-                  <Image
-                    src="/images/logo/BlueDesign-Logo.png"
-                    alt="BlueDesign"
-                    width={240}
-                    height={120}
-                    className="object-contain invert"
-                    priority
-                  />
-                </div>
+                 <div id="navbar-logo" className="relative w-[220px] sm:w-32 md:w-40 lg:w-48 xl:w-56 h-full flex items-center">
+                   <Image
+                     src="/images/logo/BlueDesign-Logo.png"
+                     alt="BlueDesign"
+                     width={360}
+                     height={180}
+                     className="object-contain invert h-[96px] sm:h-16 md:h-20 w-auto max-h-full"
+                     priority
+                   />
+                 </div>
               </motion.div>
             </Link>
 
@@ -95,59 +104,21 @@ export default function Navbar() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.1 * index + 0.3 }}
                 >
-                  {link.label === "Showroom" ? (
-                    <div 
-                      className="relative inline-block"
-                      onMouseEnter={() => setIsDropdownOpen(true)}
-                      onMouseLeave={() => setIsDropdownOpen(false)}
-                    >
-                      <button className="relative px-3 xl:px-4 py-2 caption font-medium text-[#a0a0a0] hover:text-white transition-all duration-300 group">
-                        {link.label}
-                        <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-[2px] bg-gradient-to-r from-[#4a4a4a] to-[#6b6b6b] group-hover:w-full transition-all duration-300" />
-                      </button>
-                      {/* Modern dropdown */}
-                      <AnimatePresence>
-                        {isDropdownOpen && (
-                          <motion.div
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: 10 }}
-                            transition={{ duration: 0.2 }}
-                            className="absolute left-0 min-w-[180px] xl:min-w-[200px] bg-[#1b1b1b]/95 backdrop-blur-xl border border-white/[0.06] rounded-lg shadow-2xl z-10 overflow-hidden"
-                          >
-                            {showroomLinks.map((subLink, subIndex) => (
-                              <motion.button
-                                key={subLink.label}
-                                initial={{ opacity: 0, x: -10 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                transition={{ delay: 0.05 * subIndex }}
-                                onClick={() => scrollToSection(subLink.href, false)}
-                                className="block w-full text-left px-4 py-2.5 xl:py-3 text-xs xl:text-sm text-[#a0a0a0] hover:text-white hover:bg-[#2a2a2a] transition-all duration-200"
-                              >
-                                {subLink.label}
-                              </motion.button>
-                            ))}
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </div>
-                  ) : (
-                    <Link
-                      href={link.isRoute ? link.href : "#"}
-                      onClick={(e) => {
-                        if (!link.isRoute) {
-                          e.preventDefault();
-                          scrollToSection(link.href, link.isRoute);
-                        } else {
-                          setIsMobileMenuOpen(false);
-                        }
-                      }}
-                      className="relative px-3 xl:px-4 py-2 caption font-medium text-[#a0a0a0] hover:text-white transition-all duration-300 group"
-                    >
-                      {link.label}
-                      <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-[2px] bg-gradient-to-r from-[#4a4a4a] to-[#6b6b6b] group-hover:w-full transition-all duration-300" />
-                    </Link>
-                  )}
+                  <Link
+                    href={link.isRoute ? link.href : "#"}
+                    onClick={(e) => {
+                      if (!link.isRoute) {
+                        e.preventDefault();
+                        scrollToSection(link.href, link.isRoute);
+                      } else {
+                        setIsMobileMenuOpen(false);
+                      }
+                    }}
+                    className="relative px-3 xl:px-4 py-2 caption font-medium text-[#a0a0a0] hover:text-white transition-all duration-300 group"
+                  >
+                    {link.label}
+                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-[2px] bg-gradient-to-r from-[#4a4a4a] to-[#6b6b6b] group-hover:w-full transition-all duration-300" />
+                  </Link>
                 </motion.div>
               ))}
             </div>

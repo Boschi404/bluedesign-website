@@ -1,4 +1,4 @@
-import Image from "next/image";
+﻿import Image from "next/image";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import { MapPinIcon, ClockIcon, BanknotesIcon, PhoneIcon, ArrowRightIcon, CheckCircleIcon, StarIcon, HomeIcon, SparklesIcon } from "@heroicons/react/24/outline";
@@ -12,7 +12,7 @@ const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Service',
   name: 'Progettazione Living e Zona Giorno',
-  provider: { '@type': 'HomeIconAndConstructionBusiness', name: 'BlueDesign S.r.l.', telephone: '+390239326172' },
+  provider: { '@type': 'HomeIconAndConstructionBusiness', name: 'BlueDesign S.r.l.', telephone: '+390239326173' },
   areaServed: ['Milano'],
   serviceType: 'Interior Design Service',
 };
@@ -48,7 +48,7 @@ export default function Page() {
 
             </div>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link href="tel:+390239326172" className="btn btn-primary inline-flex text-base px-10 py-4" style={{ boxShadow: "0 20px 40px rgba(201,169,98,0.25)" }}>Chiama ora</Link>
+              <Link href="tel:+390239326173" className="btn btn-primary inline-flex text-base px-10 py-4" style={{ boxShadow: "0 20px 40px rgba(201,169,98,0.25)" }}>Chiama ora</Link>
               <Link href="/contatti" className="inline-flex items-center gap-2 text-white/70 hover:text-white text-base px-6 py-4 transition-colors">Consulenza gratuita <ArrowRightIcon className="w-5 h-5" /></Link>
             </div>
           </div>
@@ -155,7 +155,7 @@ export default function Page() {
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
-            <Link href="tel:+390239326172" className="btn btn-primary text-lg px-10 py-5">Chiamaci ora</Link>
+            <Link href="tel:+390239326173" className="btn btn-primary text-lg px-10 py-5">Chiamaci ora</Link>
             <Link href="/contatti" className="btn btn-secondary text-lg px-10 py-5">Prenota sopralluogo gratuito</Link>
           </div>
           
@@ -174,7 +174,7 @@ export default function Page() {
             </div>
           </div>
           
-          <p className="text-white/30 text-sm mt-8">Piazzale Lugano 6/10, Milano | 02 39 32 61 72</p>
+          <p className="text-white/30 text-sm mt-8">Piazzale Lugano 6/10, Milano | 02 39 32 61 73</p>
         </div>
       </section>
 
@@ -188,3 +188,4 @@ export default function Page() {
     </main>
   );
 }
+

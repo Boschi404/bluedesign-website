@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useRef, useState, useEffect, useLayoutEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
@@ -78,6 +79,8 @@ export default function Hero() {
             muted
             loop
             playsInline
+            preload="metadata"
+            poster="/images/background/bg.jpg"
             className="w-full h-full object-cover"
             style={{
               transform: `translateZ(-100px) scale(1.1)`,
@@ -200,12 +203,14 @@ export default function Hero() {
           style={{ animationDuration: `${stripDuration}s` }}
         >
           {totalLogos.map((logo, index) => (
-            <img
+            <Image
               key={index}
               src={logo.src}
               alt={logo.alt}
+              width={140}
+              height={90}
               className="strip-img"
-              loading="lazy"
+              sizes="(max-width: 640px) 90px, 140px"
             />
           ))}
         </div>

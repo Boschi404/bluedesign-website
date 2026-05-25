@@ -650,9 +650,10 @@ a:hover {
    NAVBAR LOGO - Mobile +30%
    ============================================ */
 @media (max-width: 639px) {
-  /* w-24 = 96px → ×1.30 = 124.8px ≈ 125px */
+  /* Navbar logo mobile: increased to match 80% larger target */
   #navbar-logo {
-    width: 125px;
+    width: 270px;
+    max-width: 90%;
   }
 }
 

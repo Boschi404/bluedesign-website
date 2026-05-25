@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
@@ -135,7 +135,10 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        
+        {/* Preload critical images for faster LCP */}
+        <link rel="preload" as="image" href="/images/logo/BlueDesign-Logo.png" />
+        <link rel="preload" as="image" href="/images/background/bg.jpg" />
+
         {/* Schema.org JSON-LD for LocalBusiness */}
         <script
           type="application/ld+json"
@@ -148,7 +151,7 @@ export default function RootLayout({
               image: "https://www.bluedesign.biz/images/logo/BlueDesign-Logo.png",
               description: "Studio di architettura d'interni a Milano specializzato in cucine Composit, living di design e progettazione su misura.",
               url: "https://www.bluedesign.biz",
-              telephone: "+390239326172",
+              telephone: "+390239326173",
               email: "info@bluedesign.biz",
               address: {
                 "@type": "PostalAddress",
@@ -299,7 +302,7 @@ export default function RootLayout({
               logo: "https://www.bluedesign.biz/images/logo/BlueDesign-Logo.png",
               contactPoint: {
                 "@type": "ContactPoint",
-                telephone: "+390239326172",
+                telephone: "+390239326173",
                 contactType: "customer service",
                 areaServed: "IT",
                 availableLanguage: "Italian",
@@ -405,3 +408,4 @@ export default function RootLayout({
     </html>
   );
 }
+

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { motion } from "framer-motion";
 import Image from "next/image";
@@ -361,7 +361,7 @@ const promozioni = [
     originalPrice: 898,
     discountedPrice: 270,
     discount: 70,
-    image: "/images/products/pouffe-rettangolare-velluto.jpg",
+    images: ["/images/products/pouffe-rettangolare-velluto.jpg"],
     stock: 1,
     views: 123,
     category: "Living",
@@ -405,14 +405,10 @@ type Promozione = (typeof promozioni)[number];
 
 type PromozioneWithImages = Promozione & { images: string[] };
 
-  const [selectedCategory, setSelectedCategory] = useState("Tutti");
-  const [selectedProduct, setSelectedProduct] = useState<PromozioneWithImages | null>(null);
+   const [selectedCategory, setSelectedCategory] = useState("Tutti");
+   const [selectedProduct, setSelectedProduct] = useState<PromozioneWithImages | null>(null);
 
-  const productWithImages = (p: Promozione): PromozioneWithImages =>
-    p as unknown as PromozioneWithImages;
-
-
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
 
   // Close overlay on Escape key
@@ -516,7 +512,7 @@ type PromozioneWithImages = Promozione & { images: string[] };
               className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6"
             >
               <Link
-                href="tel:+390239326172"
+                href="tel:+390239326173"
                 className="inline-flex items-center gap-3 btn btn-primary text-lg sm:text-xl px-8 sm:px-12 py-4 sm:py-5"
               >
                 <svg
@@ -529,7 +525,7 @@ type PromozioneWithImages = Promozione & { images: string[] };
                 >
                   <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
                 </svg>
-                Chiama Ora: 02 39326172
+                Chiama Ora: 02 39326173
               </Link>
               <Link
                 href="#prodotti"
@@ -612,7 +608,7 @@ type PromozioneWithImages = Promozione & { images: string[] };
               Prodotti in Promozione
             </h2>
             <p className="text-[#a0a0a0] text-base sm:text-lg max-w-2xl mx-auto">
-              Cucine, armadi, letti, divani, poltrone, pouf e tantissimi complementi d'arredo in esposizione.
+               Cucine, armadi, letti, divani, poltrone, pouf e tantissimi complementi d&apos;arredo in esposizione.
               Approfitta degli sconti esclusivi - Professionalità da oltre 35 anni!
             </p>
           </motion.div>
@@ -634,8 +630,8 @@ type PromozioneWithImages = Promozione & { images: string[] };
             ))}
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            {filteredProducts.map((product, index) => (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+             {filteredProducts.map((product, _) => (
               <div
                 key={product.id}
                 className="group relative glass-card rounded-lg overflow-hidden flex flex-col"
@@ -648,50 +644,45 @@ type PromozioneWithImages = Promozione & { images: string[] };
                 </div>
 
                  {/* Image */}
-                 <div 
-                   className="relative h-64 sm:h-72 overflow-hidden cursor-pointer"
-                   onClick={() => {
-                     setSelectedProduct(product as PromozioneWithImages);
-                     setCurrentImageIndex(0);
-                   }}
-                 >
-                   {(product as PromozioneWithImages).images.length > 1 ? (
-
-                     <div className="relative h-full w-full">
-                       <Image
-                         src={(product as PromozioneWithImages).images[0]}
-
-                         alt={product.title}
-
-                         fill
-                         className="object-cover"
-                         sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                         loading="lazy"
-                       />
-                       {/* Mini carousel indicators */}
-                       <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex gap-1">
-                         {product.images.map((_, index) => (
-                           <div
-                             key={index}
-                             className={`w-2 h-2 bg-white/50 rounded-full transition-all duration-300 ${
-                               index === 0 ? 'bg-white' : 'bg-white/50'
-                             }`}
-                           />
-                         ))}
-                       </div>
-                     </div>
-                   ) : (
-                     <Image
-                       src={product.images[0]}
-                       alt={product.title}
-                       fill
-                       className="object-cover"
-                       sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                       loading="lazy"
-                     />
-                   )}
-                   <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-transparent to-transparent" />
-                 </div>
+                  <div 
+                    className="relative h-[368px] sm:h-[415px] overflow-hidden cursor-pointer"
+                    onClick={() => {
+                      setSelectedProduct(product as PromozioneWithImages);
+                      setCurrentImageIndex(0);
+                    }}
+                  >
+                    {product.images.length > 1 ? (
+                      <div className="relative h-full w-full">
+                        <Image
+                          src={product.images?.[0] || ""}
+                          alt={product.title}
+                          fill
+                          className="object-cover"
+                          loading="lazy"
+                        />
+                        {/* Mini carousel indicators */}
+                        <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex gap-1">
+                          {(product.images || []).map((_, index) => (
+                            <div
+                              key={index}
+                              className={`w-2 h-2 bg-white/50 rounded-full transition-all duration-300 ${
+                                index === 0 ? 'bg-white' : 'bg-white/50'
+                              }`}
+                            />
+                          ))}
+                        </div>
+                      </div>
+                    ) : (
+                      <Image
+                        src={product.images?.[0] || ""}
+                        alt={product.title}
+                        fill
+                        className="object-cover"
+                        loading="lazy"
+                      />
+                    )}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-transparent to-transparent" />
+                  </div>
 
                 {/* Content */}
                 <div className="p-4 sm:p-6 flex flex-col flex-grow">
@@ -733,7 +724,7 @@ type PromozioneWithImages = Promozione & { images: string[] };
                   {/* CTA - Always at bottom */}
                   <div className="mt-auto">
                     <Link
-                      href="tel:+390239326172"
+                      href="tel:+390239326173"
                       className="w-full btn btn-primary text-center block text-lg font-bold"
                     >
                       <span className="flex items-center justify-center gap-2">
@@ -744,7 +735,7 @@ type PromozioneWithImages = Promozione & { images: string[] };
                       </span>
                     </Link>
                     <p className="text-center text-[#6b6b7b] text-xs mt-2">
-                      Oppure chiamaci: 02 39326172
+                      Oppure chiamaci: 02 39326173
                     </p>
                   </div>
                 </div>
@@ -765,14 +756,14 @@ type PromozioneWithImages = Promozione & { images: string[] };
             className="text-center"
           >
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-8">
-              Non perdere l'occasione — Esaurimento scorte garantito
+               Non perdere l&apos;occasione — Esaurimento scorte garantito
             </h2>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
-                href="tel:+390239326172"
+                href="tel:+390239326173"
                 className="btn btn-primary text-lg px-8 py-4"
               >
-                Chiama Ora: 02 39326172
+                Chiama Ora: 02 39326173
               </Link>
               <Link
                 href="/contatti"
@@ -785,89 +776,113 @@ type PromozioneWithImages = Promozione & { images: string[] };
         </div>
       </section>
 
-      {/* Image Overlay */}
-      {selectedProduct && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm"
-          onClick={(e) => {
-            if (e.target === e.currentTarget) {
-              setSelectedProduct(null);
-            }
-          }}
-        >
-          <div className="relative max-w-5xl mx-4 h-[85vh]">
-            {/* Close Button */}
-            <button
-              onClick={() => setSelectedProduct(null)}
-              className="absolute top-2 right-2 z-10 p-2 bg-white/20 backdrop-blur rounded-full hover:bg-white/30 transition-all"
-              aria-label="Chiudi"
-            >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M18 6l-12 12M6 6l12 12" />
-              </svg>
-            </button>
+             {/* Image Overlay */}
+       {selectedProduct && (
+          <div
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm"
+            onClick={(e) => {
+              if (e.target === e.currentTarget) {
+                setSelectedProduct(null);
+              }
+            }}
+          >
+           <div className="relative max-w-5xl mx-4 h-[85vh]">
+             {/* Close Button */}
+             <button
+               onClick={() => setSelectedProduct(null)}
+               className="absolute top-2 right-2 z-10 p-2 bg-white/20 backdrop-blur rounded-full hover:bg-white/30 transition-all"
+               aria-label="Chiudi"
+             >
+               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                 <path d="M18 6l-12 12M6 6l12 12" />
+               </svg>
+             </button>
 
-            {/* Image Carousel */}
-            <div className="relative h-full w-full">
-              <Image
-                src={selectedProduct.images[currentImageIndex]}
-                alt={selectedProduct.title}
-                fill
-                className="object-contain rounded-lg"
-              />
+             {/* Image Carousel */}
+             <div className="relative h-full w-full flex items-center justify-center">
+                 <Image
+                   src={selectedProduct.images?.[currentImageIndex] || ""}
+                   alt={selectedProduct.title}
+                   width={800}
+                   height={600}
+                   className="object-contain rounded-lg max-h-full max-w-full"
+                   loading="lazy"
+                 />
 
-              {/* Navigation Arrows */}
-              {selectedProduct.images.length > 1 && (
-                <>
-                  <button
-                    onClick={() =>
-                      setCurrentImageIndex(
-                        (prev) =>
-                          (prev - 1 + selectedProduct.images.length) % selectedProduct.images.length
-                      )
-                    }
-                    className="absolute left-2 top-1/2 -translate-y-1/2 z-10 p-3 bg-white/20 backdrop-blur rounded-full hover:bg-white/30 transition-all"
-                  >
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M15 18l-6-6 6-6" />
-                    </svg>
-                  </button>
-                  <button
-                    onClick={() =>
-                      setCurrentImageIndex(
-                        (prev) => (prev + 1) % selectedProduct.images.length
-                      )
-                    }
-                    className="absolute right-2 top-1/2 -translate-y-1/2 z-10 p-3 bg-white/20 backdrop-blur rounded-full hover:bg-white/30 transition-all"
-                  >
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M9 6l6 6-6 6" />
-                    </svg>
-                  </button>
-                </>
-              )}
+               {/* Navigation Arrows */}
+               {(selectedProduct.images || []).length > 1 && (
+                 <>
+                   <button
+                     onClick={() =>
+                       setCurrentImageIndex(
+                         (prev) =>
+                           (prev - 1 + (selectedProduct.images || []).length) % (selectedProduct.images || []).length
+                       )
+                     }
+                     className="absolute left-2 top-1/2 -translate-y-1/2 z-10 p-3 bg-white/20 backdrop-blur rounded-full hover:bg-white/30 transition-all"
+                   >
+                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                       <path d="M15 18l-6-6 6-6" />
+                     </svg>
+                   </button>
+                   <button
+                     onClick={() =>
+                       setCurrentImageIndex(
+                         (prev) => (prev + 1) % (selectedProduct.images || []).length
+                       )
+                     }
+                     className="absolute right-2 top-1/2 -translate-y-1/2 z-10 p-3 bg-white/20 backdrop-blur rounded-full hover:bg-white/30 transition-all"
+                   >
+                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                       <path d="M9 6l6 6-6 6" />
+                     </svg>
+                   </button>
+                 </>
+               )}
 
-              {/* Image Counter */}
-              {selectedProduct.images.length > 1 && (
-                <div className="absolute bottom-2 left-1/2 -translate-x-1/2 text-white text-sm bg-black/30 px-3 py-1 rounded">
-                  {currentImageIndex + 1} / {selectedProduct.images.length}
-                </div>
-              )}
+               {/* Image Counter */}
+               {(selectedProduct.images || []).length > 1 && (
+                 <div className="absolute bottom-2 left-1/2 -translate-x-1/2 text-white text-sm bg-black/30 px-3 py-1 rounded">
+                   {currentImageIndex + 1} / {(selectedProduct.images || []).length}
+                 </div>
+               )}
 
-              {/* Product Info */}
-              <div className="absolute bottom-4 left-4 right-4 bg-black/50 backdrop-blur p-4 rounded-lg">
-                <h3 className="text-lg font-semibold text-white mb-2">{selectedProduct.title}</h3>
-                <p className="text-[#a0a0a0] text-sm mb-4 line-clamp-3">{selectedProduct.description}</p>
-                <div className="flex items-baseline gap-2">
-                  <span className="text-2xl font-bold text-[#c9a962]">€{selectedProduct.discountedPrice}</span>
-                  <span className="text-[#6b6b7b] text-xs line-through">€{selectedProduct.originalPrice}</span>
-                  <span className="ml-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">-{selectedProduct.discount}%</span>
-                </div>
+               {/* Product Info */}
+               <div className="absolute bottom-4 left-4 right-4 bg-black/50 backdrop-blur p-4 rounded-lg">
+                 <h3 className="text-lg font-semibold text-white mb-2">{selectedProduct.title}</h3>
+                 <p className="text-[#a0a0a0] text-sm mb-4 line-clamp-3">{selectedProduct.description}</p>
+                 <div className="flex items-baseline gap-2">
+                   <span className="text-2xl font-bold text-[#c9a962]">€{selectedProduct.discountedPrice}</span>
+                   <span className="text-[#6b6b7b] text-xs line-through">€{selectedProduct.originalPrice}</span>
+                   <span className="ml-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">-{selectedProduct.discount}%</span>
+                 </div>
+               </div>
+               {/* Product JSON-LD */}
+               <script
+                 type="application/ld+json"
+                 dangerouslySetInnerHTML={{
+                   __html: JSON.stringify({
+                     "@context": "https://schema.org",
+                     "@type": "Product",
+                     name: selectedProduct.title,
+                     image: (selectedProduct.images || []).map((p) => (process.env.NEXT_PUBLIC_SITE_URL || "https://www.bluedesign.biz") + p),
+                     description: selectedProduct.description,
+                     sku: String(selectedProduct.id),
+                     brand: { "@type": "Brand", name: "BlueDesign" },
+                     offers: {
+                       "@type": "Offer",
+                       url: (process.env.NEXT_PUBLIC_SITE_URL || "https://www.bluedesign.biz") + "/promozioni#product-" + selectedProduct.id,
+                       priceCurrency: "EUR",
+                       price: selectedProduct.discountedPrice,
+                       availability: selectedProduct.stock && selectedProduct.stock > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
+                     },
+                   }),
+                 }}
+               />
               </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
 
 
       {/* Footer */}
@@ -884,3 +899,4 @@ type PromozioneWithImages = Promozione & { images: string[] };
     </main>
   );
 }
+

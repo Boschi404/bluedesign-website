@@ -16,7 +16,7 @@ const showroomCategories = [
     id: 2,
     title: "Living",
     description: "Divani, poltrone e salotti raffinati per ambienti esclusivi",
-    image: "/images/products/divano-meta-1.jpeg",
+    image: "/images/projects/foto-6.png",
     link: "#servizi",
   },
   {
@@ -30,21 +30,21 @@ const showroomCategories = [
     id: 4,
     title: "Bagni",
     description: "Arredobagno completo con brand selezionati per il bagno moderno",
-    image: "/images/products/bagno-arteba-2.jpg",
+    image: "/images/projects/bagno.png",
     link: "#servizi",
   },
   {
     id: 5,
     title: "Illuminazione",
     description: "Sistemi illuminotecnici per creare atmosfere uniche",
-    image: "/images/products/lampada-spirito-venezia.jpg",
+    image: "/images/products/lampada-spirito-venezia.png",
     link: "#servizi",
   },
   {
     id: 6,
     title: "Camerette",
     description: "Arredamento camerette per bambini e ragazzi",
-    image: "/images/products/pouffe-rettangolare-velluto.jpg",
+    image: "/images/products/cameretta.jpg",
     link: "#servizi",
   },
 ];
@@ -78,6 +78,9 @@ export default function Servizi() {
       <div className="absolute bottom-1/4 -right-32 w-64 h-64 bg-[#c9a962]/5 rounded-full blur-3xl" />
 
       <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12">
+        {/* Anchor for navbar 'Showroom' */}
+        <div id="showroom" className="pointer-events-none scroll-mt-24 sm:scroll-mt-28 md:scroll-mt-32" />
+
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}

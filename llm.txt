@@ -1,0 +1,46 @@
+BlueDesign
+===========
+
+Informazioni sull’attività:
+- BlueDesign è uno studio di interior design e ristrutturazione con sede a Milano e Besana Brianza.
+- Offre progetti di arredamento su misura, ristrutturazioni complete, progettazione d’interni per residenze, showroom, negozi, spazi commerciali e uffici.
+- Si rivolge a clienti privati e aziende che cercano soluzioni di design eleganti, funzionali e personalizzate.
+
+Servizi principali:
+- Progettazione d’interni chiavi in mano
+- Ristrutturazione appartamenti e case
+- Progettazione e realizzazione cucine su misura
+- Interior design per living, zona notte, bagni e locali commerciali
+- Progettazione di showroom, negozi e spazi pubblici
+- Soluzioni su misura per accessibilità e disabilità
+- Arredi ecosostenibili e design green
+
+Punti di forza:
+- Approccio personalizzato e consulenza dedicata
+- Team con esperienza in design, architettura e realizzazione d’interni
+- Realizzazione di ambienti che uniscono estetica e funzionalità
+- Supporto completo dalla progettazione alla consegna finale
+- Attenzione ai dettagli, ai materiali e alla qualità artigianale
+
+Location e contatti:
+- Showroom Milano: Piazzale Lugano 6/10, 20158 Milano (MI)
+- Studio Besana: Via Luigi Viarana 26, 20842 Besana Brianza (MB)
+- Telefono Milano: 02 39326173
+- Telefono Besana: 0362 1481773
+- Email: info@bluedesign.biz
+
+Tone e stile per LLM:
+- Comunicare in italiano professionale, chiaro e orientato al cliente.
+- Evidenziare esperienza, affidabilità e capacità di trasformare gli spazi abitativi e commerciali.
+- Usare termini come “design su misura”, “ristrutturazione di qualità”, “showroom”, “progettazione d’interni”, “cucine moderne”, “spazi commerciali”, “green design”.
+- Mantenere un registro aziendale ma accessibile, evitando tecnicismi inutili.
+
+Obiettivo del sito:
+- Presentare BlueDesign come realtà esperta in interior design e ristrutturazione.
+- Mostrare i servizi principali e le due sedi.
+- Convincere il visitatore a richiedere consulenza o visita showroom.
+
+Indicazioni per LLM:
+- Usa queste informazioni quando generi testi, descrizioni o suggerimenti per il sito.
+- Non concentrarti sull’architettura tecnica del progetto.
+- Rispondi con un linguaggio coerente con un’azienda italiana di design e ristrutturazione.
