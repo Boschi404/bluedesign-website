@@ -5,6 +5,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import Turnstile from "./Turnstile";
 
 export default function Contatti() {
+  const disableTurnstileInDev = process.env.NEXT_PUBLIC_DISABLE_TURNSTILE_IN_DEV === '1';
+  const showTurnstile = Boolean(!disableTurnstileInDev);
   const [formData, setFormData] = useState({
     name: "",
     surname: "",
@@ -25,7 +27,8 @@ export default function Contatti() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
+    const disableTurnstileInDev = process.env.NEXT_PUBLIC_DISABLE_TURNSTILE_IN_DEV === '1';
+    const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY && !disableTurnstileInDev ? process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY : undefined;
     if (siteKey && !turnstileToken) {
       setStatus("error");
       setErrorMessage("Completa la verifica di sicurezza per favore.");
@@ -120,8 +123,7 @@ export default function Contatti() {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true, margin: "-50px" }}
-            className="bg-[#0a0a0f]/50 backdrop-blur-sm border border-white/[0.06] p-6 sm:p-8 rounded-2xl hover:border-[#c9a962]/20 transition-colors duration-300"
-          >
+            className="bg-[#0a0a0f]/50 backdrop-blur-sm border border-white/[0.06] p-6 sm:p-8 rounded-2xl hover:border-[#c9a962]/20 transition-colors duration-300">
             <h3 className="text-white font-medium text-lg mb-6 flex items-center gap-2">
               <span className="w-1 h-5 bg-[#c9a962] rounded-full"></span>
               Inviaci un Messaggio
@@ -282,8 +284,8 @@ export default function Contatti() {
                     />
                   </div>
 
-                  {/* Cloudflare Turnstile integration */}
-                  {status !== "loading" && (
+                  {/* Cloudflare Turnstile integration (render only if client site key is configured) */}
+                  {status !== "loading" && showTurnstile && (
                     <Turnstile
                       onVerify={(token) => setTurnstileToken(token)}
                       onExpire={() => setTurnstileToken("")}
