@@ -196,12 +196,12 @@ export default function Contatti() {
                         </svg>
                       </div>
                       <div className="space-y-1">
-                        <p className="text-[#a0a0a0] text-sm"><span className="text-white">Lun:</span> 15:00 - 19:30</p>
-                        <p className="text-[#a0a0a0] text-sm"><span className="text-white">Mar:</span> 10:00 - 13:00 / 15:00 - 19:30</p>
-                        <p className="text-[#a0a0a0] text-sm"><span className="text-white">Mer:</span> 10:00 - 13:00 / 15:00 - 19:30</p>
-                        <p className="text-[#a0a0a0] text-sm"><span className="text-white">Gio:</span> 10:00 - 13:00 / 15:00 - 19:30</p>
-                        <p className="text-[#a0a0a0] text-sm"><span className="text-white">Ven:</span> 10:00 - 13:00 / 15:00 - 19:30</p>
-                        <p className="text-[#a0a0a0] text-sm"><span className="text-white">Sab:</span> 10:00 - 13:00 / 15:00 - 19:30</p>
+                        <p className="text-[#a0a0a0] text-sm"><span className="text-white">Lun:</span> 15:30 - 19:30</p>
+                        <p className="text-[#a0a0a0] text-sm"><span className="text-white">Mar:</span> 10:00 - 13:00 / 15:30 - 19:30</p>
+                        <p className="text-[#a0a0a0] text-sm"><span className="text-white">Mer:</span> 10:00 - 13:00 / 15:30 - 19:30</p>
+                        <p className="text-[#a0a0a0] text-sm"><span className="text-white">Gio:</span> 10:00 - 13:00 / 15:30 - 19:30</p>
+                        <p className="text-[#a0a0a0] text-sm"><span className="text-white">Ven:</span> 10:00 - 13:00 / 15:30 - 19:30</p>
+                        <p className="text-[#a0a0a0] text-sm"><span className="text-white">Sab:</span> 10:00 - 13:00 / 15:30 - 19:30</p>
                         <p className="text-[#a0a0a0] text-sm"><span className="text-white">Dom:</span> <span className="text-[#6b6b7b]">Chiuso</span></p>
                       </div>
                     </div>

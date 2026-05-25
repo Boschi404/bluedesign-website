@@ -51,7 +51,7 @@ export default function ChiSiamo() {
           >
             <div className="relative aspect-[4/5] rounded-2xl overflow-hidden">
               <Image
-                src="/images/products/bagno.jpg"
+                src="/images/products/bagno-arteba-2.jpg"
                 alt="BlueDesign studio showroom"
                 fill
                 className="object-cover"

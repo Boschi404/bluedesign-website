@@ -73,7 +73,7 @@ export default function Navbar() {
                 whileTap={{ scale: 0.95 }}
                 className="flex items-center gap-2 sm:gap-3"
               >
-                <div className="relative w-24 sm:w-32 md:w-40 lg:w-48 xl:w-56">
+                <div id="navbar-logo" className="relative w-24 sm:w-32 md:w-40 lg:w-48 xl:w-56">
                   <Image
                     src="/images/logo/BlueDesign-Logo.png"
                     alt="BlueDesign"
@@ -208,6 +208,19 @@ export default function Navbar() {
             className="fixed inset-0 z-40 bg-[#1b1b1b]/98 backdrop-blur-xl"
           >
             <div className="flex flex-col items-center justify-center h-full gap-6 sm:gap-8 pt-16 sm:pt-20">
+              {/* Home — solo nel menu hamburger */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0 }}
+              >
+                <Link
+                  href="/"
+                  className="h2 text-white hover:text-[#6b6b6b] transition-colors"
+                >
+                  Home
+                </Link>
+              </motion.div>
               {navLinks.map((link, index) => (
                 link.isRoute ? (
                   <motion.div

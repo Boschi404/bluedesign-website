@@ -1,10 +1,10 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useLayoutEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
 
-const partnerLogos = [
+const baseLogos = [
   { src: "/images/comp-logos/logo-antares.png", alt: "Antares - Partner BlueDesign" },
   { src: "/images/comp-logos/logo-bosch.png", alt: "Bosch - Elettrodomestici di qualità" },
   { src: "/images/comp-logos/logo-composit.png", alt: "Composit - Cucine di design" },
@@ -23,7 +23,6 @@ const partnerLogos = [
 
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [scrollY, setScrollY] = useState(0);
   const [isAtTop, setIsAtTop] = useState(true);
 
   const { scrollYProgress } = useScroll({
@@ -36,11 +35,26 @@ export default function Hero() {
   const heroRotateX = useTransform(scrollYProgress, [0, 1], [0, 15]);
   const heroScale = useTransform(scrollYProgress, [0, 1], [1, 0.9]);
 
+  const [stripDuration, setStripDuration] = useState(20);
+  const stripRef = useRef<HTMLDivElement>(null);
+
+  // Loghi ripetuti: 4× la lista base garantisce sempre loop seamless
+  // (baseLogos riempie la prima metà, il clone la seconda — si incastrano perfettamente)
+  const totalLogos = [...baseLogos, ...baseLogos, ...baseLogos, ...baseLogos];
+
+  // Calcola durata in base alla larghezza effettiva della strip
+  useLayoutEffect(() => {
+    const el = stripRef.current?.querySelector(".logo-strip") as HTMLElement | null;
+    if (!el) return;
+    const update = () => setStripDuration(Math.max(8, Math.round(el.scrollWidth / 120)));
+    update();
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
   useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-      setIsAtTop(window.scrollY < 100);
-    };
+    const handleScroll = () => setIsAtTop(window.scrollY < 100);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -157,6 +171,8 @@ export default function Hero() {
             >
               <span>Showroom Milano</span>
               <span className="hidden sm:inline">•</span>
+              <span>Studio di architettura Besana</span>
+              <span className="hidden sm:inline">•</span>
               <span>35+ Anni di Esperienza</span>
             </motion.div>
           </div>
@@ -167,32 +183,25 @@ export default function Hero() {
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.2, duration: 0.6 }}
-          className="absolute bottom-8 sm:bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3"
+          className="absolute bottom-8 sm:bottom-10 left-0 right-0 flex flex-col items-center gap-3 z-10"
         >
           <span className="text-white/30 text-xs uppercase tracking-[0.2em]">Scroll</span>
           <div className="w-[1px] h-10 sm:h-12 bg-gradient-to-b from-white/20 to-transparent" />
         </motion.div>
       </div>
 
-      {/* Logo Strip */}
+      {/* Logo Strip — dinamica: aggiungi loghi a baseLogos e si adatta da sola */}
       <div
+        ref={stripRef}
         className={`dual-logo-strip ${isAtTop ? "fixed bottom-0 left-0 right-0 z-50" : "relative"}`}
       >
-        <div className="logo-strip">
-          {partnerLogos.map((logo, index) => (
+        <div
+          className="logo-strip"
+          style={{ animationDuration: `${stripDuration}s` }}
+        >
+          {totalLogos.map((logo, index) => (
             <img
-              key={`first-${index}`}
-              src={logo.src}
-              alt={logo.alt}
-              className="strip-img"
-              loading="lazy"
-            />
-          ))}
-        </div>
-        <div className="logo-strip">
-          {partnerLogos.map((logo, index) => (
-            <img
-              key={`second-${index}`}
+              key={index}
               src={logo.src}
               alt={logo.alt}
               className="strip-img"
