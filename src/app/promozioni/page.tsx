@@ -412,6 +412,12 @@ type PromozioneWithImages = Promozione & { images: string[] };
 
    const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
+  // Track page view for Promozioni (conversion)
+  useEffect(() => {
+    if (typeof gtag_report_conversion === 'function') {
+      gtag_report_conversion();
+    }
+  }, []);
 
   // Close overlay on Escape key
   useEffect(() => {

@@ -161,6 +161,7 @@ export default function Servizi() {
         >
           <Link
             href="#contatti"
+            onClick={() => { if (typeof gtag_report_conversion === 'function') gtag_report_conversion(); }}
             className="text-[#c9a962] hover:text-white text-base sm:text-lg transition-colors duration-300"
           >
             Prenota una visita nel nostro showroom

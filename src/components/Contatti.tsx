@@ -55,6 +55,10 @@ export default function Contatti() {
         setStatus("success");
         setFormData({ name: "", surname: "", email: "", phone: "", message: "" });
         setTurnstileToken("");
+        // Track conversion on successful form submission
+        if (typeof gtag_report_conversion === 'function') {
+          gtag_report_conversion();
+        }
       } else {
         setStatus("error");
         setErrorMessage(result.error || "Qualcosa è andato storto. Riprova più tardi.");

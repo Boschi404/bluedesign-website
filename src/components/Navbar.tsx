@@ -131,14 +131,17 @@ export default function Navbar() {
               className="hidden lg:block"
             >
               <button
-                onClick={() => scrollToSection("#contatti", false)}
+                onClick={() => {
+                  if (typeof gtag_report_conversion === 'function') gtag_report_conversion();
+                  scrollToSection("#contatti", false);
+                }}
                 className="btn btn-primary"
               >
                 Richiedi Consulenza
               </button>
             </motion.div>
 
-            {/* Mobile Menu Button - Modern hamburger */}
+            {/* Mobile Menu Button
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="lg:hidden relative z-50 w-10 h-10 sm:w-12 sm:h-12 flex flex-col items-center justify-center gap-1.5 rounded-lg hover:bg-white/5 transition-colors"
@@ -224,7 +227,10 @@ export default function Navbar() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5 }}
-                onClick={() => scrollToSection("#contatti", false)}
+                onClick={() => {
+                  if (typeof gtag_report_conversion === 'function') gtag_report_conversion();
+                  scrollToSection("#contatti", false);
+                }}
                 className="mt-4 sm:mt-8 btn btn-primary"
               >
                 Richiedi Consulenza

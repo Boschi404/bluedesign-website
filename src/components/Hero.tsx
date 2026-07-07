@@ -148,6 +148,7 @@ export default function Hero() {
             >
               <Link
                 href="/#contatti"
+                onClick={() => { if (typeof gtag_report_conversion === 'function') gtag_report_conversion(); }}
                 className="btn btn-primary inline-flex text-base sm:text-lg px-10 py-4"
                 style={{
                   transform: "translateZ(30px)",
@@ -158,6 +159,7 @@ export default function Hero() {
               </Link>
               <Link
                 href="/promozioni"
+                onClick={() => { if (typeof gtag_report_conversion === 'function') gtag_report_conversion(); }}
                 className="inline-flex items-center gap-2 text-white/70 hover:text-white text-base sm:text-lg px-6 py-4 transition-colors duration-300"
               >
                 Scopri le Offerte

@@ -147,6 +147,26 @@ export default function RootLayout({
           }}
         />
 
+        {/* Event snippet for conversion tracking */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              function gtag_report_conversion(url) {
+                var callback = function () {
+                  if (typeof(url) != 'undefined') {
+                    window.location = url;
+                  }
+                };
+                gtag('event', 'conversion', {
+                    'send_to': 'AW-18198527908/s5XLCKeCsswcEKT_3eVD',
+                    'event_callback': callback
+                });
+                return false;
+              }
+            `,
+          }}
+        />
+
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         {/* Preload critical images for faster LCP */}
