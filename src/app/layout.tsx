@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
@@ -133,6 +133,20 @@ export default function RootLayout({
   return (
     <html lang="it" className={montserrat.variable}>
       <head>
+        {/* Google tag (gtag.js) - Google Ads */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18198527908">
+        </script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'AW-18198527908');
+            `,
+          }}
+        />
+
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         {/* Preload critical images for faster LCP */}
@@ -408,4 +422,3 @@ export default function RootLayout({
     </html>
   );
 }
-
