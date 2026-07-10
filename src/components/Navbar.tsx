@@ -141,7 +141,7 @@ export default function Navbar() {
               </button>
             </motion.div>
 
-            {/* Mobile Menu Button
+            {/* Mobile Menu Button - Modern hamburger */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="lg:hidden relative z-50 w-10 h-10 sm:w-12 sm:h-12 flex flex-col items-center justify-center gap-1.5 rounded-lg hover:bg-white/5 transition-colors"
