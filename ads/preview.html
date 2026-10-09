@@ -226,9 +226,7 @@ function build(){
       <span class="set-name" title="${esc(c.orig)}">${esc(c.orig)}</span>
       <span class="set-kill" title="escludi questa foto">✕</span>`;
     head.querySelector('.set-kill').onclick = ()=>{
-      const KILLED = new Set(JSON.parse(localStorage.getItem('bd_killed')||'[]'));
-      KILLED.add(c.file); localStorage.setItem('bd_killed', JSON.stringify([...KILLED]));
-      card.remove(); toast('Foto esclusa: '+c.orig); updateCount(shown-1);
+      card.remove(); updateCount(--shown);
     };
     card.appendChild(head);
     const body = document.createElement('div'); body.className = 'set-body';
