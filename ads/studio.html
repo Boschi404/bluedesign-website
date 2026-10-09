@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<title>BlueDesign — Studio Creatività ADS</title>
+<style>
+  :root {
+    --night:#0A0A0F; --night2:#14141B; --gold:#C9A962; --gold2:#D8BC7E;
+    --muted:#A9A9B3; --border:#26262E;
+  }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { background:#0E0E13; color:#EDEDEF; font-family:'Segoe UI', system-ui, sans-serif; }
+  header { padding:22px 28px; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:18px; flex-wrap:wrap;}
+  header h1 { font-size:15px; font-weight:600; letter-spacing:.22em; color:var(--gold); text-transform:uppercase;}
+  header .sub { color:var(--muted); font-size:12px; }
+  header .spacer { flex:1 }
+  header select, header button {
+    background:var(--night2); color:#eee; border:1px solid var(--border);
+    padding:9px 14px; border-radius:6px; font-size:13px; cursor:pointer;
+  }
+  header select:focus { outline:2px solid var(--gold); }
+  header button#exportBtn { background:var(--gold); color:var(--night); font-weight:700; border:none; }
+  header button#exportBtn:hover { background:var(--gold2); }
+  header button:disabled { opacity:.5; cursor:wait; }
+
+  .layout { display:flex; height:calc(100vh - 69px); }
+  /* ===== COLONNA SINISTRA: foto disponibili ===== */
+  .lib { width:240px; min-width:240px; border-right:1px solid var(--border); overflow-y:auto; padding:14px; }
+  .lib h2 { font-size:11px; letter-spacing:.18em; color:var(--muted); text-transform:uppercase; margin:8px 0 10px; }
+  .thumbs { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .thumb { position:relative; aspect-ratio:1; border-radius:6px; overflow:hidden; cursor:pointer; border:2px solid transparent; }
+  .thumb img { width:100%; height:100%; object-fit:cover; display:block; }
+  .thumb:hover { border-color:#555; }
+  .thumb.sel { border-color:var(--gold); }
+  .thumb .tag { position:absolute; bottom:0; left:0; right:0; font-size:9px; background:rgba(10,10,15,.85); color:#ccc; padding:3px 5px; letter-spacing:.04em;}
+
+  /* ===== CENTRO: canvas ===== */
+  .stage { flex:1; overflow:auto; display:flex; align-items:flex-start; justify-content:center; padding:34px; }
+  #frameWrap { position:relative; }
+  #frame { transform-origin:top left; background:var(--night); }
+  .zoombar { position:fixed; bottom:18px; left:50%; transform:translateX(-50%); display:flex; gap:8px; background:rgba(20,20,27,.92); padding:8px 12px; border-radius:8px; border:1px solid var(--border); }
+  .zoombar button { background:none; border:1px solid var(--border); color:#ccc; width:30px; height:30px; border-radius:5px; cursor:pointer; font-size:15px;}
+  .zoombar span { color:var(--muted); font-size:12px; align-self:center; min-width:46px; text-align:center;}
+
+  /* ===== DESTRA: pannello ===== */
+  .panel { width:330px; min-width:330px; border-left:1px solid var(--border); overflow-y:auto; padding:18px; }
+  .panel h2 { font-size:11px; letter-spacing:.18em; color:var(--muted); text-transform:uppercase; margin:18px 0 10px; }
+  .panel h2:first-child { margin-top:0; }
+  .field { margin-bottom:12px; }
+  .field label { display:block; font-size:11px; color:var(--muted); margin-bottom:4px; letter-spacing:.05em;}
+  .field input[type=text], .field select {
+    width:100%; background:var(--night2); border:1px solid var(--border); color:#eee;
+    padding:8px 10px; border-radius:5px; font-size:13px;
+  }
+  .field input:focus, .field select:focus { outline:2px solid var(--gold); }
+  .row2 { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .variants { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .variant { position:relative; aspect-ratio:1; border-radius:6px; overflow:hidden; cursor:pointer; border:2px solid transparent; }
+  .variant canvas { width:100%; height:100%; display:block; }
+  .variant:hover { border-color:#555; }
+  .variant.sel { border-color:var(--gold); }
+  .variant .vname { position:absolute; bottom:0; left:0; right:0; font-size:9px; background:rgba(10,10,15,.85); padding:3px 5px; color:#ccc; }
+  .hint { font-size:11px; color:#777; line-height:1.6; margin-top:8px;}
+  .savebox { margin-top:16px; display:flex; gap:8px; }
+  .savebox input { flex:1; background:var(--night2); border:1px solid var(--border); color:#eee; padding:8px 10px; border-radius:5px; font-size:12px;}
+  .savebox button { background:var(--night2); border:1px solid var(--border); color:var(--gold); padding:8px 12px; border-radius:5px; cursor:pointer; font-size:12px; font-weight:600;}
+  .saved-list { margin-top:10px; display:flex; flex-direction:column; gap:6px;}
+  .saved-item { display:flex; align-items:center; gap:8px; background:var(--night2); border:1px solid var(--border); border-radius:5px; padding:7px 10px; font-size:12px; cursor:pointer;}
+  .saved-item:hover { border-color:var(--gold); }
+  .saved-item .del { margin-left:auto; color:#B55; cursor:pointer; font-weight:700; padding:0 4px;}
+  .toast { position:fixed; bottom:70px; left:50%; transform:translateX(-50%); background:var(--gold); color:var(--night); font-weight:700; font-size:13px; padding:10px 22px; border-radius:6px; opacity:0; transition:opacity .25s; pointer-events:none;}
+  .toast.show { opacity:1; }
+</style>
+</head>
+<body>
+<header>
+  <h1>BlueDesign · Studio ADS</h1>
+  <span class="sub">foto + varianti · export JPG</span>
+  <span class="spacer"></span>
+  <select id="adSel" title="Concept"></select>
+  <select id="fmtSel" title="Formato">
+    <option value="meta-square">Meta 1080×1080</option>
+    <option value="meta-story">Story 1080×1920</option>
+    <option value="google-large">Google 1200×628</option>
+    <option value="google-sq">Google 1200×1200</option>
+  </select>
+  <button id="exportBtn">⬇ Export JPG</button>
+</header>
+
+<div class="layout">
+  <aside class="lib">
+    <h2>Foto disponibili</h2>
+    <div class="thumbs" id="thumbs"></div>
+    <p class="hint">Clicca una foto per applicarla alla creatività. Le foto sono in <code>ads/img/</code> — aggiungine altre lì e ricarica.</p>
+  </aside>
+
+  <main class="stage">
+    <div id="frameWrap"><div id="frame"></div></div>
+  </main>
+
+  <aside class="panel">
+    <h2>Testi</h2>
+    <div class="field"><label>Kicker (occhiello)</label><input type="text" id="f-kicker"></div>
+    <div class="field"><label>Riga alta (domanda/contesto)</label><input type="text" id="f-top"></div>
+    <div class="field"><label>Titolo principale — <b>**oro**</b> per evidenziare</label><input type="text" id="f-main"></div>
+    <div class="field"><label>Sub (riga descrittiva)</label><input type="text" id="f-sub"></div>
+    <div class="field"><label>Extra (badge prezzo/sconto, vuoto = nascosto)</label><input type="text" id="f-extra" placeholder="-40% · solo questo weekend"></div>
+    <div class="field"><label>Badge angolo</label><input type="text" id="f-badge"></div>
+
+    <h2>Foto</h2>
+    <div class="row2">
+      <div class="field"><label>Posizione X</label><select id="f-posx"><option value="0%">sx</option><option value="50%" selected>centro</option><option value="100%">dx</option></select></div>
+      <div class="field"><label>Posizione Y</label><select id="f-posy"><option value="0%">alto</option><option value="38%">38%</option><option value="50%">centro</option><option value="62%" selected>62%</option><option value="100%">basso</option></select></div>
+    </div>
+    <div class="field"><label>Scurisci foto (velo)</label><input type="range" id="f-veil" min="0" max="100" value="70"></div>
+
+    <h2>Varianti grafica</h2>
+    <div class="variants" id="variants"></div>
+
+    <h2>Preset salvati</h2>
+    <div class="savebox">
+      <input type="text" id="presetName" placeholder="nome preset…">
+      <button id="presetSave">Salva</button>
+    </div>
+    <div class="saved-list" id="savedList"></div>
+  </aside>
+</div>
+
+<div class="zoombar">
+  <button id="zOut">−</button><span id="zVal">50%</span><button id="zIn">+</button>
+</div>
+<div class="toast" id="toast"></div>
+
+<script src="config.js"></script>
+<script src="studio-assets.js"></script>
+<script>
+/* ================= STATE ================= */
+const C = window.ADS_CONFIG;
+const FORMATS = {
+  'meta-square': { w:1080, h:1080, cls:'' },
+  'meta-story':  { w:1080, h:1920, cls:'story' },
+  'google-large':{ w:1200, h:628,  cls:'wide' },
+  'google-sq':   { w:1200, h:1200, cls:'wide-sq' },
+};
+const A = window.ADS_ASSETS;
+const PHOTOS = [
+  { src:A['cucina-led'],     tag:'cucina LED showroom' },
+  { src:A['cucina-bosch'],   tag:'cucina gialla + forni' },
+  { src:A['cucina-autunno'], tag:'cucina lounge vetro' },
+  { src:A['cucina-gres'],    tag:'isola gres scura' },
+  { src:A['living-warm'],    tag:'living caldo (hero)' },
+  { src:A['progetto'],       tag:'tavolo progetto' },
+];
+const state = {
+  adIdx: 0,
+  fmt: 'meta-square',
+  photo: PHOTOS[0].src,
+  posx: '50%', posy: '62%',
+  veil: 70,
+  variant: 'classica',
+  zoom: 0.5,
+};
+try { Object.assign(state, JSON.parse(localStorage.getItem('bd_ads_state')||'{}')); } catch(e){}
+function persist(){ localStorage.setItem('bd_ads_state', JSON.stringify({
+  adIdx: state.adIdx, fmt: state.fmt, photo: state.photo, posx: state.posx,
+  posy: state.posy, veil: state.veil, variant: state.variant,
+})); }
+
+function currentAd(){ return C.ads[state.adIdx]; }
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+function mainLine(t){ return esc(t).split('**').map((p,i)=> i%2 ? `<span style="color:${C.palette.gold}">${p}</span>` : p).join(''); }
+
+/* ================= VARIANTI ================= */
+const VARIANTS = {
+  classica: { name:'Classica', desc:'foto full + gradiente', css: v=>`
+    .photo{position:absolute;inset:0;background-image:url('${v.photo}');background-position:${v.posx} ${v.posy};background-size:cover}
+    .veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,15,${v.veil/100*.55}) 0%,rgba(10,10,15,${v.veil/100*.25}) 35%,rgba(10,10,15,${v.veil/100*.88}) 72%,rgba(10,10,15,.97) 100%)}
+    .wide .veil{background:linear-gradient(90deg,rgba(10,10,15,.96) 0%,rgba(10,10,15,.82) 42%,rgba(10,10,15,${v.veil/100*.25}) 75%,rgba(10,10,15,.15) 100%)}
+  `},
+  split: { name:'Split', desc:'foto sopra, testo sotto', css: v=>`
+    .photo{position:absolute;left:0;right:0;top:0;height:52%;background-image:url('${v.photo}');background-position:${v.posx} ${v.posy};background-size:cover}
+    .veil{position:absolute;left:0;right:0;top:0;height:52%;background:linear-gradient(180deg,rgba(10,10,15,.05) 55%,rgba(10,10,15,1) 100%)}
+    .content{justify-content:flex-end;top:52%}
+  `},
+  cornice: { name:'Cornice oro', desc:'bordo interno elegante', css: v=>`
+    .photo{position:absolute;inset:0;background-image:url('${v.photo}');background-position:${v.posx} ${v.posy};background-size:cover}
+    .veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,15,${v.veil/100*.6}) 0%,rgba(10,10,15,${v.veil/100*.3}) 40%,rgba(10,10,15,.92) 75%,rgba(10,10,15,.98) 100%)}
+    .frame-border{position:absolute;inset:26px;border:1px solid ${C.palette.gold};opacity:.85;pointer-events:none}
+  `},
+  dark: { name:'Notte piena', desc:'foto attenuata, testo protagonista', css: v=>`
+    .photo{position:absolute;inset:0;background-image:url('${v.photo}');background-position:${v.posx} ${v.posy};background-size:cover;filter:saturate(.85) brightness(.75)}
+    .veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,15,.82) 0%,rgba(10,10,15,.72) 50%,rgba(10,10,15,.97) 100%)}
+  `},
+};
+
+/* ================= TEMPLATE ================= */
+function creativeHTML(){
+  const ad = currentAd(), v = state;
+  const varCss = VARIANTS[v.variant].css(v);
+  return `
+  <style id="dyn">${varCss}
+    .creative{width:100%;height:100%;background:${C.palette.night};position:relative;overflow:hidden;display:flex;flex-direction:column;font-family:Montserrat,'Segoe UI',sans-serif}
+    .content{position:absolute;inset:0;padding:64px;display:flex;flex-direction:column;justify-content:flex-end}
+    .wide .content{justify-content:center;max-width:62%;padding:56px}
+    .story .content{padding:80px}
+    .brandline{position:absolute;top:56px;left:64px}
+    .wide .brandline{top:48px;left:56px}
+    .story .brandline{top:72px;left:80px}
+    .brandline img{height:56px}
+    .story .brandline img{height:72px}
+    .badge{position:absolute;top:56px;right:64px;background:${C.palette.gold};color:${C.palette.night};font-weight:900;font-size:30px;letter-spacing:.08em;padding:16px 30px;text-transform:uppercase}
+    .story .badge{top:72px;right:80px;font-size:36px}
+    .wide .badge{top:48px;right:56px;font-size:22px;padding:12px 22px}
+    .kicker{color:${C.palette.gold};font-size:24px;letter-spacing:.3em;font-weight:600;margin-bottom:20px;text-transform:uppercase}
+    .story .kicker{font-size:30px;margin-bottom:28px}
+    .wide .kicker{font-size:19px;margin-bottom:14px}
+    .top-line{color:#EDEDEF;font-size:40px;font-weight:300;line-height:1.25;margin-bottom:18px}
+    .story .top-line{font-size:52px}
+    .wide .top-line{font-size:30px;margin-bottom:10px}
+    .main-line{color:#fff;font-size:74px;font-weight:900;line-height:1.04;letter-spacing:-.01em;text-transform:uppercase}
+    .story .main-line{font-size:92px}
+    .wide .main-line{font-size:46px}
+    .extra-line{display:inline-block;margin-top:22px;background:${C.palette.gold};color:${C.palette.night};font-weight:800;font-size:44px;padding:10px 26px;align-self:flex-start}
+    .story .extra-line{font-size:54px}
+    .wide .extra-line{font-size:30px;margin-top:14px}
+    .sub{color:#C9C9D0;font-size:27px;font-weight:400;margin-top:24px;line-height:1.45}
+    .story .sub{font-size:33px}
+    .wide .sub{font-size:19px;margin-top:12px}
+    .bottombar{display:flex;align-items:center;gap:28px;margin-top:36px}
+    .story .bottombar{margin-top:44px}
+    .wide .bottombar{margin-top:20px}
+    .cta{background:${C.palette.gold};color:${C.palette.night};font-weight:800;font-size:28px;padding:20px 44px}
+    .wide .cta{font-size:20px;padding:14px 30px}
+    .phone{color:#fff;font-size:28px;font-weight:600}
+    .wide .phone{font-size:20px}
+  </style>
+  <div class="creative ${FORMATS[v.fmt].cls}">
+    <div class="photo"></div>
+    <div class="veil"></div>
+    <div class="frame-border"></div>
+    ${ad._badge === '' ? '' : `<div class="badge">${esc(ad._badge)}</div>`}
+    <div class="content">
+      <div class="brandline"><img src="${A['logo']}"></div>
+      <div style="flex:1"></div>
+      <div class="kicker">${esc(ad._kicker)}</div>
+      <div class="top-line">${esc(ad._top)}</div>
+      <div class="main-line">${mainLine(ad._main)}</div>
+      ${ad._extra ? `<div class="extra-line">${esc(ad._extra)}</div>` : ''}
+      <div class="sub">${esc(ad._sub)}</div>
+      <div class="bottombar">
+        <span class="cta">${esc(C.brand.cta)} →</span>
+        <span class="phone">${esc(C.brand.phone)}</span>
+      </div>
+    </div>
+  </div>`;
+}
+
+/* ================= RENDER ================= */
+const frame = document.getElementById('frame');
+function render(){
+  const { w, h } = FORMATS[state.fmt];
+  frame.style.width = w+'px'; frame.style.height = h+'px';
+  frame.style.transform = `scale(${state.zoom})`;
+  frame.innerHTML = creativeHTML();
+  document.getElementById('frameWrap').style.width = (w*state.zoom)+'px';
+  document.getElementById('frameWrap').style.height = (h*state.zoom)+'px';
+  document.getElementById('zVal').textContent = Math.round(state.zoom*100)+'%';
+  persist();
+}
+
+/* ================= UI ================= */
+const $ = id => document.getElementById(id);
+function toast(msg){ const t=$('toast'); t.textContent=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),1800); }
+
+// selector concept
+C.ads.forEach((ad,i)=>{
+  const o = document.createElement('option'); o.value=i; o.textContent = ad.id + ' — ' + ad.campaign; $('adSel').appendChild(o);
+});
+$('adSel').onchange = e => { state.adIdx = +e.target.value; loadAdIntoForm(); render(); };
+$('fmtSel').onchange = e => { state.fmt = e.target.value; render(); };
+
+function loadAdIntoForm(){
+  const a = currentAd();
+  // init campi editabili dal config originale (kicker/lines.main/...) se mai toccati
+  a._kicker = a._kicker ?? a.kicker ?? '';
+  a._top    = a._top    ?? (a.lines && a.lines.top) ?? '';
+  a._main   = a._main   ?? (a.lines && a.lines.main) ?? '';
+  a._sub    = a._sub    ?? a.sub ?? '';
+  a._extra  = a._extra  ?? (a.lines && a.lines.extra) ?? '';
+  a._badge  = a._badge  ?? a.badge ?? '';
+  $('f-kicker').value = a._kicker; $('f-top').value = a._top; $('f-main').value = a._main;
+  $('f-sub').value = a._sub; $('f-extra').value = a._extra; $('f-badge').value = a._badge;
+}
+function bindField(id, key){
+  $(id).addEventListener('input', e => { currentAd()[key] = e.target.value; render(); });
+}
+bindField('f-kicker','_kicker'); bindField('f-top','_top'); bindField('f-main','_main');
+bindField('f-sub','_sub'); bindField('f-extra','_extra'); bindField('f-badge','_badge');
+
+// libreria foto
+PHOTOS.forEach(p=>{
+  const d = document.createElement('div'); d.className='thumb'+(p.src===state.photo?' sel':'');
+  d.innerHTML = `<img src="${p.src}"><div class="tag">${p.tag}</div>`;
+  d.onclick = ()=>{ state.photo = p.src; document.querySelectorAll('.thumb').forEach(t=>t.classList.remove('sel')); d.classList.add('sel'); render(); };
+  $('thumbs').appendChild(d);
+});
+
+$('f-posx').value = state.posx; $('f-posy').value = state.posy; $('f-veil').value = state.veil;
+$('f-posx').onchange = e=>{ state.posx=e.target.value; render(); };
+$('f-posy').onchange = e=>{ state.posy=e.target.value; render(); };
+$('f-veil').oninput = e=>{ state.veil=+e.target.value; render(); };
+
+// varianti
+function renderVariants(){
+  $('variants').innerHTML='';
+  Object.entries(VARIANTS).forEach(([key,def])=>{
+    const d = document.createElement('div'); d.className='variant'+(key===state.variant?' sel':'');
+    const cv = document.createElement('canvas'); cv.width=200; cv.height=200;
+    const x = cv.getContext('2d');
+    const img = new Image();
+    img.onload = ()=>{ drawMini(x, key, img); };
+    img.src = state.photo;
+    d.appendChild(cv);
+    const n = document.createElement('div'); n.className='vname'; n.textContent = `${def.name} — ${def.desc}`; d.appendChild(n);
+    d.onclick = ()=>{ state.variant=key; renderVariants(); render(); };
+    $('variants').appendChild(d);
+  });
+}
+function drawMini(x, key, img){
+  const S=200;
+  x.fillStyle = C.palette.night; x.fillRect(0,0,S,S);
+  if(key==='split'){ x.drawImage(img, 0,0, img.width, img.height*0.52, 0,0, S, S*0.52); x.fillStyle='rgba(10,10,15,.75)'; x.fillRect(0,S*0.4,S,S*0.6); x.fillStyle=C.palette.gold; x.fillRect(12,S*0.62,40,4); x.fillStyle='#fff'; x.fillRect(12,S*0.72,S*0.5,8); x.fillRect(12,S*0.82,S*0.35,6);}
+  else if(key==='cornice'){ x.drawImage(img,0,0,S,S); x.fillStyle='rgba(10,10,15,.45)'; x.fillRect(0,0,S,S); x.strokeStyle=C.palette.gold; x.lineWidth=1.5; x.strokeRect(6,6,S-12,S-12); x.fillStyle='#fff'; x.fillRect(14,S*0.7,S*0.5,8); x.fillStyle=C.palette.gold; x.fillRect(14,S*0.55,44,4);}
+  else if(key==='dark'){ x.filter='saturate(.85) brightness(.6)'; x.drawImage(img,0,0,S,S); x.filter='none'; x.fillStyle='rgba(10,10,15,.4)'; x.fillRect(0,0,S,S); x.fillStyle='#fff'; x.fillRect(14,S*0.68,S*0.55,9); x.fillStyle=C.palette.gold; x.fillRect(14,S*0.55,44,4);}
+  else { x.drawImage(img,0,0,S,S); const g=x.createLinearGradient(0,0,0,S); g.addColorStop(0,'rgba(10,10,15,.25)'); g.addColorStop(1,'rgba(10,10,15,.95)'); x.fillStyle=g; x.fillRect(0,0,S,S); x.fillStyle='#fff'; x.fillRect(14,S*0.7,S*0.55,9); x.fillStyle=C.palette.gold; x.fillRect(14,S*0.56,44,4);}
+}
+$('exportBtn').onclick = async ()=>{
+  const btn = $('exportBtn'); btn.disabled = true; btn.textContent = 'Esporto…';
+  try {
+    const { w, h } = FORMATS[state.fmt];
+    const node = frame.querySelector('.creative');
+    const canvas = await htmlToCanvas(node, w, h);
+    const url = canvas.toDataURL('image/jpeg', 0.92);
+    const a = document.createElement('a');
+    a.download = `${currentAd().id}_${state.fmt}_${state.variant}.jpg`;
+    a.href = url; a.click();
+    toast('Esportato ' + a.download);
+  } catch(err){ alert('Export fallito: '+err.message); }
+  btn.disabled = false; btn.textContent = '⬇ Export JPG';
+};
+
+// ===== EXPORT: renderer canvas manuale (niente SVG foreignObject) =====
+async function drawCreative(canvas, w, h){
+  const ad = currentAd(), P = C.palette, F = FORMATS[state.fmt];
+  const wide = state.fmt === 'google-large', story = state.fmt === 'meta-story', wsq = state.fmt === 'google-sq';
+  const ctx = canvas.getContext('2d');
+  canvas.width = w; canvas.height = h;
+  const V = state.veil / 100;
+  const font = (weight, px) => `${weight} ${px}px Montserrat, 'Segoe UI', sans-serif`;
+
+  // foto
+  const photo = new Image();
+  await new Promise((res, rej) => { photo.onload = res; photo.onerror = rej; photo.src = state.photo; });
+  ctx.fillStyle = P.night; ctx.fillRect(0, 0, w, h);
+  ctx.save();
+  if (state.variant === 'split'){
+    const ph = h * 0.52;
+    drawCover(ctx, photo, 0, 0, w, ph, state.posx, state.posy);
+    const g = ctx.createLinearGradient(0, ph*0.45, 0, ph);
+    g.addColorStop(0, 'rgba(10,10,15,0)'); g.addColorStop(1, 'rgba(10,10,15,1)');
+    ctx.fillStyle = g; ctx.fillRect(0, 0, w, ph);
+  } else {
+    drawCover(ctx, photo, 0, 0, w, h, state.posx, state.posy);
+    if (state.variant === 'dark'){ ctx.filter = 'saturate(.85) brightness(.72)'; ctx.drawImage(canvas, 0, 0); ctx.filter = 'none'; }
+  }
+  ctx.restore();
+
+  // veli
+  ctx.save();
+  if (state.variant === 'split'){
+    ctx.fillStyle = `rgba(10,10,15,${V*0.25})`;
+    ctx.fillRect(0, 0, w, h*0.52);
+  } else if (wide){
+    const g = ctx.createLinearGradient(0, 0, w, 0);
+    g.addColorStop(0, `rgba(10,10,15,.96)`); g.addColorStop(.42, `rgba(10,10,15,.82)`);
+    g.addColorStop(.75, `rgba(10,10,15,${V*0.25})`); g.addColorStop(1, `rgba(10,10,15,.15)`);
+    ctx.fillStyle = g; ctx.fillRect(0, 0, w, h);
+  } else {
+    const g = ctx.createLinearGradient(0, 0, 0, h);
+    g.addColorStop(0, `rgba(10,10,15,${V*0.55})`); g.addColorStop(.35, `rgba(10,10,15,${V*0.25})`);
+    g.addColorStop(.72, `rgba(10,10,15,${V*0.88})`); g.addColorStop(1, 'rgba(10,10,15,.97)');
+    ctx.fillStyle = g; ctx.fillRect(0, 0, w, h);
+  }
+  ctx.restore();
+
+  // cornice oro
+  if (state.variant === 'cornice'){
+    ctx.strokeStyle = P.gold; ctx.globalAlpha = .85; ctx.lineWidth = 2;
+    const m = Math.round(w*0.024);
+    ctx.strokeRect(m, m, w-2*m, h-2*m);
+    ctx.globalAlpha = 1;
+  }
+
+  // logo
+  const logo = new Image();
+  await new Promise(res => { logo.onload = res; logo.onerror = res; logo.src = A['logo']; });
+  const lh = story ? 72 : wide ? 48 : 56;
+  if (logo.width) {
+    const lw = logo.width / logo.height * lh;
+    const lx = wide ? 56 : story ? 80 : 64, ly = wide ? 48 : story ? 72 : 56;
+    ctx.drawImage(logo, lx, ly, lw, lh);
+  }
+
+  // badge
+  const badge = (ad._badge || '').trim();
+  if (badge){
+    ctx.font = font(900, wide ? 22 : story ? 36 : 30);
+    const padX = wide ? 22 : 30, padY = wide ? 12 : 16;
+    const bw = ctx.measureText(badge).width + padX*2;
+    const bh = (wide ? 22 : story ? 36 : 30) + padY*2;
+    const bx = w - (wide ? 56 : story ? 80 : 64) - bw, by = wide ? 48 : story ? 72 : 56;
+    ctx.fillStyle = P.gold; ctx.fillRect(bx, by, bw, bh);
+    ctx.fillStyle = P.night; ctx.textBaseline = 'middle';
+    ctx.fillText(badge, bx + padX, by + bh/2 + 1);
+    ctx.textBaseline = 'alphabetic';
+  }
+
+  // ===== blocco testo: layout top-down con split oro =====
+  const padX = wide ? 56 : story ? 80 : 64;
+  const padB = wide ? 56 : story ? 110 : 72;
+  const maxW = w - padX*2;
+  const sMain = wide ? 46 : story ? 88 : 72;
+  const sTop  = wide ? 30 : story ? 50 : 38;
+  const sSub  = wide ? 19 : story ? 32 : 26;
+  const sKick = wide ? 19 : story ? 28 : 23;
+  const sExtra= wide ? 30 : story ? 52 : 42;
+
+  // wrap con split oro: ogni riga = lista di segmenti [testo, gold]
+  const goldParts = String(ad._main).split('**');      // pari=bianco, dispari=oro
+  const segs = goldParts.map((t,i) => ({ t: t.toUpperCase(), gold: i%2===1 })).filter(s => s.t);
+  // wrap per parole mantenendo l'attributo gold
+  const words = [];
+  for (const s of segs) s.t.split(/\s+/).filter(Boolean).forEach(wd => words.push({ wd, gold: s.gold }));
+  ctx.font = font(900, sMain);
+  const rows = []; let row = [], rowW = 0;
+  const spaceW = ctx.measureText(' ').width;
+  for (const wd of words){
+    const wW = ctx.measureText(wd.wd).width;
+    if (row.length && rowW + spaceW + wW > maxW){ rows.push(row); row = []; rowW = 0; }
+    if (row.length) rowW += spaceW;
+    row.push({ ...wd, w: wW }); rowW += wW;
+  }
+  if (row.length) rows.push(row);
+
+  const topLines = ad._top ? wrapTxt(ctx, font(300, sTop), ad._top, maxW) : [];
+  const subLines = ad._sub ? wrapTxt(ctx, font(400, sSub), ad._sub, maxW) : [];
+  const extraTxt = (ad._extra || '').trim();
+
+  // altezze
+  const hKick = sKick + (wide ? 14 : story ? 26 : 20);
+  const hTop  = topLines.length ? topLines.length*sTop*1.3 + (wide ? 10 : 18) : 0;
+  const hMain = rows.length * sMain * 1.08;
+  const hExtra= extraTxt ? sExtra + 42 : 0;
+  const hSub  = subLines.length ? 24 + subLines.length*sSub*1.5 : 0;
+  const hCta  = (wide ? 20 : 28) + (wide ? 28 : 40);
+  const hBlock = hKick + hTop + hMain + hExtra + hSub + hCta + (wide ? 20 : 28);
+
+  let y = h - padB - hBlock;
+
+  // kicker
+  ctx.fillStyle = P.gold; ctx.font = font(600, sKick);
+  try { ctx.letterSpacing = Math.round(sKick*0.3) + 'px'; } catch(e){}
+  ctx.fillText(ad._kicker.toUpperCase(), padX, y + sKick);
+  try { ctx.letterSpacing = '0px'; } catch(e){}
+  y += hKick;
+
+  // top line
+  if (topLines.length){
+    ctx.fillStyle = '#EDEDEF'; ctx.font = font(300, sTop);
+    for (const tl of topLines){ ctx.fillText(tl, padX, y + sTop*0.95); y += sTop*1.3; }
+    y += (wide ? 10 : 18);
+  }
+
+  // main line con oro
+  ctx.font = font(900, sMain);
+  y += sMain;
+  for (const rw of rows){
+    let x = padX;
+    for (let i=0; i<rw.length; i++){
+      const seg = rw[i];
+      ctx.fillStyle = seg.gold ? P.gold : '#FFFFFF';
+      ctx.fillText(seg.wd, x, y);
+      x += seg.w + (i < rw.length-1 ? spaceW : 0);
+    }
+    y += sMain * 1.08;
+  }
+  y -= sMain*0.08;
+
+  // extra badge prezzo
+  if (extraTxt){
+    ctx.font = font(800, sExtra);
+    const tw = ctx.measureText(extraTxt).width;
+    const eh = sExtra + 22;
+    ctx.fillStyle = P.gold; ctx.fillRect(padX, y + 16, tw + 52, eh);
+    ctx.fillStyle = P.night; ctx.fillText(extraTxt, padX + 26, y + 16 + eh/2 + sExtra*0.34);
+    y += 16 + eh;
+  }
+
+  // sub
+  if (subLines.length){
+    y += 24 + sSub;
+    ctx.fillStyle = '#C9C9D0'; ctx.font = font(400, sSub);
+    for (const sl of subLines){ ctx.fillText(sl, padX, y); y += sSub*1.5; }
+  }
+
+  // bottombar: cta + telefono
+  const ctaFs = wide ? 20 : 28;
+  ctx.font = font(800, ctaFs);
+  const ctaTxt = C.brand.cta + ' →';
+  const cw = ctx.measureText(ctaTxt).width + (wide ? 60 : 88);
+  const ch = ctaFs + (wide ? 28 : 40);
+  const ctaY = h - padB + (wide ? 0 : 10) - ch + ch;  // ancorata in basso nel blocco
+  const cyAbs = y + (wide ? 20 : 28);
+  ctx.fillStyle = P.gold; ctx.fillRect(padX, cyAbs, cw, ch);
+  ctx.fillStyle = P.night;
+  ctx.fillText(ctaTxt, padX + (wide ? 30 : 44), cyAbs + ch/2 + ctaFs*0.35);
+  ctx.fillStyle = '#FFFFFF'; ctx.font = font(600, ctaFs);
+  ctx.fillText(C.brand.phone, padX + cw + (wide ? 24 : 28), cyAbs + ch/2 + ctaFs*0.35);
+}
+
+function drawCover(ctx, img, x, y, w, h, posx, posy){
+  const ir = img.width / img.height, r = w / h;
+  let dw, dh;
+  if (ir > r){ dh = h; dw = h * ir; } else { dw = w; dh = w / ir; }
+  const ox = (w - dw) * (parseInt(posx) / 100);
+  const oy = (h - dh) * (parseInt(posy) / 100);
+  ctx.drawImage(img, x + ox, y + oy, dw, dh);
+}
+function wrapTxt(ctx, fnt, text, maxW){
+  ctx.font = fnt;
+  const words = String(text).split(/\s+/);
+  const lines = []; let cur = '';
+  for (const wd of words){
+    const t = cur ? cur + ' ' + wd : wd;
+    if (ctx.measureText(t).width > maxW && cur){ lines.push(cur); cur = wd; }
+    else cur = t;
+  }
+  if (cur) lines.push(cur);
+  return lines;
+}
+async function htmlToCanvas(node, w, h){
+  const canvas = document.createElement('canvas');
+  await drawCreative(canvas, w, h);
+  return canvas;
+}
+
+// zoom
+$('zIn').onclick = ()=>{ state.zoom = Math.min(1, state.zoom+0.15); render(); };
+$('zOut').onclick = ()=>{ state.zoom = Math.max(0.12, state.zoom-0.15); render(); };
+
+// preset
+function savedPresets(){ try{ return JSON.parse(localStorage.getItem('bd_ads_presets')||'{}'); }catch(e){ return {}; } }
+$('presetSave').onclick = ()=>{
+  const name = $('presetName').value.trim() || ('preset-'+Date.now());
+  const presets = savedPresets();
+  presets[name] = {
+    texts: { _kicker:$('f-kicker').value,_top:$('f-top').value,_main:$('f-main').value,_sub:$('f-sub').value,_extra:$('f-extra').value,_badge:$('f-badge').value },
+    photo: state.photo, posx: state.posx, posy: state.posy, veil: state.veil, variant: state.variant, fmt: state.fmt,
+  };
+  localStorage.setItem('bd_ads_presets', JSON.stringify(presets));
+  $('presetName').value=''; renderPresets(); toast('Preset salvato: '+name);
+};
+function renderPresets(){
+  const presets = savedPresets();
+  $('savedList').innerHTML='';
+  Object.entries(presets).forEach(([name,p])=>{
+    const d = document.createElement('div'); d.className='saved-item';
+    d.innerHTML = `<span>${esc(name)}</span><span class="del" title="elimina">×</span>`;
+    d.onclick = e=>{
+      if(e.target.classList.contains('del')){
+        delete presets[name]; localStorage.setItem('bd_ads_presets', JSON.stringify(presets)); renderPresets(); return;
+      }
+      Object.assign(currentAd(), p.texts); loadAdIntoForm();
+      state.photo=p.photo; state.posx=p.posx; state.posy=p.posy; state.veil=p.veil; state.variant=p.variant; state.fmt=p.fmt;
+      $('fmtSel').value=p.fmt; $('f-posx').value=p.posx; $('f-posy').value=p.posy; $('f-veil').value=p.veil;
+      renderVariants(); render(); toast('Preset applicato: '+name);
+    };
+    $('savedList').appendChild(d);
+  });
+}
+
+/* init */
+$('adSel').value = state.adIdx;
+$('fmtSel').value = state.fmt;
+loadAdIntoForm();
+renderVariants();
+render();
+renderPresets();
+</script>
+</body>
+</html>
