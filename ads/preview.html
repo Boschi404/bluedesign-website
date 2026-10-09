@@ -2,163 +2,306 @@
 <html lang="it">
 <head>
 <meta charset="UTF-8">
-<title>BlueDesign — Creatività ADS Autunno 2026</title>
+<title>BlueDesign — Matrice Creatività ADS</title>
 <style>
-  :root { --night:#0A0A0F; --gold:#C9A962; }
-  * { box-sizing: border-box; margin:0; padding:0; }
-  body { background:#111; color:#eee; font-family: 'Montserrat', 'Segoe UI', sans-serif; padding:24px; }
-  h1 { font-weight:300; letter-spacing:.2em; text-transform:uppercase; font-size:14px; color:var(--gold); margin-bottom:4px;}
-  .hint { color:#888; font-size:12px; margin-bottom:28px; max-width:900px; line-height:1.6;}
-  .hint b { color:#ccc; }
-  .ad-block { margin-bottom:48px; }
-  .ad-head { display:flex; align-items:baseline; gap:12px; margin-bottom:12px; }
-  .ad-title { font-size:15px; font-weight:600; color:#fff; }
-  .ad-id { font-family: monospace; font-size:11px; color:var(--gold); background:#1c1c24; padding:2px 8px; border-radius:4px;}
-  .formats { display:flex; flex-wrap:wrap; gap:20px; align-items:flex-start;}
-  .fmt { position:relative; }
-  .fmt-label { font-size:10px; color:#777; letter-spacing:.1em; margin-bottom:6px; text-transform:uppercase;}
+  :root { --night:#0A0A0F; --night2:#14141B; --gold:#C9A962; --muted:#A9A9B3; --border:#26262E; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { background:#0E0E13; color:#EDEDEF; font-family:'Segoe UI', system-ui, sans-serif; }
 
-  /* ===== FRAME CREATIVE (scala via transform) ===== */
-  .creative {
-    width:1080px; height:1080px;
-    background:var(--night);
-    position:relative; overflow:hidden;
-    display:flex; flex-direction:column;
-    transform-origin: top left;
-  }
-  .creative.story { width:1080px; height:1920px; }
-  .creative.wide { width:1200px; height:628px; flex-direction:row; }
-  .creative.wide-sq { width:1200px; height:1200px; }
+  header { position:sticky; top:0; z-index:10; background:rgba(14,14,19,.96); backdrop-filter:blur(8px);
+    padding:14px 22px; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:14px; flex-wrap:wrap;}
+  header h1 { font-size:13px; letter-spacing:.2em; color:var(--gold); text-transform:uppercase; font-weight:600;}
+  header input[type=search] { background:var(--night2); border:1px solid var(--border); color:#eee;
+    padding:8px 12px; border-radius:6px; font-size:13px; width:220px; }
+  header select { background:var(--night2); border:1px solid var(--border); color:#eee; padding:8px 10px; border-radius:6px; font-size:12px;}
+  header .count { color:var(--muted); font-size:12px; margin-left:auto; }
 
-  /* foto: copre sempre il frame intero, poi overlay */
-  .photo { position:absolute; inset:0; background-size:cover; background-position:center; }
-  .veil { position:absolute; inset:0;
-    background: linear-gradient(180deg, rgba(10,10,15,.55) 0%, rgba(10,10,15,.25) 35%, rgba(10,10,15,.88) 72%, rgba(10,10,15,.97) 100%); }
-  .wide .veil { background: linear-gradient(90deg, rgba(10,10,15,.96) 0%, rgba(10,10,15,.82) 42%, rgba(10,10,15,.25) 75%, rgba(10,10,15,.15) 100%); }
+  .grid { padding:20px; display:grid; grid-template-columns:repeat(auto-fill, minmax(340px, 1fr)); gap:22px; }
+  .set { background:var(--night2); border:1px solid var(--border); border-radius:10px; overflow:hidden; }
+  .set-head { display:flex; align-items:center; gap:10px; padding:10px 12px; border-bottom:1px solid var(--border); }
+  .set-num { font-family:ui-monospace, monospace; font-size:13px; font-weight:700; color:var(--gold);
+    background:rgba(201,169,98,.12); padding:3px 9px; border-radius:5px; }
+  .set-name { font-size:12px; color:#ddd; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; flex:1;}
+  .set-kill { cursor:pointer; color:#B55; font-weight:700; padding:0 4px; font-size:14px; opacity:.7;}
+  .set-kill:hover { opacity:1; }
+  .set-body { display:grid; grid-template-columns:1fr 1fr; gap:2px; background:#000; }
+  .cell { position:relative; cursor:pointer; background:var(--night); }
+  .cell canvas { width:100%; display:block; aspect-ratio:1; }
+  .cell .tag { position:absolute; top:6px; left:6px; font-size:9px; background:rgba(10,10,15,.85);
+    color:var(--gold); padding:2px 7px; border-radius:4px; letter-spacing:.06em;}
+  .cell:hover { outline:2px solid var(--gold); outline-offset:-2px; }
 
-  .content { position:absolute; inset:0; padding:64px; display:flex; flex-direction:column; justify-content:flex-end; }
-  .wide .content { justify-content:center; max-width:62%; padding:56px; }
-  .story .content { padding:80px; }
-
-  .brandline { display:flex; align-items:center; justify-content:flex-start; margin-bottom:auto; }
-  .content > .brandline { position:absolute; top:56px; left:64px; right:300px; }
-  .wide .content > .brandline { top:48px; left:56px; right:220px; }
-  .story .content > .brandline { top:72px; left:80px; right:340px; }
-  .brandline img.logo { height:56px; width:auto; }
-  .story .brandline img.logo { height:72px; }
-  .site { color:var(--gold); font-size:22px; letter-spacing:.14em; font-weight:600; }
-  .story .site { font-size:28px; }
-
-  .kicker { color:var(--gold); font-size:24px; letter-spacing:.3em; font-weight:600; margin-bottom:20px; text-transform: uppercase;}
-  .story .kicker { font-size:30px; margin-bottom:28px;}
-  .wide .kicker { font-size:19px; margin-bottom:14px;}
-
-  .top-line { color:#EDEDEF; font-size:40px; font-weight:300; line-height:1.25; margin-bottom:18px; }
-  .story .top-line { font-size:52px; }
-  .wide .top-line { font-size:30px; margin-bottom:10px;}
-
-  .main-line { color:#fff; font-size:74px; font-weight:900; line-height:1.04; letter-spacing:-.01em; text-transform:uppercase; }
-  .main-line .gold { color:var(--gold); }
-  .story .main-line { font-size:92px; }
-  .wide .main-line { font-size:46px; }
-
-  .extra-line { display:inline-block; margin-top:22px; background:var(--gold); color:var(--night); font-weight:800; font-size:44px; padding:10px 26px; }
-  .story .extra-line { font-size:54px; }
-  .wide .extra-line { font-size:30px; margin-top:14px;}
-
-  .sub { color:#C9C9D0; font-size:27px; font-weight:400; margin-top:24px; line-height:1.45; }
-  .story .sub { font-size:33px; }
-  .wide .sub { font-size:19px; margin-top:12px;}
-
-  .bottombar { display:flex; align-items:center; gap:28px; margin-top:36px; }
-  .story .bottombar { margin-top:44px; }
-  .wide .bottombar { margin-top:20px; }
-  .cta { background:var(--gold); color:var(--night); font-weight:800; font-size:28px; padding:20px 44px; letter-spacing:.02em; }
-  .wide .cta { font-size:20px; padding:14px 30px; }
-  .phone { color:#fff; font-size:28px; font-weight:600; letter-spacing:.04em;}
-  .wide .phone { font-size:20px; }
-  .partner { margin-left:auto; height:64px; }
-  .wide .partner { height:44px; }
-
-  .badge {
-    position:absolute; top:56px; right:64px;
-    background:var(--gold); color:var(--night);
-    font-weight:900; font-size:30px; letter-spacing:.08em;
-    padding:16px 30px; text-transform:uppercase;
-  }
-  .story .badge { top:72px; right:80px; font-size:36px;}
-  .wide .badge { top:48px; right:56px; font-size:22px; padding:12px 22px;}
-
-  .gold-rule { width:120px; height:4px; background:var(--gold); margin-bottom:28px; }
-  .wide .gold-rule { width:90px; height:3px; margin-bottom:18px;}
+  /* lightbox */
+  #lb { position:fixed; inset:0; background:rgba(5,5,8,.94); display:none; z-index:50;
+    flex-direction:column; align-items:center; justify-content:center; gap:14px; padding:30px; }
+  #lb.open { display:flex; }
+  #lb img { max-height:78vh; max-width:92vw; border:1px solid var(--border); border-radius:8px; }
+  #lb .lb-cap { font-size:13px; color:#ddd; }
+  #lb .lb-cap b { color:var(--gold); }
+  #lb .lb-btns { display:flex; gap:10px; }
+  #lb button { background:var(--gold); border:none; color:var(--night); font-weight:700;
+    padding:11px 22px; border-radius:6px; cursor:pointer; font-size:13px; }
+  #lb button.ghost { background:var(--night2); color:#ccc; border:1px solid var(--border); }
+  #lb .lb-close { position:absolute; top:18px; right:24px; font-size:26px; color:#999; cursor:pointer; }
+  #toast { position:fixed; bottom:26px; left:50%; transform:translateX(-50%); background:var(--gold); color:var(--night);
+    font-weight:700; padding:10px 22px; border-radius:6px; opacity:0; transition:opacity .25s; pointer-events:none; z-index:60;}
+  #toast.show { opacity:1; }
 </style>
 </head>
 <body>
-<h1>BlueDesign — Creatività ADS · Autunno 2026</h1>
-<p class="hint">
-  Ogni blocco = 1 annuncio nei 4 formati (Meta feed 1:1, Meta story 9:16, Google display 1.91:1, Google square 1:1).<br>
-  <b>Modifica i testi/foto in <code>ads/config.js</code></b> e ricarica: tutto si aggiorna. <b>Esporta i PNG</b> aprendo <code>ads/export.html</code>.
-</p>
-<div id="root"></div>
+<header>
+  <h1>BlueDesign · Matrice ADS</h1>
+  <input type="search" id="q" placeholder="cerca numero, foto, frase…">
+  <select id="phraseFilter"><option value="">tutte le frasi</option></select>
+  <select id="styleFilter"><option value="">tutti gli stili</option></select>
+  <span class="count" id="count"></span>
+</header>
+<div class="grid" id="grid"></div>
+<div id="lb">
+  <span class="lb-close" onclick="lbClose()">×</span>
+  <img id="lbImg" alt="">
+  <div class="lb-cap" id="lbCap"></div>
+  <div class="lb-btns">
+    <button id="lbDl">⬇ Scarica JPG 1080×1080</button>
+    <button class="ghost" onclick="lbClose()">Chiudi</button>
+  </div>
+</div>
+<div id="toast"></div>
 
 <script src="config.js"></script>
+<script src="catalog.js"></script>
 <script>
-const C = window.ADS_CONFIG;
-const FMT = [
-  { key: "meta-square", label: "Meta Feed · 1080×1080", cls: "" },
-  { key: "meta-story",  label: "Meta Story · 1080×1920", cls: "story" },
-  { key: "google-large",label: "Google Display · 1200×628", cls: "wide" },
-  { key: "google-sq",   label: "Google Square · 1200×1200", cls: "wide-sq" },
-];
+const C = window.ADS_CONFIG, CAT = window.ADS_CATALOG, P = C.palette;
 
-function esc(s){ return s.replace(/&/g,"&amp;").replace(/</g,"&lt;"); }
-function mainLineHTML(t){
-  // text prima di ** è bianco, tra ** è oro: "I top in gres **TE LI REGALIAMO**"
-  return esc(t).split("**").map((part,i)=> i%2 ? `<span class="gold">${part}</span>` : part).join("");
+/* ===== 6 STILI: varianti font + layout ===== */
+const STYLES = {
+  hero:       { name:'Hero Montserrat',    fam:"Montserrat,'Segoe UI',sans-serif",  kicker:{w:600, ls:.32}, main:{w:900, lh:1.06} },
+  editoriale: { name:'Editoriale serif',   fam:"Georgia,'Times New Roman',serif",   kicker:{w:400, ls:.34}, main:{w:700, lh:1.14, mainLower:true} },
+  poster:     { name:'Poster nero',        fam:"'Arial Black','Segoe UI',sans-serif", kicker:{w:800, ls:.18}, main:{w:900, lh:1.0} },
+  moderno:    { name:'Moderno Trebuchet',  fam:"'Trebuchet MS','Segoe UI',sans-serif", kicker:{w:700, ls:.4}, main:{w:700, lh:1.1} },
+  elegante:   { name:'Elegante corsivo',   fam:"Georgia,serif",                      kicker:{w:400, ls:.44}, main:{w:400, lh:1.2, ital:true, mainLower:true} },
+  boldest:    { name:'Condizionato alto',  fam:"'Segoe UI',system-ui,sans-serif",    kicker:{w:700, ls:.5},  main:{w:800, lh:1.02} },
+};
+const FORMATI = { key:'square', w:1080, h:1080 };
+
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+function mainParts(t){ return String(t).split('**').map((p,i)=>({t:p, gold:i%2===1})).filter(s=>s.t.trim()); }
+
+/* ===== DRAW ===== */
+async function drawCell(canvas, ad, photoSrc, styleKey, W, H){
+  const st = STYLES[styleKey];
+  const ctx = canvas.getContext('2d');
+  canvas.width = W; canvas.height = H;
+  const px = v => Math.round(v * W / 1080);   // scala dal riferimento 1080
+
+  const img = new Image();
+  await new Promise((res, rej) => { img.onload = res; img.onerror = rej; img.src = photoSrc; });
+  ctx.fillStyle = P.night; ctx.fillRect(0,0,W,H);
+  const ir = img.width/img.height, r = W/H;
+  let dw, dh;
+  if (ir > r){ dh = H; dw = H*ir; } else { dw = W; dh = W/ir; }
+  ctx.drawImage(img, (W-dw)/2, (H-dh)/2, dw, dh);
+
+  const g = ctx.createLinearGradient(0,0,0,H);
+  g.addColorStop(0,'rgba(10,10,15,.45)'); g.addColorStop(.4,'rgba(10,10,15,.25)');
+  g.addColorStop(.72,'rgba(10,10,15,.88)'); g.addColorStop(1,'rgba(10,10,15,.98)');
+  ctx.fillStyle = g; ctx.fillRect(0,0,W,H);
+
+  ctx.textBaseline = 'alphabetic';
+  // badge
+  const bFs = px(30);
+  ctx.font = `${st.main.w >= 800 ? 800 : 700} ${bFs}px ${st.fam}`;
+  const bTxt = (ad.badge||'').toUpperCase();
+  const bw = ctx.measureText(bTxt).width + px(52), bh = bFs + px(30);
+  const bx = W - px(42) - bw, by = px(52);
+  ctx.fillStyle = P.gold; ctx.fillRect(bx, by, bw, bh);
+  ctx.fillStyle = P.night; ctx.fillText(bTxt, bx+px(26), by+bh/2+bFs*.35);
+
+  // logo
+  const logo = new Image();
+  await new Promise(res => { logo.onload = res; logo.onerror = res; logo.src = 'img/logo-white.webp'; });
+  const lh = px(56);
+  if (logo.width) ctx.drawImage(logo, px(60), px(52), logo.width/logo.height*lh, lh);
+
+  // testo
+  const padX = px(64), maxW = W - padX*2;
+  const sMain = px(72), sTop = px(38), sSub = px(26), sKick = px(23);
+  const font = (wgt, size, ital) => `${wgt}${ital?' italic':''} ${size}px ${st.fam}`;
+
+  const parts = mainParts(ad.lines.main).map(s => ({ ...s, t: st.main.mainLower ? s.t : s.t.toUpperCase() }));
+  ctx.font = font(st.main.w, sMain, st.main.ital);
+  const rows = []; let row = [], rowW = 0;
+  const spW = ctx.measureText(' ').width;
+  for (const seg of parts){
+    for (const wd of seg.t.split(/\s+/).filter(Boolean)){
+      const wW = ctx.measureText(wd).width;
+      if (row.length && rowW + spW + wW > maxW){ rows.push(row); row=[]; rowW=0; }
+      if (row.length) rowW += spW;
+      row.push({wd, gold:seg.gold, w:wW}); rowW += wW;
+    }
+  }
+  if (row.length) rows.push(row);
+
+  const topLines = ad.lines.top ? wrapTxt(ctx, font(400, sTop), ad.lines.top, maxW) : [];
+  const subLines = ad.sub ? wrapTxt(ctx, font(400, sSub), ad.sub, maxW) : [];
+  const hKick = sKick + px(20);
+  const hTop = topLines.length ? topLines.length*sTop*1.3 + px(16) : 0;
+  const hMain = rows.length * sMain * st.main.lh;
+  const hSub = subLines.length ? px(22) + subLines.length*sSub*1.45 : 0;
+  const hCta = px(28) + px(40);
+  const padB = px(66);
+  let y = H - padB - hCta - hSub - hMain - hTop - hKick;
+
+  ctx.fillStyle = P.gold; ctx.font = font(st.kicker.w, sKick);
+  try { ctx.letterSpacing = Math.round(sKick*st.kicker.ls)+'px'; } catch(e){}
+  ctx.fillText(ad.kicker.toUpperCase(), padX, y + sKick);
+  try { ctx.letterSpacing = '0px'; } catch(e){}
+  y += hKick;
+
+  if (topLines.length){
+    ctx.fillStyle = '#EDEDEF'; ctx.font = font(400, sTop);
+    for (const tl of topLines){ ctx.fillText(tl, padX, y + sTop*.95); y += sTop*1.3; }
+    y += px(16);
+  }
+
+  y += sMain;
+  for (const rw of rows){
+    let x = padX;
+    ctx.font = font(st.main.w, sMain, st.main.ital);
+    for (let i=0;i<rw.length;i++){
+      const s = rw[i];
+      ctx.fillStyle = s.gold ? P.gold : '#FFFFFF';
+      ctx.fillText(s.wd, x, y);
+      x += s.w + (i<rw.length-1 ? spW : 0);
+    }
+    y += sMain * st.main.lh;
+  }
+
+  if (subLines.length){
+    y += px(22) + sSub;
+    ctx.fillStyle = '#C9C9D0'; ctx.font = font(400, sSub);
+    for (const sl of subLines){ ctx.fillText(sl, padX, y); y += sSub*1.45; }
+  }
+
+  const ctaFs = px(28);
+  ctx.font = `800 ${ctaFs}px ${st.fam}`;
+  const ctaTxt = C.brand.cta + ' →';
+  const cw = ctx.measureText(ctaTxt).width + px(88), ch = ctaFs + px(40);
+  const cy = H - padB;
+  ctx.fillStyle = P.gold; ctx.fillRect(padX, cy, cw, ch);
+  ctx.fillStyle = P.night; ctx.fillText(ctaTxt, padX+px(44), cy+ch/2+ctaFs*.35);
+  ctx.fillStyle = '#fff'; ctx.font = `600 ${ctaFs}px ${st.fam}`;
+  ctx.fillText(C.brand.phone, padX+cw+px(28), cy+ch/2+ctaFs*.35);
+}
+function wrapTxt(ctx, fnt, text, maxW){
+  ctx.font = fnt;
+  const words = String(text).split(/\s+/); const out = []; let cur='';
+  for (const wd of words){
+    const t = cur ? cur+' '+wd : wd;
+    if (ctx.measureText(t).width > maxW && cur){ out.push(cur); cur = wd; } else cur = t;
+  }
+  if (cur) out.push(cur);
+  return out;
 }
 
-function creativeHTML(ad, cls){
-  const p = C.palette;
-  return `
-  <div class="creative ${cls}">
-    <div class="photo" style="background-image:url('${ad.photo}'); background-position:${ad.photoPos}"></div>
-    <div class="veil"></div>
-    <div class="badge">${esc(ad.badge)}</div>
-    <div class="content">
-      <div class="brandline">
-        <img class="logo" src="${C.brand.logo}" alt="${C.brand.name}">
-      </div>
-      <div style="flex:1"></div>
-      <div class="kicker">${esc(ad.kicker)}</div>
-      <div class="top-line">${esc(ad.lines.top)}</div>
-      <div class="main-line">${mainLineHTML(ad.lines.main)}</div>
-      ${ad.lines.extra ? `<div class="extra-line">${esc(ad.lines.extra)}</div>` : ""}
-      <div class="sub">${esc(ad.sub)}</div>
-      <div class="bottombar">
-        <span class="cta">${esc(C.brand.cta)} →</span>
-        <span class="phone">${esc(C.brand.phone)}</span>
-        ${ad.partnerLogo ? `<img class="partner" src="${ad.partnerLogo}" alt="partner">` : ""}
-      </div>
-    </div>
-  </div>`;
+/* ===== GRIGLIA ===== */
+const PHRASES = C.ads;
+const styleKeys = Object.keys(STYLES);
+let cellsPending = [], draining = false;
+
+function build(){
+  const q = document.getElementById('q').value.toLowerCase();
+  const pf = document.getElementById('phraseFilter').value;
+  const sf = document.getElementById('styleFilter').value;
+  const grid = document.getElementById('grid');
+  grid.innerHTML = ''; cellsPending = [];
+  let num = 0, shown = 0;
+  for (const c of CAT){
+    num++;
+    if (q && !(String(num).includes(q) || c.orig.toLowerCase().includes(q) || c.phrase.includes(q))) continue;
+    shown++;
+    const card = document.createElement('div'); card.className = 'set';
+    const head = document.createElement('div'); head.className = 'set-head';
+    head.innerHTML = `<span class="set-num">${String(num).padStart(3,'0')}</span>
+      <span class="set-name" title="${esc(c.orig)}">${esc(c.orig)}</span>
+      <span class="set-kill" title="escludi questa foto">✕</span>`;
+    head.querySelector('.set-kill').onclick = ()=>{
+      const KILLED = new Set(JSON.parse(localStorage.getItem('bd_killed')||'[]'));
+      KILLED.add(c.file); localStorage.setItem('bd_killed', JSON.stringify([...KILLED]));
+      card.remove(); toast('Foto esclusa: '+c.orig); updateCount(shown-1);
+    };
+    card.appendChild(head);
+    const body = document.createElement('div'); body.className = 'set-body';
+    // celle: frase assegnata × 6 stili
+    const ad = PHRASES.find(p => p.id === c.phrase) || PHRASES[0];
+    for (const sk of styleKeys){
+      if (sf && sk !== sf) continue;
+      const cell = document.createElement('div'); cell.className = 'cell';
+      const cv = document.createElement('canvas'); cv.width = 540; cv.height = 540;
+      cell.appendChild(cv);
+      const tg = document.createElement('div'); tg.className = 'tag';
+      tg.textContent = STYLES[sk].name;
+      cell.appendChild(tg);
+      cell.onclick = () => lbOpen(c, ad, sk, num);
+      body.appendChild(cell);
+      cellsPending.push({ cv, ad, photo: c.file, style: sk, w:540, h:540 });
+    }
+    card.appendChild(body);
+    grid.appendChild(card);
+  }
+  updateCount(shown);
+  drain();
+}
+async function drain(){
+  if (draining) return; draining = true;
+  while (cellsPending.length){
+    const j = cellsPending.shift();
+    try { await drawCell(j.cv, j.ad, j.photo, j.style, j.w, j.h); }
+    catch(e){ const x = j.cv.getContext('2d'); x.fillStyle = '#311'; x.fillRect(0,0,j.w,j.h); }
+    await new Promise(r => requestAnimationFrame(r));
+  }
+  draining = false;
+}
+function updateCount(shown){
+  document.getElementById('count').textContent =
+    `${shown} foto × ${styleKeys.length} stili = ${shown*styleKeys.length} creatività · frase assegnata per foto`;
 }
 
-document.getElementById("root").innerHTML = C.ads.map(ad => `
-  <div class="ad-block" id="${ad.id}">
-    <div class="ad-head">
-      <span class="ad-id">${ad.id}</span>
-      <span class="ad-title">${esc(ad.campaign)}</span>
-    </div>
-    <div class="formats">
-      ${FMT.map(f => `
-        <div class="fmt">
-          <div class="fmt-label">${f.label}</div>
-          <div class="fmt-frame" data-ad="${ad.id}" data-fmt="${f.key}" style="zoom:${f.cls==='story'?0.22:(f.cls==='wide'?0.36:0.32)}">
-            ${creativeHTML(ad, f.cls)}
-          </div>
-        </div>`).join("")}
-    </div>
-  </div>`).join("");
+/* filtri */
+const pfS = document.getElementById('phraseFilter');
+PHRASES.forEach(p => { const o=document.createElement('option'); o.value=p.id; o.textContent=p.id+' — '+(p.campaign||''); pfS.appendChild(o); });
+const sfS = document.getElementById('styleFilter');
+styleKeys.forEach(k => { const o=document.createElement('option'); o.value=k; o.textContent=STYLES[k].name; sfS.appendChild(o); });
+document.getElementById('q').oninput = build;
+pfS.onchange = build; sfS.onchange = build;
+
+/* lightbox */
+let lbCtx = null;
+async function lbOpen(c, ad, sk, num){
+  lbCtx = { c, ad, sk };
+  const cv = document.createElement('canvas');
+  await drawCell(cv, ad, c.file, sk, 1080, 1080);
+  document.getElementById('lbImg').src = cv.toDataURL('image/jpeg', .92);
+  document.getElementById('lbCap').innerHTML =
+    `<b>SET ${String(num).padStart(3,'0')}</b> — ${esc(c.orig)} — frase ${ad.id} — stile ${STYLES[sk].name}`;
+  document.getElementById('lb').classList.add('open');
+}
+function lbClose(){ document.getElementById('lb').classList.remove('open'); }
+document.getElementById('lbDl').onclick = ()=>{
+  if (!lbCtx) return;
+  const cv = document.createElement('canvas');
+  drawCell(cv, lbCtx.ad, lbCtx.c.file, lbCtx.sk, 1080, 1080).then(()=>{
+    const a = document.createElement('a');
+    const base = lbCtx.c.orig.replace(/\.[^.]+$/,'');
+    a.download = `${base}_${lbCtx.ad.id}_${lbCtx.sk}.jpg`;
+    a.href = cv.toDataURL('image/jpeg', .92); a.click();
+    toast('Esportato ' + a.download);
+  });
+};
+function toast(m){ const t=document.getElementById('toast'); t.textContent=m; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),1600); }
+document.addEventListener('keydown', e => { if(e.key==='Escape') lbClose(); });
+
+build();
 </script>
 </body>
 </html>
