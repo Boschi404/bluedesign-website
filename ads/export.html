@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<title>Export PNG — BlueDesign ADS</title>
+<style>
+  body { margin:0; background:#111; font-family: monospace; color:#eee; font-size:13px; }
+  #stage { position:fixed; left:-99999px; top:0; }
+  .creative { width:1080px; height:1080px; background:#0A0A0F; position:relative; overflow:hidden; display:flex; flex-direction:column; font-family:'Montserrat','Segoe UI',sans-serif; }
+  .creative.story { width:1080px; height:1920px; }
+  .creative.wide { width:1200px; height:628px; flex-direction:row; }
+  .creative.wide-sq { width:1200px; height:1200px; }
+  .photo { position:absolute; inset:0; background-size:cover; background-position:center; }
+  .veil { position:absolute; inset:0; background:linear-gradient(180deg, rgba(10,10,15,.55) 0%, rgba(10,10,15,.25) 35%, rgba(10,10,15,.88) 72%, rgba(10,10,15,.97) 100%); }
+  .wide .veil { background:linear-gradient(90deg, rgba(10,10,15,.96) 0%, rgba(10,10,15,.82) 42%, rgba(10,10,15,.25) 75%, rgba(10,10,15,.15) 100%); }
+  .content { position:absolute; inset:0; padding:64px; display:flex; flex-direction:column; justify-content:flex-end; }
+  .wide .content { justify-content:center; max-width:62%; padding:56px; }
+  .story .content { padding:80px; }
+  .brandline { display:flex; align-items:center; justify-content:flex-start; position:absolute; top:56px; left:64px; right:300px; }
+  .wide .brandline { top:48px; left:56px; right:220px; }
+  .story .brandline { top:72px; left:80px; right:340px; }
+  .brandline img.logo { height:56px; width:auto; }
+  .story .brandline img.logo { height:72px; }
+  .site { color:#C9A962; font-size:22px; letter-spacing:.14em; font-weight:600; }
+  .story .site { font-size:28px; }
+  .kicker { color:#C9A962; font-size:24px; letter-spacing:.3em; font-weight:600; margin-bottom:20px; text-transform:uppercase; }
+  .story .kicker { font-size:30px; margin-bottom:28px; }
+  .wide .kicker { font-size:19px; margin-bottom:14px; }
+  .top-line { color:#EDEDEF; font-size:40px; font-weight:300; line-height:1.25; margin-bottom:18px; }
+  .story .top-line { font-size:52px; }
+  .wide .top-line { font-size:30px; margin-bottom:10px; }
+  .main-line { color:#fff; font-size:74px; font-weight:900; line-height:1.04; letter-spacing:-.01em; text-transform:uppercase; }
+  .main-line .gold { color:#C9A962; }
+  .story .main-line { font-size:92px; }
+  .wide .main-line { font-size:46px; }
+  .extra-line { display:inline-block; margin-top:22px; background:#C9A962; color:#0A0A0F; font-weight:800; font-size:44px; padding:10px 26px; align-self:flex-start; }
+  .story .extra-line { font-size:54px; }
+  .wide .extra-line { font-size:30px; margin-top:14px; }
+  .sub { color:#C9C9D0; font-size:27px; font-weight:400; margin-top:24px; line-height:1.45; }
+  .story .sub { font-size:33px; }
+  .wide .sub { font-size:19px; margin-top:12px; }
+  .bottombar { display:flex; align-items:center; gap:28px; margin-top:36px; }
+  .story .bottombar { margin-top:44px; }
+  .wide .bottombar { margin-top:20px; }
+  .cta { background:#C9A962; color:#0A0A0F; font-weight:800; font-size:28px; padding:20px 44px; }
+  .wide .cta { font-size:20px; padding:14px 30px; }
+  .phone { color:#fff; font-size:28px; font-weight:600; }
+  .wide .phone { font-size:20px; }
+  .partner { margin-left:auto; height:64px; }
+  .wide .partner { height:44px; }
+  .badge { position:absolute; top:56px; right:64px; background:#C9A962; color:#0A0A0F; font-weight:900; font-size:30px; letter-spacing:.08em; padding:16px 30px; text-transform:uppercase; }
+  .story .badge { top:72px; right:80px; font-size:36px; }
+  .wide .badge { top:48px; right:56px; font-size:22px; padding:12px 22px; }
+  #log { padding:20px; }
+</style>
+</head>
+<body>
+<div id="log">Export in corso…</div>
+<div id="stage"></div>
+<script src="config.js"></script>
+<script src="render.js"></script>
+</body>
+</html>
